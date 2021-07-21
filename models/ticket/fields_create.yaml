@@ -38,4 +38,5 @@ fields:
     first_message:
         label: waka.support::ticket.first_message
         span: full
-        type: markdown
+        type: richeditor
+        toolbarButtons: bold,italic,underline,strikeThrough

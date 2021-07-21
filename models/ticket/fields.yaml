@@ -39,7 +39,8 @@ fields:
     next_message:
         label: waka.support::ticket.next_message
         span: full
-        type: markdown
+        type: richeditor
+        toolbarButtons: bold,italic,underline,strikeThrough
     temps:
         label: waka.support::ticket.temps
         span: left

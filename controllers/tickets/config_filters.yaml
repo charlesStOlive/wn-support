@@ -18,3 +18,13 @@ scopes:
         modelClass: Waka\Support\Models\TicketType
         nameFrom: name
         conditions: type_id in (:filtered)
+    hide_termined:
+        label: waka.support::ticket.hide_termined
+        type: checkbox
+        default: true
+        conditions: state not in  ('abdn','archived')
+    hide_sleep:
+        label: waka.support::ticket.hide_sleep
+        type: checkbox
+        default: true
+        conditions: state <> 'sleep'

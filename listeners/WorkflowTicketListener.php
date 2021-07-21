@@ -50,12 +50,16 @@ class WorkflowTicketListener extends WorkflowListener
 
     public function isClient($event, $args = null)
     {
-        return Settings::isClientManager();
+        $blocked = false;
+        $blocked = !Settings::isClientManager(); //Si pas manager
+        return $blocked;
     }
 
     public function isSupport($event, $args = null)
     {
-        return Settings::isSupportMember();
+        $blocked = false;
+        $blocked = !Settings::isSupportMember(); //Si pas équipe support
+        return $blocked;
     }
 
     /**

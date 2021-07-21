@@ -1,6 +1,6 @@
 <?php
 return [
-    'silent_mode' => 'Mode Silencieux',
+    'silent_mode' => 'Mode silencieux',
     'silent_mode_com' => 'Les emails de notification ne seront pas envoyés. Utile si vous créez plusieurs tickets en même temps. ',
     'name' => 'Nom/Sujet du  ticket',
     'ticket_type' => 'Type',
@@ -18,5 +18,7 @@ return [
     'create' => 'Créer ticket',
     'edit' => 'Editer ticket',
     'form_name' => 'Gestion ticket',
-    'preview_name' => 'Voir ticket'
+    'preview_name' => 'Voir ticket',
+    'hide_termined' => 'Cacher tickets terminés',
+    'hide_sleep' => 'Cacher tickets endormis'
 ];

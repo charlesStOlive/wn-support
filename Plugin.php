@@ -51,6 +51,7 @@ class Plugin extends PluginBase
                 'url'         => Backend::url('waka/support/tickets'),
                 'permissions' => ['waka.support.*'],
                 'order'       => 600,
+                'counter' => \Waka\Support\Models\ticket::getMenucounter(),
             ],
         ];
     }

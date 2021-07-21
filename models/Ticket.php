@@ -188,6 +188,8 @@ class Ticket extends Model
         $query->whereIn('state', ['abdn', 'archived']);
     }
 
+    
+
     /**
      * @param $query
      */
@@ -239,6 +241,17 @@ class Ticket extends Model
     public function getUrl()
     {
         return Backend::url('waka/support/tickets/update/' . $this->id);
+    }
+
+    public static function getMenucounter()
+    {
+        if(Settings::isClientManager()) {
+            return Ticket::whereIn('state', ['wait_managment', 'wait_response'])->count();
+        } 
+         if(Settings::isSupportMember()) {
+            return Ticket::whereIn('state', ['wait_support'])->count();
+        }
+        return null;      
     }
 
     /**
