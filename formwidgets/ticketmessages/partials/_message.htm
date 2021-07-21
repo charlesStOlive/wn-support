@@ -1,0 +1,26 @@
+<div class="message-item <?php if ($message->isOwner()) : ?>owner<?php endif; ?>">
+
+    <div
+         class="hidden-sm hidden-xs col-md-1 <?php if ($message->isOwner()) : ?>pull-right<?php else : ?>pull-left<?php endif; ?>">
+        <img class="<?php if ($message->isOwner()) : ?>pull-left<?php else : ?>pull-right<?php endif; ?> account-avatar"
+             loading="lazy" width="40" height="40"
+             src=" <?=$message->user->getAvatarThumb(90, ['mode' => 'crop', 'extension' => 'png']) ?>">
+    </div>
+
+
+    <div class="body col-md-7 <?php if ($message->isOwner()) : ?>pull-right<?php else : ?>pull-left<?php endif; ?>">
+
+        <div class="content">
+            <span class="chat-arrow"></span>
+            <?= e($message->content); ?>
+        </div>
+
+        <span class="from">
+            <?php echo e($message->user->full_name); ?> | <?php echo e($message->created_at); ?> UTC
+        </span>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>

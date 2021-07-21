@@ -1,0 +1,33 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    support_team:
+        label: waka.support::lang.settings.support_team
+        span: full
+        type: repeater
+        form:
+            fields:
+                user:
+                    label: waka.support::lang.settings.support_user
+                    span: left
+                    type: dropdown
+                    options: listUsers
+                    useKey: true
+    client_manage_team:
+        label: waka.support::lang.settings.client_manage_team
+        span: full
+        type: repeater
+        form:
+            fields:
+                user:
+                    label: waka.support::lang.settings.client_manage_user
+                    span: left
+                    type: dropdown
+                    options: listUsers
+                    useKey: true
+                all_email:
+                    label: waka.support::lang.settings.all_email
+                    type: checkbox
+                    default: false

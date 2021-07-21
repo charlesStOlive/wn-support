@@ -1,0 +1,120 @@
+# ===================================
+#  Btn  Behavior Config
+# ===================================
+
+Description: >
+    //startKeep/
+modelClass: Waka\Support\Models\Ticket
+
+workflow: true 
+
+###BREADCRUMP
+breadcrump:
+    inSettings: false 
+    indexUrl: waka/support/tickets
+    indexlabel: waka.support::ticket.title
+    title: waka.support::ticket.form_name
+
+###TOOL_BAR
+tool_bar:
+    base:
+        create: 
+            show: true
+            permissions: []
+            url: waka/support/tickets/create
+        reorder: 
+            show: true 
+            permissions: []
+            url: waka/support/tickets/reorder
+ 
+        delete: 
+            show: true
+            permissions: []
+    config_btns:
+            format: all
+            btns:
+                importExcel:
+                    config: waka.importexport::btns.importExcel
+                exportExcel:
+                    config: waka.importexport::btns.exportExcel
+    config_lot:
+        format: all
+        btns: 
+    # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+    #     testbtns:
+    #         url: $/waka/support/controllers/tickets/_test_btns.htm
+
+###ACTION_BAR Producteurs. Les behavior liée aux boutons doivent êtres instanciés implements = [waka.xxx.behaviors.yyy] dans le controller. 
+action_bar:
+    config_btns:
+        format: grouped #unique : un seul bouton, all : tts les boutons
+        groups:
+            waka.utils::lang.prod.produce: oc-icon-file-text-o
+            waka.utils::lang.prod.send: oc-icon-external-link
+            waka.utils::lang.prod.tools: oc-icon-wrench
+        btns:
+
+    # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+    #     name:
+    #         url: $/waka/support/controllers/tickets/_test_update.htm
+Description: >
+    //endKeep/
+
+
+#     ##### SAUVEGARDE PURE ########
+# # ===================================
+# #  Btn  Behavior Config
+# # ===================================
+
+# modelClass: Waka\Support\Models\Ticket
+
+# workflow: true 
+
+# ###BREADCRUMP
+# breadcrump:
+#     inSettings: false 
+#     indexUrl: waka/support/tickets
+#     indexlabel: waka.support::ticket.title
+#     title: waka.support::ticket.form_name
+
+# ###TOOL_BAR
+# tool_bar:
+#     base:
+#         create: 
+#             show: true
+#             permissions: []
+#             url: waka/support/tickets/create
+#         reorder: 
+#             show: true#  
+#             permissions: []
+#             url: waka/support/tickets/reorder
+#  
+#         delete: 
+#             show: true
+#             permissions: []
+#     config_btns:
+#             format: all
+#             btns:
+# #                 importExcel:
+#                     config: waka.importexport::btns.importExcel
+# # #                 exportExcel:
+#                     config: waka.importexport::btns.exportExcel
+# #     config_lot:
+#         format: all
+#         btns: 
+# # # #     # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+#     #     testbtns:
+#     #         url: $/waka/support/controllers/tickets/_test_btns.htm
+
+# ###ACTION_BAR Producteurs. Les behavior liée aux boutons doivent êtres instanciés implements = [waka.xxx.behaviors.yyy] dans le controller. 
+# action_bar:
+#     config_btns:
+#         format: grouped #unique : un seul bouton, all : tts les boutons
+#         groups:
+#             waka.utils::lang.prod.produce: oc-icon-file-text-o
+#             waka.utils::lang.prod.send: oc-icon-external-link
+#             waka.utils::lang.prod.tools: oc-icon-wrench
+#         btns:
+# # # # # # # # #     # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+#     #     name:
+#     #         url: $/waka/support/controllers/tickets/_test_update.htm

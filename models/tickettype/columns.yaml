@@ -1,0 +1,22 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: waka.support::tickettype.name
+        searchable: true
+    is_facturable:
+        label: waka.support::tickettype.is_facturable
+        type: switch
+        searchable: true
+    is_for_super_user:
+        label: waka.support::tickettype.is_for_super_user
+        type: switch
+        searchable: true
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: timetense
+    sort_order:
+        label: waka.utils::lang.global.sort_order
+        invisible: true

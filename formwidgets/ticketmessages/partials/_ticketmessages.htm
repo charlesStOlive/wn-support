@@ -1,0 +1,22 @@
+<div class="control-scrollbar messages-scroll" data-control="scrollbar">
+
+    <?php if (!$ticket->ticket_messages) : ?>
+
+    <p><?php echo e(trans('waka.support::lang.messages.empty')); ?></p>
+
+    <?php else : ?>
+
+    <div id="messages-list">
+
+        <?php foreach($ticket->ticket_messages as $message) : ?>
+
+        <?php echo $this->makePartial(base_path('plugins/waka/support/formwidgets/ticketmessages/partials/message'),
+            ['message' => $message]); ?>
+
+        <?php endforeach; ?>
+
+    </div>
+
+    <?php endif ?>
+
+</div>

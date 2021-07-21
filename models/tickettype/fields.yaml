@@ -1,0 +1,23 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: waka.support::tickettype.name
+        span: left
+        required: true
+    is_facturable:
+        label: waka.support::tickettype.is_facturable
+        span: left
+        type: switch
+        required: true
+        default: false
+    is_for_super_user:
+        label: waka.support::tickettype.is_for_super_user
+        span: left
+        type: switch
+    description:
+        label: waka.support::tickettype.description
+        span: full
+        type: textarea

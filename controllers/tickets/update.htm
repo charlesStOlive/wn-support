@@ -1,0 +1,48 @@
+<!-- Primary content -->
+<?php Block::put('breadcrumb') ?>
+<?=$this->btnsWidget->renderBreadcrump()?>
+<?php Block::endPut() ?>
+<?php Block::put('form-contents') ?>
+<?php if (!$this->fatalError): ?>
+
+<?= Form::open(['class' => 'layout']) ?>
+
+<div class="layout-row">
+    <?= $this->formRender() ?>
+</div>
+<div class="form-buttons">
+    <div class="loading-indicator-container">
+        <?= $this->btnsWidget->renderBar('update') ?>
+    </div>
+</div>
+<?php Block::endPut() ?>
+
+<!-- Complimentary sidebar -->
+<?php Block::put('form-sidebar') ?>
+<div class="hide-tabs">
+    <div id="sidebar_info"><?= $this->makePartial('sidebar_info') ?></div>
+</div>
+
+
+<?php Block::endPut() ?>
+
+<!-- Layout execution -->
+<?php Block::put('body') ?>
+<?= Form::open(['class'=>'layout stretch']) ?>
+<?= $this->makeLayout('form-with-sidebar') ?>
+<?= Form::close() ?>
+<?php Block::endPut() ?>
+
+<?php else: ?>
+<div class="control-breadcrumb">
+    <?= Block::placeholder('breadcrumb') ?>
+</div>
+<div class="padded-container">
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+    <p>
+        <a href="<?= Backend::url('backend/users') ?>"
+           class="btn btn-default"><?= e(trans('backend::lang.user.return')) ?>
+        </a>
+    </p>
+</div>
+<?php endif ?>

@@ -1,0 +1,17 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+# Reorder Title
+title: Reorder tickets
+
+# Attribute name
+nameFrom: name
+
+# Model Class name
+modelClass: Waka\Support\Models\Ticket
+
+# Toolbar widget configuration
+#toolbar:
+    # Partial for toolbar buttons
+    # buttons: reorder_toolbar

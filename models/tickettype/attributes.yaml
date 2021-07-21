@@ -1,0 +1,19 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+icon: icon-info
+attributes:
+    name:
+        label: waka.support::tickettype.name
+    is_facturable:
+        label: waka.support::tickettype.is_facturable
+        type: switch
+    is_for_super_user:
+        label: waka.support::tickettype.is_for_super_user
+        type: switch
+    description:
+        label: waka.support::tickettype.description
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: date-medium

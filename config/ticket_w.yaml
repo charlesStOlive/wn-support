@@ -1,0 +1,274 @@
+ticket:
+    type: state_machine
+    metadata: 
+        name: waka.support::ticket_w.name 
+        com: waka.support::ticket_w.com 
+        rulesSets:
+            default:
+                fields:  
+                messages: waka.support::ticket_wf_errors
+            none:
+                fields:  
+                messages: waka.support::ticket_wf_errors
+            factu:
+                fields:  
+                    price: required              
+                messages: waka.support::ticket_wf_errors
+    marking_store:
+        type: single_state
+        arguments: [state]
+    supports:
+        - \Waka\Support\Models\Ticket
+    places:
+        draft:
+            metadata:
+                label: waka.support::ticket_w.places.draft 
+                icon: wicon-pencil2
+        wait_support:
+            metadata:
+                label: waka.support::ticket_w.places.wait_support 
+                icon: icon-clock-o
+        wait_managment:
+            metadata:
+                label: waka.support::ticket_w.places.wait_managment 
+                icon: icon-clock-o
+        wait_response:
+            metadata:
+                label: waka.support::ticket_w.places.wait_response 
+                icon: icon-clock-o
+        wait_validation:
+            metadata:
+                label: waka.support::ticket_w.places.wait_validation 
+                icon: wicon-document-checked
+        validated:
+            metadata:
+                label: waka.support::ticket_w.places.validated 
+                icon: icon-check
+        sleep:
+            metadata:
+                label: waka.support::ticket_w.places.sleep 
+                icon: icon-bed
+        archived:
+            metadata:
+                label: waka.support::ticket_w.places.archived 
+                icon: icon-cubes
+        abdn:
+            metadata:
+                label: waka.support::ticket_w.places.abdn 
+                icon: icon-trash-o
+    initial_places: brouillon  # or set to an array if multiple initial places
+    transitions:
+        draft_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_wait_support 
+                rulesSet: none
+                redirect: "redirect:1"
+                type: success
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: support
+                    isClient:
+                        type: gard
+            from: draft
+            to: wait_support
+        draft_to_wait_response:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_wait_response 
+                redirect: "redirect:1"
+                type: success
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: client
+                    isSupport:
+                        type: gard
+            from: draft
+            to: wait_response
+        draft_to_sleep:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_sleep 
+                redirect: "close:1"
+                type: info
+            from: draft
+            to: sleep
+        draft_to_abdn:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_abdn 
+                redirect: "redirect:1"
+                type: danger
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: draft
+            to: abdn
+        wait_support_to_wait_response:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_wait_response 
+                redirect: "redirect:1"
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: client
+                    isCreatorAsking:
+                        type: gard
+            from: wait_support
+            to: wait_response
+        wait_support_to_wait_validation:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_wait_validation 
+                redirect: "redirect:1"
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: client
+                    isSupport:
+                        type: gard
+            from: wait_support
+            to: wait_validation
+        wait_support_to_abdn:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_abdn 
+                redirect: "redirect:1"
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: wait_support
+            to: abdn
+        wait_response_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_response_to_wait_support 
+                redirect: "redirect:1"
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: support
+                    isClient:
+                        type: gard
+            from: wait_response
+            to: wait_support
+        wait_response_to_validated:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_response_to_validated 
+                redirect: "redirect:1"
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: support
+                    isCreatorAsking:
+                        type: gard
+            from: wait_response
+            to: validated
+        wait_response_to_sleep:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_response_to_sleep 
+                redirect: "redirect:1"
+            from: wait_response
+            to: sleep
+        wait_response_to_abdn:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_response_to_abdn 
+                redirect: "redirect:1"
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: wait_response
+            to: abdn
+        wait_validation_to_validated:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_validation_to_validated 
+                redirect: "redirect:1"
+                type: success
+                fncs:
+                    isClient:
+                        type: gard
+            from: wait_validation
+            to: validated
+        wait_validation_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_validation_to_wait_support 
+                redirect: "redirect:1"
+                type: danger
+                fncs:
+                    isClient:
+                        type: gard
+            from: wait_validation
+            to: wait_support
+        sleep_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.sleep_to_wait_support 
+                redirect: "redirect:1"
+                fncs:
+                    isClient:
+                        type: gard
+            from: sleep
+            to: wait_support
+        sleep_to_wait_managment:
+            metadata: 
+                label: waka.support::ticket_w.trans.sleep_to_wait_managment 
+                redirect: "redirect:1"
+                fncs:
+                    isSupport:
+                        type: gard
+            from: sleep
+            to: wait_managment
+        sleep_to_validated:
+            metadata: 
+                label: waka.support::ticket_w.trans.sleep_to_validated 
+                redirect: "redirect:1"
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: sleep
+            to: validated
+        sleep_to_abdn:
+            metadata: 
+                label: waka.support::ticket_w.trans.sleep_to_abdn 
+                redirect: "redirect:1"
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: sleep
+            to: abdn
+        validated_to_archived:
+            metadata: 
+                label: waka.support::ticket_w.trans.validated_to_archived 
+                redirect: "redirect:1"
+            from: validated
+            to: archived
+        archived_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.archived_to_wait_support 
+                redirect: "redirect:1"
+                fncs:
+                    isClient:
+                        type: gard
+            from: archived
+            to: wait_support
+        archived_to_wait_response:
+            metadata: 
+                label: waka.support::ticket_w.trans.archived_to_wait_response 
+                redirect: "redirect:1"
+                fncs:
+                    isSupport:
+                        type: gard
+            from: archived
+            to: wait_response
+        abdn_to_draft:
+            metadata: 
+                label: waka.support::ticket_w.trans.abdn_to_draft 
+                redirect: "redirect:1"
+            from: abdn
+            to: draft

@@ -1,0 +1,29 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+model: Ticket
+
+fields:
+    state:
+        value: state
+        type: workflow 
+    ticket_type:
+        value: ticket_type.name
+        label: waka.support::ticket.ticket_type
+    name:
+        label: waka.support::ticket.name
+        value: name
+    user_email:
+        label: waka.support::ticket.user
+        value: user.email
+    section_states:
+        label: waka.utils::lang.side_bar_info.state_history
+        type: section
+    states:
+        type: state_logs
+        src_trad: waka.support::ticket_w.trans.
+
+
+
+

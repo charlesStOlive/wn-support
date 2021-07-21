@@ -1,0 +1,20 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+scopes:
+    status:
+        label: Etat
+        conditions: state in (:filtered)
+        modelClass: Waka\Support\Models\Ticket
+        options: listAllWorklowState
+        nameFrom: name
+    user:
+        label: waka.support::ticket.user
+        modelClass: Backend\Models\User
+        nameFrom: full_name
+        conditions: user_id in (:filtered)
+    type:
+        label: waka.support::ticket.ticket_type
+        modelClass: Waka\Support\Models\TicketType
+        nameFrom: name
+        conditions: type_id in (:filtered)

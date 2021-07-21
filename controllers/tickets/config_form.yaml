@@ -1,0 +1,32 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: waka.support::ticket.form_name
+
+# Model Form Field configuration
+form: $/waka/support/models/ticket/fields.yaml
+
+# Model Class name
+modelClass: Waka\Support\Models\Ticket
+
+# Default redirect location
+defaultRedirect: waka/support/tickets
+
+# Create page
+create:
+    title: waka.support::ticket.create
+    redirect: waka/support/tickets/update/:id
+    redirectClose: waka/support/tickets
+    form: $/waka/support/models/ticket/fields_create.yaml
+
+# Update page
+update:
+    title: waka.support::ticket.update
+    redirect: waka/support/tickets/update/:id
+    redirectClose: waka/support/tickets
+
+# Preview page
+preview:
+    title: waka.support::ticket.preview_name
