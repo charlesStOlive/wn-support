@@ -138,6 +138,7 @@ class Ticket extends Model
 
     public function beforeSave() 
     {
+        
         if($this->id) {
             $content = $this->getOriginalPurgeValue('next_message');
             if(!$content) {

@@ -56,7 +56,7 @@ ticket:
             metadata:
                 label: waka.support::ticket_w.places.abdn 
                 icon: icon-trash-o
-    initial_places: brouillon  # or set to an array if multiple initial places
+    initial_places: draft  # or set to an array if multiple initial places
     transitions:
         draft_to_wait_support:
             metadata: 

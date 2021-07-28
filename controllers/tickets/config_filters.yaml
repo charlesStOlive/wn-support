@@ -27,4 +27,4 @@ scopes:
         label: waka.support::ticket.hide_sleep
         type: checkbox
         default: true
-        conditions: state <> 'sleep'
+        conditions: state <> 'sleep' or state is NULL
