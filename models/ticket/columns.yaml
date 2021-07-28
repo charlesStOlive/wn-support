@@ -22,7 +22,7 @@ columns:
     user_r:
         label: waka.support::ticket.user
         relation: user
-        select: name
+        select: login
         searchable: true
     temps:
         label: waka.support::ticket.temps
