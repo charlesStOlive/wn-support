@@ -18,6 +18,7 @@ return [
         'draft_to_wait_response' => 'Ouvrir un ticket pour le client',
         'draft_to_sleep' => 'Mettre en someil',
         'draft_to_abdn' => 'Abandonner le ticket',
+        'draft_to_validated' => 'Valider et clôturer le ticket',
         'wait_support_to_wait_response' => 'Demander des infos au client',
         'wait_support_to_wait_validation' => 'Demande validation au client',
         'wait_support_to_abdn' => 'Abandonner le ticket',

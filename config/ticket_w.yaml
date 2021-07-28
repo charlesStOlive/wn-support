@@ -106,6 +106,16 @@ ticket:
                         type: gard
             from: draft
             to: abdn
+        draft_to_validated:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_validated 
+                redirect: "close:1"
+                type: success
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: draft
+            to: validated
         wait_support_to_wait_response:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_wait_response 
