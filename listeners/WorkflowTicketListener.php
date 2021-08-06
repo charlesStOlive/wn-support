@@ -119,11 +119,11 @@ class WorkflowTicketListener extends WorkflowListener
             'emails' => $usersEmails,
             'subject' => null,
         ];
-        trace_log('envoyer un email -----------------------');
-        trace_log($dotedModel);
-        trace_log($code);
-        trace_log($datasEmail);
-        trace_log('----------------------Fin email');
+        //trace_log('envoyer un email -----------------------');
+        //trace_log($dotedModel);
+        //trace_log($code);
+        //trace_log($datasEmail);
+        //trace_log('----------------------Fin email');
     }
 
 }
