@@ -39,7 +39,7 @@ class Plugin extends PluginBase
 
         // Event::listen('backend.form.extendFields', function ($widget) {
 
-        //     trace_log('yo');
+        //     //trace_log('yo');
         //     if (!$widget->getController() instanceof \System\Controllers\Settings) {
         //         return;
         //     }
@@ -92,22 +92,22 @@ class Plugin extends PluginBase
     public function registerSchedule($schedule)
     {
         // $schedule->call(function () {
-        //     trace_log('coucou du shedule');
-        //     trace_log(Settings::get('recap_team_cron'));
+        //     //trace_log('coucou du shedule');
+        //     //trace_log(Settings::get('recap_team_cron'));
         // })->everyMinute();
 
         //Sauvegarde de la base de données.
 
         $schedule->call(function () {
             $support_team = Settings::getSupportUsers();
-            trace_log($support_team);
+            //trace_log($support_team);
             foreach ($support_team as $userId) {
                 \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
                 //array_push($emails, $user->email);
             }
 
             $client_team = Settings::getClientManagers();
-            trace_log($client_team);
+            //trace_log($client_team);
             foreach ($client_team as $userId) {
                 \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
                 //array_push($emails, $user->email);
