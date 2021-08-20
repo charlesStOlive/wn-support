@@ -7,6 +7,7 @@ use System\Classes\PluginBase;
 use Backend;
 use Event;
 use Waka\Support\Models\Settings;
+use Carbon\Carbon;
 
 /**
  * Support Plugin Information File
@@ -91,21 +92,24 @@ class Plugin extends PluginBase
     public function registerSchedule($schedule)
     {
         // $schedule->call(function () {
-        //     ////trace_log('coucou du shedule');
+        //     trace_log('coucou du shedule');
+        //     trace_log(Settings::get('recap_team_cron'));
         // })->everyMinute();
 
         //Sauvegarde de la base de données.
 
         $schedule->call(function () {
-            $support_team = Settings::get('support_team');
-            foreach ($support_team as $target) {
-                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($target)->renderMail();
+            $support_team = Settings::getSupportUsers();
+            trace_log($support_team);
+            foreach ($support_team as $userId) {
+                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
                 //array_push($emails, $user->email);
             }
 
-            $client_team = Settings::get('client_manage_team');
-            foreach ($client_team as $target) {
-                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($target)->renderMail();
+            $client_team = Settings::getClientManagers();
+            trace_log($client_team);
+            foreach ($client_team as $userId) {
+                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
                 //array_push($emails, $user->email);
             }
         })->dailyAt(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
