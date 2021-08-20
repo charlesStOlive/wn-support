@@ -109,6 +109,9 @@ class TicketMessage extends Model
     public function beforeCreate() {
         $this->user = \BackendAuth::getUser();
     }
+    public function afterSave() {
+        $this->ticket->touch();
+    }
 
     /**
      * LISTS
