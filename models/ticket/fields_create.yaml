@@ -35,6 +35,7 @@ fields:
     url:
         label: waka.support::ticket.url
         span: right
+        commentAbove: waka.support::ticket.url_com
     first_message:
         label: waka.support::ticket.first_message
         span: full

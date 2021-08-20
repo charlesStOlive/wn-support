@@ -17,9 +17,14 @@ fields:
     user_email:
         label: waka.support::ticket.user
         value: user.email
+    url:
+        label: waka.support::ticket.url
+        type: link
+        value: url
     section_states:
         label: waka.utils::lang.side_bar_info.state_history
         type: section
+    
     states:
         type: state_logs
         src_trad: waka.support::ticket_w.trans.
