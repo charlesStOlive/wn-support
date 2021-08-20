@@ -103,12 +103,15 @@ return [
     'settings'  => [
         'category'    => 'Support',
         'label'       => 'Settings',
+        'label_support_settings' => 'Réglage du support',
+        'label_ticket_types' => 'Gestion des type de tickets',
         'description' => 'Manage support settings',
         'support_team'      => 'Equipe de support',
         'support_user'     => 'Utilisateur support',
         'client_manage_team' => 'Equipe management',
         'client_manage_user' =>'Utilisateur managment',
-        'all_email' => 'Reçoit tous les emails'
+        'all_email' => 'Reçoit tous les emails',
+        'recap_team_cron' => 'Heure execution de la fonction',
     ],
     'tab'          => [
         'details'      => 'Details',

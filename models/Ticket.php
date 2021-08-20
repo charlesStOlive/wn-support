@@ -168,12 +168,13 @@ class Ticket extends Model
      **/
     public function listTicketTypes()
     {
-        $user = \BackendAuth::getUser();
-        if($user->hasAccess('waka.support.admin.super')) {
-            return TicketType::lists('name', 'id');
-        } else {
-            return TicketType::where('is_for_super_user', null)->lists('name', 'id');
-        }
+        // $user = \BackendAuth::getUser();
+        // if($user->hasAccess('waka.support.admin.super')) {
+        //     return TicketType::lists('name', 'id');
+        // } else {
+        //     return TicketType::where('is_for_super_user', null)->lists('name', 'id');
+        // }
+        return TicketType::lists('name', 'id');
         
     }
 

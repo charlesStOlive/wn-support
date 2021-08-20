@@ -3,6 +3,11 @@
 # ===================================
 
 fields:
+    recap_team_cron:
+        label: waka.support::lang.settings.recap_team_cron
+        type: datepicker
+        mode: time
+        span: left
     support_team:
         label: waka.support::lang.settings.support_team
         span: full
@@ -31,3 +36,4 @@ fields:
                     label: waka.support::lang.settings.all_email
                     type: checkbox
                     default: false
+    

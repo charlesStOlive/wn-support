@@ -6,6 +6,7 @@ use Waka\Support\Models\Ticket;
 use System\Classes\PluginBase;
 use Backend;
 use Event;
+use Waka\Support\Models\Settings;
 
 /**
  * Support Plugin Information File
@@ -33,8 +34,84 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        \Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketListener());
+        Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketListener());
+
+        // Event::listen('backend.form.extendFields', function ($widget) {
+
+        //     trace_log('yo');
+        //     if (!$widget->getController() instanceof \System\Controllers\Settings) {
+        //         return;
+        //     }
+
+        //     // Only for the Wconfig Settings
+        //     if (!$widget->model instanceof Settings) {
+        //         return;
+        //     }
+
+        //     if ($widget->isNested === true) {
+        //         return;
+        //     }
+        //     $widget->addTabFields(\Yaml::parseFile(plugins_path() . '/waka/support/models/settings/fields.yaml'));
+
+        //     // $widget->addTabFields([
+        //     //     'sf_responsable' => [
+        //     //         'tab' => 'Support',
+        //     //         'label' => "Collaborateurs recevant l'email de bilan Sales Force",
+        //     //         'type' => 'taglist',
+        //     //         'mode' => 'array',
+        //     //         'useKey' => 'true',
+        //     //         'options' => 'listUsers',
+        //     //     ],
+        //     //     'sf_active_imports' => [
+        //     //         'tab' => 'Support',
+        //     //         'label' => 'waka.salesforce::lang.settings.active_imports',
+        //     //         'type' => 'checkboxlist',
+        //     //         'quickselect' => true,
+        //     //         'options' => 'listImports',
+        //     //     ],
+
+        //     //     'sf_oldest_date' => [
+        //     //         'tab' => 'Support',
+        //     //         'label' => 'waka.salesforce::lang.settings.oldest_date',
+        //     //         'type' => 'datepicker',
+        //     //     ],
+        //     //     'sf_cron_time' => [
+        //     //         'tab' => 'Support',
+        //     //         'label' => "Heure d'execution du CRON",
+        //     //         'type' => 'datepicker',
+        //     //         'mode' => 'time',
+        //     //         'span' => 'left',
+        //     //         'width' => '100px',
+        //     //     ],
+        //     // ]);
+        // });
         
+    }
+
+    public function registerSchedule($schedule)
+    {
+        // $schedule->call(function () {
+        //     ////trace_log('coucou du shedule');
+        // })->everyMinute();
+
+        //Sauvegarde de la base de données.
+
+        $schedule->call(function () {
+            $support_team = Settings::get('support_team');
+            foreach ($support_team as $target) {
+                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($target)->renderMail();
+                //array_push($emails, $user->email);
+            }
+
+            $client_team = Settings::get('client_manage_team');
+            foreach ($client_team as $target) {
+                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($target)->renderMail();
+                //array_push($emails, $user->email);
+            }
+        })->dailyAt(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
+        //})->everyMinute();
+
+
     }
 
     /**
@@ -126,7 +203,7 @@ class Plugin extends PluginBase
     {
         return [
             'support_settings' => [
-                'label'       => 'waka.support::lang.settings.label',
+                'label'       => 'waka.support::lang.settings.label_support_settings',
                 'description' => 'waka.support::lang.settings.description',
                 'category'    => 'waka.support::lang.settings.category',
                 'icon'        => 'icon-life-ring',
@@ -136,12 +213,12 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.support.access_settings']
             ],
              'TicketTypes' => [
-                'label'       => 'waka.support::lang.settings.label',
+                'label'       => 'waka.support::lang.settings.label_ticket_types',
                 'description' => 'waka.support::lang.settings.description',
                 'category'    => 'waka.support::lang.settings.category',
                 'icon'        => 'icon-gear',
-                'url' => Backend::url('wcli/crpf/payss'),
-                'order'       => 500,
+                'url' => Backend::url('waka/support/tickettypes'),
+                'order'       => 501,
                 'keywords'    => 'support help',
                 'permissions' => ['waka.support.admin.super']
             ]
