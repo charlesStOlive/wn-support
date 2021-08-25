@@ -91,6 +91,14 @@ class Plugin extends PluginBase
 
     public function registerSchedule($schedule)
     {
+        if(!Settings::get('recap_team_cron')) {
+            //Il n' y a pas de date cela rique d'engendrer un email par minute
+            return;
+        }
+        if(!Settings::get('activate')) {
+            //On bloque si desactivé
+            return;
+        }
 
         $schedule->call(function () {
             $support_team = Settings::getSupportUsers();

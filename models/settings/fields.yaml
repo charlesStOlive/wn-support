@@ -3,11 +3,16 @@
 # ===================================
 
 fields:
+    activate:
+        label: waka.support::lang.settings.activate
+        type: switch
+        span: auto
     recap_team_cron:
         label: waka.support::lang.settings.recap_team_cron
         type: datepicker
         mode: time
-        span: left
+        span: auto
+        required: true
     support_team:
         label: waka.support::lang.settings.support_team
         span: full

@@ -112,6 +112,7 @@ return [
         'client_manage_user' =>'Utilisateur managment',
         'all_email' => 'Reçoit tous les emails',
         'recap_team_cron' => 'Heure execution de la fonction',
+        'activate' => 'Activer les bilans de ticket par email',
     ],
     'tab'          => [
         'details'      => 'Details',
