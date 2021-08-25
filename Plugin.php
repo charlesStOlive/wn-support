@@ -91,29 +91,19 @@ class Plugin extends PluginBase
 
     public function registerSchedule($schedule)
     {
-        // $schedule->call(function () {
-        //     //trace_log('coucou du shedule');
-        //     //trace_log(Settings::get('recap_team_cron'));
-        // })->everyMinute();
-
-        //Sauvegarde de la base de données.
 
         $schedule->call(function () {
             $support_team = Settings::getSupportUsers();
-            //trace_log($support_team);
+            trace_log(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
             foreach ($support_team as $userId) {
                 \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
-                //array_push($emails, $user->email);
             }
 
             $client_team = Settings::getClientManagers();
-            //trace_log($client_team);
             foreach ($client_team as $userId) {
                 \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
-                //array_push($emails, $user->email);
             }
         })->dailyAt(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
-        //})->everyMinute();
 
 
     }
