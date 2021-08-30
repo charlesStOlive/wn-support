@@ -102,7 +102,7 @@ class Plugin extends PluginBase
 
         $schedule->call(function () {
             $support_team = Settings::getSupportUsers();
-            trace_log(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
+            //trace_log(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
             foreach ($support_team as $userId) {
                 \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
             }
