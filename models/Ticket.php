@@ -150,7 +150,7 @@ class Ticket extends Model
     {
         $this->next_id = $this->getNextUserId();
         
-        if($this->code) {
+        if(!$this->code) {
             $this->code = 'EM_'.str_pad( $this->id, 5, "0", STR_PAD_LEFT );
         }
         

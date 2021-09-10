@@ -3,11 +3,6 @@
 # ===================================
 
 columns:
-    silent_mode:
-        label: waka.support::ticket.silent_mode
-        type: switch
-        searchable: false
-        sortable: true
     urgent:
         label: waka.support::ticket.urgent
         type: switch
@@ -40,10 +35,6 @@ columns:
         label: waka.support::ticket.ticket_group
         relation: ticket_group
         select: name
-        searchable: true
-    awake_at:
-        label: waka.support::ticket.awake_at
-        type: date
         searchable: true
     user_r:
         label: waka.support::ticket.user

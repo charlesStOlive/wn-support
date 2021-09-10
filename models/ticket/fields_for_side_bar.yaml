@@ -32,6 +32,7 @@ fields:
         label: waka.support::ticket.next
         span: auto
         value: next.login
+        noUpdate: true
     sb_section_f:
         label: waka.support::ticket.sb_section_f
         span: auto
@@ -48,6 +49,7 @@ fields:
         placeholder: waka.utils::lang.global.placeholder
         nameFrom: name
         permissions: [wcli.ticket.admin.super]
+        infoType: relation
         value: ticket_group.name
         noUpdate: true
     sb_section_a:

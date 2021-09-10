@@ -17,7 +17,7 @@ return [
     'ticket_messages' => 'Messages',
     'first_message' => 'Premier message',
     'next_message' => 'Votre message',
-    'temps' => 'Temps prévu si facturable',
+    'temps' => 'Temps prévu',
     'ticket_group' => 'Lot de tickets',
     'awake_at' => 'Révéiller la tâche (si mise en sommeil)',
     'sb_section_i' => 'Infos',
