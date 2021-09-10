@@ -3,22 +3,18 @@
 # ===================================
 
 fields:
-    silent_mode:
-        label: waka.support::ticket.silent_mode
+    support_user:
+        label: waka.support::ticket.support_user
         span: left
-        type: checkbox
-        commentAbove: waka.support::ticket.silent_mode_com
-    name:
-        label: waka.support::ticket.name
-        span: left
-        required: true
-    ticket_type:
-        label: waka.support::ticket.ticket_type
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        options: listSupportUser
+    support_client:
+        label: waka.support::ticket.support_client
         span: right
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
-        required: true
-        options: listTicketTypes
+        options: ListClientTeam
     attachments:
         label: waka.support::ticket.attachments
         span: left
@@ -41,6 +37,15 @@ fields:
         span: full
         type: richeditor
         toolbarButtons: bold,italic,underline,strikeThrough
-    temps:
-        label: waka.support::ticket.temps
+    awake_at:
+        label: waka.support::ticket.awake_at
         span: left
+        type: datepicker
+        valueFrom: baseAwake
+        mode: date
+secondaryTabs:
+    fields:
+        info:
+            type: modelinfo
+            mode: secondary
+            src: /waka/support/models/ticket/fields_for_side_bar.yaml

@@ -32,10 +32,6 @@ ticket:
             metadata:
                 label: waka.support::ticket_w.places.wait_managment 
                 icon: icon-clock-o
-        wait_response:
-            metadata:
-                label: waka.support::ticket_w.places.wait_response 
-                icon: icon-clock-o
         wait_validation:
             metadata:
                 label: waka.support::ticket_w.places.wait_validation 
@@ -74,9 +70,9 @@ ticket:
                         type: gard
             from: draft
             to: wait_support
-        draft_to_wait_response:
+        draft_to_wait_managment:
             metadata: 
-                label: waka.support::ticket_w.trans.draft_to_wait_response 
+                label: waka.support::ticket_w.trans.draft_to_wait_managment 
                 redirect: "redirect:1"
                 type: success
                 fncs:
@@ -88,7 +84,7 @@ ticket:
                     isSupport:
                         type: gard
             from: draft
-            to: wait_response
+            to: wait_managment
         draft_to_sleep:
             metadata: 
                 label: waka.support::ticket_w.trans.draft_to_sleep 
@@ -101,9 +97,6 @@ ticket:
                 label: waka.support::ticket_w.trans.draft_to_abdn 
                 redirect: "redirect:1"
                 type: danger
-                fncs:
-                    isCreatorAsking:
-                        type: gard
             from: draft
             to: abdn
         draft_to_validated:
@@ -111,14 +104,11 @@ ticket:
                 label: waka.support::ticket_w.trans.draft_to_validated 
                 redirect: "close:1"
                 type: success
-                fncs:
-                    isCreatorAsking:
-                        type: gard
             from: draft
             to: validated
-        wait_support_to_wait_response:
+        wait_support_to_wait_managment:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_support_to_wait_response 
+                label: waka.support::ticket_w.trans.wait_support_to_wait_managment 
                 redirect: "redirect:1"
                 fncs:
                     sendNotification:
@@ -126,10 +116,10 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: client
-                    isCreatorAsking:
+                    isSupport:
                         type: gard
             from: wait_support
-            to: wait_response
+            to: wait_managment
         wait_support_to_wait_validation:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_wait_validation 
@@ -144,18 +134,23 @@ ticket:
                         type: gard
             from: wait_support
             to: wait_validation
+        wait_support_to_sleep:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_sleep 
+            from: wait_support
+            to: sleep
         wait_support_to_abdn:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_abdn 
                 redirect: "redirect:1"
                 fncs:
-                    isCreatorAsking:
+                    isSupport:
                         type: gard
             from: wait_support
             to: abdn
-        wait_response_to_wait_support:
+        wait_managment_to_wait_support:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_response_to_wait_support 
+                label: waka.support::ticket_w.trans.wait_managment_to_wait_support 
                 redirect: "redirect:1"
                 fncs:
                     sendNotification:
@@ -163,13 +158,11 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: support
-                    isClient:
-                        type: gard
-            from: wait_response
+            from: wait_managment
             to: wait_support
-        wait_response_to_validated:
+        wait_managment_to_validated:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_response_to_validated 
+                label: waka.support::ticket_w.trans.wait_managment_to_validated 
                 redirect: "redirect:1"
                 fncs:
                     sendNotification:
@@ -177,24 +170,19 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: support
-                    isCreatorAsking:
-                        type: gard
-            from: wait_response
+            from: wait_managment
             to: validated
-        wait_response_to_sleep:
+        wait_managment_to_sleep:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_response_to_sleep 
+                label: waka.support::ticket_w.trans.wait_managment_to_sleep 
                 redirect: "redirect:1"
-            from: wait_response
+            from: wait_managment
             to: sleep
-        wait_response_to_abdn:
+        wait_managment_to_abdn:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_response_to_abdn 
+                label: waka.support::ticket_w.trans.wait_managment_to_abdn 
                 redirect: "redirect:1"
-                fncs:
-                    isCreatorAsking:
-                        type: gard
-            from: wait_response
+            from: wait_managment
             to: abdn
         wait_validation_to_validated:
             metadata: 
@@ -238,18 +226,12 @@ ticket:
             metadata: 
                 label: waka.support::ticket_w.trans.sleep_to_validated 
                 redirect: "redirect:1"
-                fncs:
-                    isCreatorAsking:
-                        type: gard
             from: sleep
             to: validated
         sleep_to_abdn:
             metadata: 
                 label: waka.support::ticket_w.trans.sleep_to_abdn 
                 redirect: "redirect:1"
-                fncs:
-                    isCreatorAsking:
-                        type: gard
             from: sleep
             to: abdn
         validated_to_archived:
@@ -267,15 +249,15 @@ ticket:
                         type: gard
             from: archived
             to: wait_support
-        archived_to_wait_response:
+        archived_to_wait_managment:
             metadata: 
-                label: waka.support::ticket_w.trans.archived_to_wait_response 
+                label: waka.support::ticket_w.trans.archived_to_wait_managment 
                 redirect: "redirect:1"
                 fncs:
                     isSupport:
                         type: gard
             from: archived
-            to: wait_response
+            to: wait_managment
         abdn_to_draft:
             metadata: 
                 label: waka.support::ticket_w.trans.abdn_to_draft 

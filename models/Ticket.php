@@ -2,6 +2,7 @@
 
 use Model;
 use Carbon\Carbon;
+use Backend\Models\User;
 
 /**
  * ticket Model
@@ -85,6 +86,7 @@ class Ticket extends Model
     protected $dates = [
         'created_at',
         'updated_at',
+        'awake_at',
     ];
 
     /**
@@ -104,7 +106,11 @@ class Ticket extends Model
     ];
     public $belongsTo = [
        'ticket_type' => ['Waka\Support\Models\TicketType'],
+       'ticket_group' => ['Waka\Support\Models\TicketGroup'],
        'user' => ['Backend\Models\User'],
+       'next' => ['Backend\Models\User'],
+       'support_user' => ['Backend\Models\User'],
+       'support_client' => ['Backend\Models\User'],
     ];
     public $belongsToMany = [
     ];        
@@ -128,6 +134,10 @@ class Ticket extends Model
     /**
      *EVENTS
      **/
+    public function beforeCreate() {
+            $id = $this->getNextStringId(5);
+            $this->code = 'EM_'.$id;  
+    }
     public function afterCreate() 
     {
         $content = $this->getOriginalPurgeValue('first_message');
@@ -138,6 +148,12 @@ class Ticket extends Model
 
     public function beforeSave() 
     {
+        $this->next_id = $this->getNextUserId();
+        
+        if($this->code) {
+            $this->code = 'EM_'.str_pad( $this->id, 5, "0", STR_PAD_LEFT );
+        }
+        
         
         if($this->id) {
             $content = $this->getOriginalPurgeValue('next_message');
@@ -177,10 +193,44 @@ class Ticket extends Model
         return TicketType::lists('name', 'id');
         
     }
+    public function listSupportUser() {
+        $users =  Settings::getSupportUsers();
+        $users = User::whereIn('id', $users)->get();
+        return $this->collectionConcatId($users);
+    }
+    public function ListClientTeam() {
+        $users =   Settings::getClientManagers();
+        $users = User::whereIn('id', $users)->get();
+        return $this->collectionConcatId($users);
+    }
+
 
     /**
      * GETTERS
      **/
+    public function getNextUserId() {
+        if($this->state == "draft") {
+            return $this->user_id;
+        }
+        if($this->state == "wait_support") {
+            return $this->support_user_id ? $this->support_user_id : Settings::getSupportUsers()[0] ?? null;
+        }
+        if($this->state == "wait_managment" || $this->state == "wait_managment" ) {
+            return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null; 
+            
+        }
+        if($this->state == "validated") {
+            return $this->user_id;
+        } else {
+            return $this->user_id;
+        }
+        
+    }
+
+    public function getBaseAwakeAttribute() {
+        trace_log('yo');
+        return Carbon::now()->addWeek();
+    }
 
     /**
      * SCOPES
@@ -247,13 +297,15 @@ class Ticket extends Model
 
     public static function getMenucounter()
     {
-        if(Settings::isClientManager()) {
-            return Ticket::whereIn('state', ['wait_managment', 'wait_response'])->count();
-        } 
-         if(Settings::isSupportMember()) {
-            return Ticket::whereIn('state', ['wait_support'])->count();
-        }
-        return null;      
+        $userId = \BackendAuth::getUser()->id;
+        return Ticket::where('next_id', $userId)->count();
+
+        // if(Settings::isClientManager()) {
+        //     return Ticket::whereIn('state', ['wait_managment', 'wait_response'])->count();
+        // } 
+        //  if(Settings::isSupportMember()) {
+        //     return Ticket::whereIn('state', ['wait_support'])->count();
+        // }     
     }
 
     /**

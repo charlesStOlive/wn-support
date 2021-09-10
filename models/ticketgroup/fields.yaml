@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    tickets:
+        label: waka.support::ticketgroup.tickets
+        span: full
+        type: partial
+        path: field_tickets
+secondaryTabs:
+    fields:
+        info:
+            type: modelinfo
+            mode: secondary
+            src: /waka/support/models/ticketgroup/fields_for_side_bar.yaml

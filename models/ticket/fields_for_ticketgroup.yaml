@@ -1,0 +1,43 @@
+fields:
+    silent_mode:
+        label: 'waka.support::ticket.silent_mode'
+        span: left
+        type: checkbox
+        commentAbove: 'waka.support::ticket.silent_mode_com'
+    urgent:
+        label: 'waka.support::ticket.urgent'
+        span: right
+        type: checkbox
+    name:
+        label: 'waka.support::ticket.name'
+        span: left
+        required: true
+    ticket_type:
+        label: 'waka.support::ticket.ticket_type'
+        span: right
+        type: dropdown
+        placeholder: 'waka.utils::lang.global.placeholder'
+        required: true
+        options: listTicketTypes
+    attachments:
+        label: 'waka.support::ticket.attachments'
+        span: left
+        type: fileupload
+        mode: image
+        imageHeight: 260
+        thumbOptions:
+            mode: auto
+            quality: 90
+            sharpen: 0
+            interlace: false
+            extension: auto
+        useCaption: false
+    url:
+        label: 'waka.support::ticket.url'
+        span: right
+        commentAbove: 'waka.support::ticket.url_com'
+    first_message:
+        label: 'waka.support::ticket.first_message'
+        span: full
+        type: richeditor
+        toolbarButtons: 'bold,italic,underline,strikeThrough'

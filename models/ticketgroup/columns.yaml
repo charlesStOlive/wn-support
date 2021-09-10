@@ -1,0 +1,25 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: waka.support::ticketgroup.name
+        searchable: true
+    is_factured:
+        label: waka.support::ticketgroup.is_factured
+        type: switch
+        searchable: false
+        sortable: true
+    montant:
+        label: waka.support::ticketgroup.montant
+        type: euro
+        searchable: false
+        sortable: false
+    nbTicket:
+        label: waka.support::ticketgroup.nbTicket
+        searchable: false
+        sortable: false
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: timetense

@@ -6,9 +6,18 @@ columns:
     silent_mode:
         label: waka.support::ticket.silent_mode
         type: switch
-        searchable: true
+        searchable: false
+        sortable: true
+    urgent:
+        label: waka.support::ticket.urgent
+        type: switch
+        searchable: false
+        sortable: true
     name:
         label: waka.support::ticket.name
+        searchable: true
+    code:
+        label: waka.support::ticket.code
         searchable: true
     ticket_type_r:
         label: waka.support::ticket.ticket_type
@@ -19,14 +28,29 @@ columns:
         label: waka.support::ticket.state
         type: workflow
         searchable: true
-    user_r:
-        label: waka.support::ticket.user
-        relation: user
-        select: login
+    next_r:
+        label: waka.support::ticket.next
+        relation: next
         searchable: true
+        select: CONCAT(first_name,' ',last_name)
     temps:
         label: waka.support::ticket.temps
         searchable: true
+    ticket_group_r:
+        label: waka.support::ticket.ticket_group
+        relation: ticket_group
+        select: name
+        searchable: true
+    awake_at:
+        label: waka.support::ticket.awake_at
+        type: date
+        searchable: true
+    user_r:
+        label: waka.support::ticket.user
+        relation: user
+        searchable: true
+        select: CONCAT(first_name,' ',last_name)
+        invisible: true
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense

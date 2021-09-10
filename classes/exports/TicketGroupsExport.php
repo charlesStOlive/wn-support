@@ -6,9 +6,9 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithStyles;
 //
-use Waka\Support\Models\Ticket;
+use Waka\Support\Models\TicketGroup;
 
-class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
+class TicketGroupsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
 {
     public $listId;
 
@@ -24,12 +24,9 @@ class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
         return [
             'id',
             'name',
-            'ticket_type_id',
-            'state',
-            'user_id',
-            'url',
-            'ticket_group_id',
-            'awake_at',
+            'is_factured',
+            'montant',
+            'nbTicket',
         ];
     }
 
@@ -37,9 +34,9 @@ class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
     {
         $request;
         if ($this->listId) {
-            $request = Ticket::whereIn('id', $this->listId)->get($this->headings());
+            $request = TicketGroup::whereIn('id', $this->listId)->get($this->headings());
         } else {
-            $request = Ticket::get($this->headings()); 
+            $request = TicketGroup::get($this->headings()); 
         }
         $request = $request->map(function ($item) {
                 return $item;
@@ -73,12 +70,9 @@ class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 //         return [
 //             'id',
 //             'name',
-//             'ticket_type_id',
-//             'state',
-//             'user_id',
-//             'url',
-//             'ticket_group_id',
-//             'awake_at',
+//             'is_factured',
+//             'montant',
+//             'nbTicket',
 //         ];
 //     }
 
@@ -86,9 +80,9 @@ class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 //     {
 //         $request;
 //         if ($this->listId) {
-//             $request = Ticket::whereIn('id', $this->listId)->get($this->headings());
+//             $request = TicketGroup::whereIn('id', $this->listId)->get($this->headings());
 //         } else {
-//             $request = Ticket::get($this->headings()); 
+//             $request = TicketGroup::get($this->headings()); 
 //         }
 //         $request = $request->map(function ($item) {
 //                 return $item;

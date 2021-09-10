@@ -1,0 +1,16 @@
+# ===================================
+# Relation Behavior Config
+# ===================================
+
+tickets:
+    label: waka.support::ticketgroup.tickets
+    manage:
+        form: $/waka/support/models/ticket/fields_for_ticketgroup.yaml
+        list: $/waka/support/models/ticket/columns_for_ticketgroup.yaml
+    view:
+        list: $/waka/support/models/ticket/columns_for_ticketgroup.yaml
+        toolbarButtons: link|unlink
+        defaultSort:
+            column: name
+            direction: asc
+

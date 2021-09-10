@@ -1,0 +1,24 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: waka.support::ticketgroup.name
+        span: left
+        required: true
+    is_factured:
+        label: waka.support::ticketgroup.is_factured
+        span: left
+        type: switch
+        default: false
+        infoType: switch
+    montant:
+        label: waka.support::ticketgroup.montant
+        span: auto
+        noUpdate: true
+    nbTicket:
+        label: waka.support::ticketgroup.nbTicket
+        span: auto
+        noUpdate: true
+

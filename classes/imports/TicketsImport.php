@@ -4,6 +4,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use \PhpOffice\PhpSpreadsheet\Shared\Date as DateConvert;
 use Waka\Support\Models\Ticket;
 
 class TicketsImport implements ToCollection, WithHeadingRow, WithCalculatedFormulas
@@ -28,8 +29,9 @@ class TicketsImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
             $ticket->ticket_type_id = $row['ticket_type_id'] ?? null;
             $ticket->state = $row['state'] ?? null;
             $ticket->user_id = $row['user_id'] ?? null;
-            $ticket->subject = $row['subject'] ?? null;
             $ticket->url = $row['url'] ?? null;
+            $ticket->ticket_group_id = $row['ticket_group_id'] ?? null;
+            $ticket->awake_at = DateConvert::excelToDateTimeObject($row['awake_at'] ?? null);
             $ticket->save();
         }
     }
@@ -59,6 +61,8 @@ class TicketsImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
 //             $ticket->state = $row['state'] ?? null;
 //             $ticket->user_id = $row['user_id'] ?? null;
 //             $ticket->url = $row['url'] ?? null;
+//             $ticket->ticket_group_id = $row['ticket_group_id'] ?? null;
+//             $ticket->awake_at = $row['awake_at'] ?? null;
 //             $ticket->save();
 //         }
 //     }

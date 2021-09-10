@@ -8,6 +8,10 @@ fields:
         span: left
         type: checkbox
         commentAbove: waka.support::ticket.silent_mode_com
+    urgent:
+        label: waka.support::ticket.urgent
+        span: right
+        type: checkbox
     name:
         label: waka.support::ticket.name
         span: left
@@ -19,6 +23,18 @@ fields:
         placeholder: waka.utils::lang.global.placeholder
         required: true
         options: listTicketTypes
+    support_user:
+        label: waka.support::ticket.support_user
+        span: left
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        options: listSupportUser
+    support_client:
+        label: waka.support::ticket.support_client
+        span: right
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        options: ListClientTeam
     attachments:
         label: waka.support::ticket.attachments
         span: left
@@ -36,6 +52,12 @@ fields:
         label: waka.support::ticket.url
         span: right
         commentAbove: waka.support::ticket.url_com
+    ticket_group:
+        label: waka.support::ticket.ticket_group
+        span: full
+        type: partial
+        path: field_ticket_group
+        permissions: [wcli.ticket.admin.super]
     first_message:
         label: waka.support::ticket.first_message
         span: full

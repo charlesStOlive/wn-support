@@ -1,0 +1,41 @@
+columns:
+    silent_mode:
+        label: 'waka.support::ticket.silent_mode'
+        type: switch
+        searchable: false
+        sortable: true
+    urgent:
+        label: 'waka.support::ticket.urgent'
+        type: switch
+        searchable: false
+        sortable: true
+    name:
+        label: 'waka.support::ticket.name'
+        searchable: true
+    ticket_type_r:
+        label: 'waka.support::ticket.ticket_type'
+        relation: ticket_type
+        select: name
+        searchable: true
+    state:
+        label: 'waka.support::ticket.state'
+        type: workflow
+        searchable: true
+    user_r:
+        label: 'waka.support::ticket.user'
+        relation: user
+        select: name
+        searchable: true
+    temps:
+        label: 'waka.support::ticket.temps'
+        searchable: true
+    awake_at:
+        label: 'waka.support::ticket.awake_at'
+        type: date
+        searchable: true
+    updated_at:
+        label: 'waka.utils::lang.global.updated_at'
+        type: timetense
+    sort_order:
+        label: 'waka.utils::lang.global.sort_order'
+        invisible: true

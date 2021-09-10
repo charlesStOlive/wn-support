@@ -1,0 +1,89 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    state:
+        label: waka.support::ticket.state
+        span: auto
+        infoType: workflow
+    code:
+        label: waka.support::ticket.code
+        span: auto
+        infoType: title
+    sb_section_i:
+        label: waka.support::ticket.sb_section_i
+        span: auto
+        infoType: section
+        noUpdate: true
+    name:
+        label: waka.support::ticket.name
+        span: left
+        required: true
+    ticket_type:
+        label: waka.support::ticket.ticket_type
+        span: right
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        required: true
+        options: listTicketTypes
+        value: ticket_type.name
+    next:
+        label: waka.support::ticket.next
+        span: auto
+        value: next.login
+    sb_section_f:
+        label: waka.support::ticket.sb_section_f
+        span: auto
+        infoType: section
+        noUpdate: true
+    temps:
+        label: waka.support::ticket.temps
+        span: left
+        permissions: [wcli.ticket.admin.super]
+    ticket_group:
+        label: waka.support::ticket.ticket_group
+        span: full
+        type: relation
+        placeholder: waka.utils::lang.global.placeholder
+        nameFrom: name
+        permissions: [wcli.ticket.admin.super]
+        value: ticket_group.name
+        noUpdate: true
+    sb_section_a:
+        label: waka.support::ticket.sb_section_a
+        span: auto
+        infoType: section
+        noUpdate: true
+    silent_mode:
+        label: waka.support::ticket.silent_mode
+        span: left
+        type: checkbox
+        commentAbove: waka.support::ticket.silent_mode_com
+        infoType: switch
+    urgent:
+        label: waka.support::ticket.urgent
+        span: right
+        type: checkbox
+        infoType: switch
+    user:
+        label: waka.support::ticket.user
+        span: left
+        type: relation
+        placeholder: waka.utils::lang.global.placeholder
+        nameFrom: name
+        required: true
+        value: user.login
+        noUpdate: true
+    sb_section_w:
+        label: waka.support::ticket.sb_section_w
+        span: auto
+        infoType: section
+        noUpdate: true
+    sb_section_w_c:
+        label: waka.support::ticket.sb_section_w_c
+        span: auto
+        infoType: state_logs
+        noUpdate: true
+        src_trad: waka.support::ticket_w.trans.
+

@@ -2,11 +2,12 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use System\Classes\SettingsManager;
 
 /**
- * Ticket Back-end Controller
+ * Ticket Group Back-end Controller
  */
-class Tickets extends Controller
+class TicketGroups extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
@@ -16,22 +17,21 @@ class Tickets extends Controller
         'Waka.Utils.Behaviors.SideBarUpdate',
         'Waka.ImportExport.Behaviors.ExcelImport',
         'Waka.ImportExport.Behaviors.ExcelExport',
-        'Backend.Behaviors.ReorderController',
-        'Waka.Utils.Behaviors.WorkflowBehavior',
     ];
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
     public $btnsConfig = 'config_btns.yaml';
     public $relationConfig = 'config_relation.yaml';
-    public $reorderConfig = 'config_reorder.yaml';
     public $sideBarUpdateConfig = 'config_side_bar_update.yaml';
-    public $workflowConfig = 'config_workflow.yaml'; 
+
+    public $requiredPermissions = ['nobody'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Waka.Support', 'support', 'tickets');
+        BackendMenu::setContext('October.System', 'system', 'settings');
+        SettingsManager::setContext('Waka.Support', 'TicketGroups');
     }
 
     //startKeep/

@@ -4,3 +4,7 @@
     - create_ticket_messages_table.php
     - create_tickets_table.php
     - seed_ticket_types_table.php
+1.1.0:
+    - Ajout des groupes tickets.
+    - create_tickets_table_u110.php
+    - create_ticket_groups_table.php

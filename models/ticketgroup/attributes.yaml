@@ -1,0 +1,19 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+icon: icon-info
+attributes:
+    name:
+        label: waka.support::ticketgroup.name
+    is_factured:
+        label: waka.support::ticketgroup.is_factured
+        type: switch
+    montant:
+        label: waka.support::ticketgroup.montant
+        type: euro
+    nbTicket:
+        label: waka.support::ticketgroup.nbTicket
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: date-medium
