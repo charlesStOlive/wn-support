@@ -49,7 +49,6 @@ fields:
         placeholder: waka.utils::lang.global.placeholder
         nameFrom: name
         permissions: [wcli.ticket.admin.super]
-        infoType: relation
         value: ticket_group.name
         noUpdate: true
     sb_section_a:
