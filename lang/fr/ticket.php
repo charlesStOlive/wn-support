@@ -3,7 +3,7 @@ return [
     'silent_mode' => 'Mode silencieux',
     'silent_mode_com' => 'Les emails de notification ne seront pas envoyés. Utile si vous créez plusieurs tickets en même temps. ',
     'urgent' => 'Urgent',
-    'name' => 'Nom/Sujet du  ticket',
+    'name' => 'Nom/Sujet',
     'code' => 'Code',
     'ticket_type' => 'Type',
     'state' => 'Etat',
@@ -20,6 +20,7 @@ return [
     'temps' => 'Temps prévu',
     'ticket_group' => 'Lot de tickets',
     'awake_at' => 'Révéiller la tâche (si mise en sommeil)',
+    'created_at' => 'Crée le',
     'sb_section_i' => 'Infos',
     'sb_section_f' => 'Facturation',
     'sb_section_a' => 'Autres',
@@ -31,6 +32,6 @@ return [
     'edit' => 'Editer ticket',
     'form_name' => 'Gestion ticket',
     'preview_name' => 'Voir ticket',
-    'hide_termined' => 'Cacher tickets terminés',
-    'hide_sleep' => 'Cacher tickets endormis'
+    'only_active' => 'Actif',
+    'facturable' => 'Facturable'
 ];

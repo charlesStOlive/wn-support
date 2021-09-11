@@ -239,6 +239,17 @@ class Ticket extends Model
     {
         $query->whereIn('state', ['abdn', 'archived']);
     }
+    public function scopeActive($query) {
+        $query->whereIn('state', ['draft', 'wait_support', 'wait_managment', 'wait_validation', 'validated', ''])
+        ->orWhereNull('state');
+
+    }
+    public function scopeNoGroup($query) {
+        $query->whereNull('ticket_group_id');
+    }
+    public function scopeIsFacturable($query) {
+        $query->where('temps','>', 0);
+    }
 
     
 

@@ -1,9 +1,4 @@
 columns:
-    urgent:
-        label: 'waka.support::ticket.urgent'
-        type: switch
-        searchable: false
-        sortable: true
     name:
         label: 'waka.support::ticket.name'
         searchable: true
@@ -31,6 +26,10 @@ columns:
         label: 'waka.support::ticket.ticket_group'
         relation: ticket_group
         select: name
+        searchable: true
+    created_at:
+        label: 'waka.support::ticket.created_at'
+        type: timetense
         searchable: true
     user_r:
         label: 'waka.support::ticket.user'

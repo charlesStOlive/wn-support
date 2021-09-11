@@ -2,6 +2,11 @@
 # Filter Scope Definitions
 # ===================================
 scopes:
+    ticketGroups:
+        label: Groupes
+        conditions: ticket_group_id in (:filtered)
+        modelClass: Waka\Support\Models\TicketGroup
+        nameFrom: name
     status:
         label: Etat
         conditions: state in (:filtered)
@@ -18,13 +23,13 @@ scopes:
         modelClass: Waka\Support\Models\TicketType
         nameFrom: name
         conditions: type_id in (:filtered)
-    hide_termined:
-        label: waka.support::ticket.hide_termined
+    only_active:
+        label: waka.support::ticket.only_active
         type: checkbox
         default: true
-        conditions: state not in  ('abdn','archived')
-    hide_sleep:
-        label: waka.support::ticket.hide_sleep
+        scope: active
+    facturable:
+        label: waka.support::ticket.facturable
         type: checkbox
-        default: true
-        conditions: state <> 'sleep' or state is NULL
+        scope: isFacturable 
+    

@@ -142,7 +142,7 @@ class Plugin extends PluginBase
                         'label' => 'waka.support::lang.settings.label_ticket_groupes',
                         'icon' => 'icon-gear',
                         'url' => Backend::url('waka/support/ticketgroups'),
-                        'permissions' => ['waka.support.admin.super']
+                        'permissions' => ['waka.support.*']
                     ],
                 ]
             ],

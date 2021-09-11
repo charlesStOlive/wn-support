@@ -7,6 +7,7 @@ tickets:
     manage:
         form: $/waka/support/models/ticket/fields_for_ticketgroup.yaml
         list: $/waka/support/models/ticket/columns_for_ticketgroup.yaml
+        scope: noGroup
     view:
         list: $/waka/support/models/ticket/columns_for_ticketgroup.yaml
         toolbarButtons: link|unlink

@@ -23,7 +23,7 @@ class TicketGroups extends Controller
     public $relationConfig = 'config_relation.yaml';
     public $sideBarUpdateConfig = 'config_side_bar_update.yaml';
 
-    public $requiredPermissions = ['nobody'];
+    public $requiredPermissions = ['waka.support.*'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()
@@ -38,6 +38,13 @@ class TicketGroups extends Controller
     {
         $this->bodyClass = 'compact-container';
         return $this->asExtension('FormController')->update($id);
+    }
+
+    public function listInjectRowClass($record, $value)
+    {
+        if(!$this->user->hasAccess('waka.support.admin.*')) {
+            return 'nolink  disabled';
+        }
     }
 
         //endKeep/
