@@ -141,7 +141,7 @@ class Plugin extends PluginBase
                     'side-menu-ticketgroups' => [
                         'label' => 'waka.support::lang.settings.label_ticket_groupes',
                         'icon' => 'icon-gear',
-                        'url' => Backend::url('waka/support/ticketgroupes'),
+                        'url' => Backend::url('waka/support/ticketgroups'),
                         'permissions' => ['waka.support.admin.super']
                     ],
                 ]
