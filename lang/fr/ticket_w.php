@@ -14,7 +14,7 @@ return [
     ],
     'trans' => [
         'draft_to_wait_support' => 'Transmettre au support',
-        'draft_to_wait_managment' => 'Ouvrir un ticket pour le client',
+        'draft_to_wait_managment' => 'Transmettre au  client',
         'draft_to_sleep' => 'Mettre en someil',
         'draft_to_abdn' => 'Abandonner le ticket',
         'draft_to_validated' => 'Valider et clôturer le ticket',

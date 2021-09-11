@@ -130,7 +130,21 @@ class Plugin extends PluginBase
                 'url'         => Backend::url('waka/support/tickets'),
                 'permissions' => ['waka.support.*'],
                 'order'       => 600,
-                'counter' => \Waka\Support\Models\Ticket::getMenucounter(),
+                'sideMenu' => [
+                    'side-menu-tickets' => [
+                        'label' => 'waka.support::lang.navigation.support',
+                        'icon' => 'icon-life-ring',
+                        'url' => Backend::url('waka/support/tickets'),
+                        'permissions' => ['waka.support.*'],
+                        'counter' => \Wcli\Crpf\Models\Fal::countScope('wait'),
+                    ],
+                    'side-menu-ticketgroups' => [
+                        'label' => 'waka.support::lang.settings.label_ticket_groupes',
+                        'icon' => 'icon-gear',
+                        'url' => Backend::url('waka/support/ticketgroupes'),
+                        'permissions' => ['waka.support.admin.super']
+                    ],
+                ]
             ],
         ];
     }
@@ -223,7 +237,8 @@ class Plugin extends PluginBase
                 'order'       => 501,
                 'keywords'    => 'support help',
                 'permissions' => ['waka.support.admin.super']
-            ]
+            ],
+            
         ];
     }
 

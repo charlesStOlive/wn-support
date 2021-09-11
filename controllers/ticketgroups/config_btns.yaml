@@ -10,7 +10,7 @@ workflow: false
 
 ###BREADCRUMP
 breadcrump:
-    inSettings: true 
+    inSettings: false 
     indexUrl: waka/support/ticketgroups
     indexlabel: waka.support::ticketgroup.title
     title: waka.support::ticketgroup.form_name
@@ -69,7 +69,7 @@ Description: >
 
 # ###BREADCRUMP
 # breadcrump:
-#     inSettings: true 
+#     inSettings: false 
 #     indexUrl: waka/support/ticketgroups
 #     indexlabel: waka.support::ticketgroup.title
 #     title: waka.support::ticketgroup.form_name

@@ -97,6 +97,9 @@ ticket:
                 label: waka.support::ticket_w.trans.draft_to_abdn 
                 redirect: "redirect:1"
                 type: danger
+                fncs:
+                    isCreatorAsking:
+                        type: gard
             from: draft
             to: abdn
         draft_to_validated:
@@ -104,6 +107,9 @@ ticket:
                 label: waka.support::ticket_w.trans.draft_to_validated 
                 redirect: "close:1"
                 type: success
+                fncs:
+                    isCreatorAsking:
+                        type: gard
             from: draft
             to: validated
         wait_support_to_wait_managment:
@@ -137,6 +143,9 @@ ticket:
         wait_support_to_sleep:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_sleep 
+                fncs:
+                    isSupport:
+                        type: gard
             from: wait_support
             to: sleep
         wait_support_to_abdn:
@@ -158,6 +167,8 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: support
+                    isClient:
+                        type: gard
             from: wait_managment
             to: wait_support
         wait_managment_to_validated:
@@ -170,18 +181,26 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: support
+                    isClient:
+                        type: gard
             from: wait_managment
             to: validated
         wait_managment_to_sleep:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_sleep 
                 redirect: "redirect:1"
+                fncs:
+                    isClient:
+                        type: gard
             from: wait_managment
             to: sleep
         wait_managment_to_abdn:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_abdn 
                 redirect: "redirect:1"
+                fncs:
+                    isClient:
+                        type: gard
             from: wait_managment
             to: abdn
         wait_validation_to_validated:

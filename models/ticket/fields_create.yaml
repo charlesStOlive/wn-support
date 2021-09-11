@@ -14,11 +14,11 @@ fields:
         type: checkbox
     name:
         label: waka.support::ticket.name
-        span: left
+        span: full
         required: true
     ticket_type:
         label: waka.support::ticket.ticket_type
-        span: right
+        span: auto
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         required: true
@@ -54,9 +54,10 @@ fields:
         commentAbove: waka.support::ticket.url_com
     ticket_group:
         label: waka.support::ticket.ticket_group
-        span: full
-        type: partial
-        path: field_ticket_group
+        span: auto
+        type: relation
+        placeholder: waka.utils::lang.global.placeholder
+        scope: opened
         permissions: [wcli.ticket.admin.super]
     first_message:
         label: waka.support::ticket.first_message

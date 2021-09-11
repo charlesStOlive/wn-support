@@ -120,16 +120,19 @@ class TicketGroup extends Model
      * GETTERS
      **/
     public function getMontantAttribute() {
-        return 'A configurer';
+        return $this->tickets()->sum('temps') * 80;
     }
 
     public function getNbTicketAttribute() {
-        return 'A configurer';
+        return $this->tickets->count();
     }
 
     /**
      * SCOPES
      */
+    public function scopeOpened($query) {
+        $query->where('is_factured', false);
+    }
 
     /**
      * SETTERS

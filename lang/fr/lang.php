@@ -113,6 +113,8 @@ return [
         'all_email' => 'Reçoit tous les emails',
         'recap_team_cron' => 'Heure execution de la fonction',
         'activate' => 'Activer les bilans de ticket par email',
+        'label_ticket_groupes' => "Groupes de tickets",
+        'description_ticket_groupes' => "Facturation des groupes de tickets par lots",
     ],
     'tab'          => [
         'details'      => 'Details',

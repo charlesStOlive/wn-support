@@ -1,5 +1,0 @@
-fields:
-    name:
-        label: 'waka.support::ticketgroup.name'
-        span: left
-        required: true

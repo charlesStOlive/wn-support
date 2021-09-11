@@ -222,7 +222,7 @@ class Ticket extends Model
         if($this->state == "validated") {
             return $this->user_id;
         } else {
-            return $this->user_id;
+            return null;
         }
         
     }

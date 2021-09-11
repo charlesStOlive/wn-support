@@ -39,7 +39,7 @@ fields:
         toolbarButtons: bold,italic,underline,strikeThrough
     awake_at:
         label: waka.support::ticket.awake_at
-        span: left
+        span: auto
         type: datepicker
         valueFrom: baseAwake
         mode: date

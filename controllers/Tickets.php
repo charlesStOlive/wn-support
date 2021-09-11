@@ -12,7 +12,6 @@ class Tickets extends Controller
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
         'Waka.Utils.Behaviors.BtnsBehavior',
-        'Backend.Behaviors.RelationController',
         'Waka.Utils.Behaviors.SideBarUpdate',
         'Waka.ImportExport.Behaviors.ExcelImport',
         'Waka.ImportExport.Behaviors.ExcelExport',
@@ -22,10 +21,11 @@ class Tickets extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
     public $btnsConfig = 'config_btns.yaml';
-    public $relationConfig = 'config_relation.yaml';
     public $reorderConfig = 'config_reorder.yaml';
     public $sideBarUpdateConfig = 'config_side_bar_update.yaml';
     public $workflowConfig = 'config_workflow.yaml'; 
+
+    public $requiredPermissions = ['waka.support.*'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()

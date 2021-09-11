@@ -7,10 +7,12 @@ fields:
         label: waka.support::ticket.state
         span: auto
         infoType: workflow
+        noUpdate: true
     code:
         label: waka.support::ticket.code
         span: auto
         infoType: title
+        noUpdate: true
     sb_section_i:
         label: waka.support::ticket.sb_section_i
         span: auto
@@ -18,16 +20,17 @@ fields:
         noUpdate: true
     name:
         label: waka.support::ticket.name
-        span: left
+        span: full
         required: true
     ticket_type:
         label: waka.support::ticket.ticket_type
-        span: right
+        span: auto
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         required: true
         options: listTicketTypes
         value: ticket_type.name
+        permissions: wcli.ticket.admin.*
     next:
         label: waka.support::ticket.next
         span: auto
@@ -44,13 +47,12 @@ fields:
         permissions: [wcli.ticket.admin.super]
     ticket_group:
         label: waka.support::ticket.ticket_group
-        span: full
+        span: auto
         type: relation
         placeholder: waka.utils::lang.global.placeholder
-        nameFrom: name
+        scope: opened
         permissions: [wcli.ticket.admin.super]
         value: ticket_group.name
-        noUpdate: true
     sb_section_a:
         label: waka.support::ticket.sb_section_a
         span: auto
@@ -69,7 +71,7 @@ fields:
         infoType: switch
     user:
         label: waka.support::ticket.user
-        span: left
+        span: auto
         type: relation
         placeholder: waka.utils::lang.global.placeholder
         nameFrom: name
