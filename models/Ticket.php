@@ -212,16 +212,13 @@ class Ticket extends Model
         if($this->state == "draft") {
             return $this->user_id;
         }
-        if($this->state == "wait_support") {
+        else if(in_array($this->state, ['wait_support', 'validated'])) {
             return $this->support_user_id ? $this->support_user_id : Settings::getSupportUsers()[0] ?? null;
         }
-        if($this->state == "wait_managment" || $this->state == "wait_managment" ) {
-            return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null; 
-            
-        }
-        if($this->state == "validated") {
-            return $this->user_id;
-        } else {
+        else if(in_array($this->state, ['wait_managment', 'wait_validation'])) {
+            return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null;   
+        } 
+        else {
             return null;
         }
         
