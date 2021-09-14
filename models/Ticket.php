@@ -225,7 +225,7 @@ class Ticket extends Model
     }
 
     public function getBaseAwakeAttribute() {
-        trace_log('yo');
+        //trace_log('yo');
         return Carbon::now()->addWeek();
     }
 
@@ -285,6 +285,15 @@ class Ticket extends Model
     public function getOpenedCount()
     {
         return $this->opened()->count();
+    }
+
+    public function getMessagesAsTxt()
+    {
+        $messages = $this->ticket_messages()->get(['content'])->pluck('content')->toArray();
+        $messagesTxt = implode("\n", $messages);
+        $messagesTxt = html_entity_decode(preg_replace("/[\r\n]{2,}/", "\n", $messagesTxt), ENT_QUOTES, 'UTF-8');
+        $messagesTxt = strip_tags($messagesTxt);
+        return $messagesTxt;
     }
 
     /**
