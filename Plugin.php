@@ -136,7 +136,7 @@ class Plugin extends PluginBase
                         'icon' => 'icon-life-ring',
                         'url' => Backend::url('waka/support/tickets'),
                         'permissions' => ['waka.support.*'],
-                        'counter' => \Wcli\Crpf\Models\Fal::countScope('wait'),
+                        'counter' => \Waka\Support\Models\Ticket::countScope('nextUser'),
                     ],
                     'side-menu-ticketgroups' => [
                         'label' => 'waka.support::lang.settings.label_ticket_groupes',

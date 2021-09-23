@@ -247,6 +247,10 @@ class Ticket extends Model
     public function scopeIsFacturable($query) {
         $query->where('temps','>', 0);
     }
+    public function scopeNextUser($query) {
+        $userId = \BackendAuth::getUser()->id;
+        $query->where('next_id', $userId);
+    }
 
     
 
