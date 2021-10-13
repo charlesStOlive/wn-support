@@ -1,0 +1,21 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+    mode:
+        label: Filtre de tickets
+        type: radio
+        options:
+            next_only: Utilisateur est le prochain
+            creator_only: Utilisateur est le créateur
+            all: tous les tickets
+        default: all
+    states:
+        label: Etat des fals
+        type: taglist
+        options: listTicketState
+        useKey: true  
+outputs:
+    attributes: 
+        main: waka/support/models/ticket/attributes.yaml

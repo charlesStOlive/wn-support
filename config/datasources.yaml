@@ -1,0 +1,37 @@
+datasource: 
+    ticket:
+        label: Ticket
+        code: ticket
+        test_id: 1
+        author: Waka
+        plugin: Support
+        name : Ticket
+        class: Waka\Support\Models\Ticket
+        controller: waka/support/tickets
+        relations:
+            user: 
+                label: User
+            next: 
+                label: User
+            ticket_type: 
+                label: Type
+            ticket_group: 
+                label: Group de ticket
+                
+    ticket_group:
+        hidden: true
+        label: Groupes de ticket
+        class: Waka\Support\Models\TicketGroup
+        controller: waka/support/ticketgroups
+
+    next:
+        hidden: true
+        label: utilsateur suivant
+        class: Backend\Models\User
+        attributes: wcli/wconfig/models/user/attributes.yaml
+        outputName: full_name
+
+    ticket_type:
+        label: Type de tickets
+        class: Waka\Support\Models\TicketType
+        controller: waka/support/tickettypes

@@ -35,6 +35,8 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        \DataSources::registerDataSources(plugins_path().'/waka/support/config/datasources.yaml');
+        
         Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketListener());
 
         // Event::listen('backend.form.extendFields', function ($widget) {
@@ -174,6 +176,16 @@ class Plugin extends PluginBase
                 'tab'   => 'waka.support::lang.permissions.tab'
             ],
             
+        ];
+    }
+
+    public function registerWakaRules()
+    {
+        return [
+            'asks' => [],
+            'fncs' => [
+                ['Waka\Support\WakaRules\Fncs\Tickets'],
+            ],
         ];
     }
 
