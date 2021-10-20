@@ -1,7 +1,6 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
-
 fields:
     state:
         label: waka.support::ticket.state
@@ -62,7 +61,7 @@ fields:
         label: waka.support::ticket.silent_mode
         span: left
         type: checkbox
-        commentAbove: waka.support::ticket.silent_mode_com
+        comment: waka.support::ticket.silent_mode_com
         infoType: switch
     urgent:
         label: waka.support::ticket.urgent
@@ -84,7 +83,6 @@ fields:
         infoType: section
         noUpdate: true
     sb_section_w_c:
-        label: waka.support::ticket.sb_section_w_c
         span: auto
         infoType: state_logs
         noUpdate: true

@@ -7,7 +7,7 @@ fields:
         label: waka.support::ticket.silent_mode
         span: left
         type: checkbox
-        commentAbove: waka.support::ticket.silent_mode_com
+        comment: waka.support::ticket.silent_mode_com
     urgent:
         label: waka.support::ticket.urgent
         span: right
@@ -51,7 +51,7 @@ fields:
     url:
         label: waka.support::ticket.url
         span: right
-        commentAbove: waka.support::ticket.url_com
+        comment: waka.support::ticket.url_com
     ticket_group:
         label: waka.support::ticket.ticket_group
         span: auto

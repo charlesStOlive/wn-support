@@ -24,6 +24,7 @@ class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
         return [
             'id',
             'name',
+            'code',
             'ticket_type_id',
             'state',
             'user_id',
@@ -73,6 +74,7 @@ class TicketsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 //         return [
 //             'id',
 //             'name',
+//             'code',
 //             'ticket_type_id',
 //             'state',
 //             'user_id',

@@ -26,6 +26,7 @@ class TicketsImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
             }
             $ticket->id = $row['id'] ?? null;
             $ticket->name = $row['name'] ?? null;
+            $ticket->code = $row['code'] ?? null;
             $ticket->ticket_type_id = $row['ticket_type_id'] ?? null;
             $ticket->state = $row['state'] ?? null;
             $ticket->user_id = $row['user_id'] ?? null;
@@ -57,6 +58,7 @@ class TicketsImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
 //             }
 //             $ticket->id = $row['id'] ?? null;
 //             $ticket->name = $row['name'] ?? null;
+//             $ticket->code = $row['code'] ?? null;
 //             $ticket->ticket_type_id = $row['ticket_type_id'] ?? null;
 //             $ticket->state = $row['state'] ?? null;
 //             $ticket->user_id = $row['user_id'] ?? null;

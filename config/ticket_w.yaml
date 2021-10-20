@@ -152,6 +152,7 @@ ticket:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_abdn 
                 redirect: "redirect:1"
+                type: danger
                 fncs:
                     isSupport:
                         type: gard
@@ -198,9 +199,7 @@ ticket:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_abdn 
                 redirect: "redirect:1"
-                fncs:
-                    isClient:
-                        type: gard
+                type: danger
             from: wait_managment
             to: abdn
         wait_validation_to_validated:
@@ -251,6 +250,7 @@ ticket:
             metadata: 
                 label: waka.support::ticket_w.trans.sleep_to_abdn 
                 redirect: "redirect:1"
+                type: danger
             from: sleep
             to: abdn
         validated_to_archived:
