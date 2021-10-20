@@ -26,6 +26,7 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
         return [
             'id',
             'name',
+            'code',
             'ticket_type',
             'temps',
             'state',
@@ -42,6 +43,7 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
         return [
             'id',
             'name',
+            'code',
             'ticket_type_id',
             'temps',
             'state',
