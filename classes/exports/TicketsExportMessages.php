@@ -31,6 +31,7 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
             'temps',
             'state',
             'user',
+            'next',
             'url',
             'ticket_group',
             'awake_at',
@@ -48,6 +49,7 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
             'temps',
             'state',
             'user_id',
+            'next_id',
             'url',
             'ticket_group_id',
             'awake_at',
@@ -58,17 +60,22 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
     {
         $request;
         if ($this->listId) {
-            $request = Ticket::whereIn('id', $this->listId)->with('ticket_group', 'ticket_type', 'user')->get($this->headingsTemps());
+            $request = Ticket::whereIn('id', $this->listId)->with('ticket_group', 'ticket_type', 'user', 'next')->get($this->headingsTemps());
         } else {
             $request = Ticket::with('ticket_group', 'ticket_type')->get($this->headingsTemps()); 
         }
         $request->transform(function ($item) {
             //trace_log($item->toArray());
             $messages = $item->getMessagesAsTxt();
+            $state = 
             $item['messages'] = $messages;
             $item['ticket_group'] = $item['ticket_group']['name'] ?? null; 
             $item['ticket_type'] = $item['ticket_type']['name'] ?? null; 
             $item['user'] = $item['user']['login'] ?? null; 
+            $item['next'] = $item['next']['login'] ?? null;
+            if($item['state'] != 'sleep') {
+                $item['awake_at'] = null;
+            }
             return $item;
         });;
         return $request;
@@ -85,7 +92,7 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
                     'startColor' => ['argb' => 'FFFFFF00'],
                 ],
             ],
-            'J' => [
+            'L' => [
                 'font' => ['size' => 8],
                 'alignment' => ['wrapText' => true],
             ]
@@ -95,7 +102,7 @@ class TicketsExportMessages implements FromCollection, WithHeadings, ShouldAutoS
     public function columnWidths(): array
     {
         return [
-            'J' => 55,            
+            'L' => 75,            
         ];
     }
 
