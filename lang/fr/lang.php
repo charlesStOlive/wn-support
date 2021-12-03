@@ -115,6 +115,8 @@ return [
         'activate' => 'Activer les bilans de ticket par email',
         'label_ticket_groupes' => "Groupes de tickets",
         'description_ticket_groupes' => "Facturation des groupes de tickets par lots",
+        'receive_recap' =>  'Reçoit les emails de recap',
+        'receive_notify' => 'Reçoit les notifications (PAS ACTIF)', 
     ],
     'tab'          => [
         'details'      => 'Details',

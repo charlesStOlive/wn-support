@@ -93,6 +93,7 @@ class Plugin extends PluginBase
 
     public function registerSchedule($schedule)
     {
+        trace_log(Settings::get('recap_team_cron'));
         if(!Settings::get('recap_team_cron')) {
             //Il n' y a pas de date cela rique d'engendrer un email par minute
             return;
@@ -103,15 +104,33 @@ class Plugin extends PluginBase
         }
 
         $schedule->call(function () {
+            trace_log('call support');
             $support_team = Settings::getSupportUsers();
             //trace_log(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
             foreach ($support_team as $userId) {
-                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
+                trace_log($userId." : Utilisateur");
+                
+                $countNext = \Waka\Support\Models\Ticket::opened()->nextUser($userId)->count();
+                trace_log($countNext);
+                trace_log(\Waka\Support\Models\Ticket::opened()->get()->toArray());
+                if($countNext) {
+                    \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
+                }   
+                //\Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
             }
 
-            $client_team = Settings::getClientManagers();
-            foreach ($client_team as $userId) {
-                \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
+            $client_team = Settings::get('client_manage_team');
+            trace_log($client_team);
+            foreach ($client_team as $client) {
+                trace_log($client['id']." : Utilisateur");
+                trace_log($client['receive_recap']);
+                if($client['receive_recap']) {
+                    $countNext = \Waka\Support\Models\Ticket::opened()->nextUser($client['id'])->count();
+                    if($countNext) {
+                        \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($client['id'])->renderMail();
+                    }   
+                }
+                //
             }
         })->dailyAt(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
 

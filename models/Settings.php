@@ -31,11 +31,11 @@ class Settings extends Model
 
     public static function getSupportUsers() {
         $clientUsers = self::get('support_team');
-        return array_column($clientUsers, 'user');
+        return array_column($clientUsers, 'id');
     }
     public static function getClientManagers() {
         $teamUsers = self::get('client_manage_team');
-        return array_column($teamUsers, 'user');
+        return array_column($teamUsers, 'id');
 
     }
     //

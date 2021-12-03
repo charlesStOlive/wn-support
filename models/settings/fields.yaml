@@ -19,7 +19,7 @@ fields:
         type: repeater
         form:
             fields:
-                user:
+                id:
                     label: waka.support::lang.settings.support_user
                     span: left
                     type: dropdown
@@ -31,14 +31,20 @@ fields:
         type: repeater
         form:
             fields:
-                user:
+                id:
                     label: waka.support::lang.settings.client_manage_user
                     span: left
                     type: dropdown
                     options: listUsers
                     useKey: true
-                all_email:
-                    label: waka.support::lang.settings.all_email
+                receive_recap:
+                    label: waka.support::lang.settings.receive_recap
                     type: checkbox
                     default: false
+                    span: left
+                receive_notify:
+                    label: waka.support::lang.settings.receive_notify
+                    type: checkbox
+                    default: false
+                    span: right
     

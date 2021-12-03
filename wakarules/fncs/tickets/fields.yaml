@@ -3,6 +3,8 @@
 # ===================================
 
 fields:
+    title:
+        label: Titre
     mode:
         label: Filtre de tickets
         type: radio
