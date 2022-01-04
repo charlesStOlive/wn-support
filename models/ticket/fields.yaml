@@ -41,11 +41,14 @@ fields:
         label: waka.support::ticket.awake_at
         span: auto
         type: datepicker
-        valueFrom: baseAwake
+        defaultFrom: baseAwake
+        ignoreTimezone: true
         mode: date
 secondaryTabs:
     fields:
-        info:
+        infos:
+            span: full
             type: modelinfo
-            mode: secondary
-            src: /waka/support/models/ticket/fields_for_side_bar.yaml
+            permissions: [waka.support.admin.*]
+            tab: waka.support::ticket.tab_infos
+            src: waka/support/models/ticket/fields_for_side_bar.yaml

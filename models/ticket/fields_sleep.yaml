@@ -1,0 +1,9 @@
+fields:
+    awake_at:
+        label: waka.support::ticket.awake_at
+        span: auto
+        type: datepicker
+        mode: date
+        defaultFrom: baseAwake
+        ignoreTimezone: true
+        

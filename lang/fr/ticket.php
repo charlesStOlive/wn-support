@@ -1,7 +1,7 @@
 <?php
 return [
     'attachments' => 'Images',
-    'awake_at' => 'Révéiller la tâche (si mise en sommeil)',
+    'awake_at' => 'Révéiller la tâche le',
     'code' => 'Code',
     'courriers' => 'Gestion ticket',
     'create' => 'Créer ticket',

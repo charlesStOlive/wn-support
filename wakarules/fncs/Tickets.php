@@ -54,13 +54,13 @@ class Tickets extends FncBase implements FncInterface
 
 
     public function resolve($modelSrc, $poductorDs) {
-        trace_log('resolve');
+        //trace_log('resolve');
         //$query = $this->getBridgeQuery($modelSrc, $poductorDs);
         $iduser = $modelSrc->id;
         $mode = $this->getConfig('mode');
         $states = $this->getConfig('states');
         $query = \Waka\Support\models\Ticket::opened();
-        trace_log($query->get()->toArray());
+        //trace_log($query->get()->toArray());
         if($mode == 'next_only' ) {
             $query = $query->where('next_id', $iduser);
         } else if($mode == 'creator_only') {

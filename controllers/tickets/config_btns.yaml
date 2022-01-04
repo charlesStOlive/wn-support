@@ -53,10 +53,9 @@ action_bar:
             waka.utils::lang.prod.send: oc-icon-external-link
             waka.utils::lang.prod.tools: oc-icon-wrench
         btns:
-
-    # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
-    #     name:
-    #         url: $/waka/support/controllers/tickets/_test_update.htm
+    partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+        name:
+            url: $/waka/support/controllers/tickets/_test.htm
 Description: >
     //endKeep/
 

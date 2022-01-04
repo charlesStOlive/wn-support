@@ -24,26 +24,32 @@ ticket:
             metadata:
                 label: waka.support::ticket_w.places.draft 
                 icon: wicon-pencil2
+                hidden_fields: [awake_at]
         wait_support:
             metadata:
                 label: waka.support::ticket_w.places.wait_support 
                 icon: icon-clock-o
+                hidden_fields: [awake_at]
         wait_managment:
             metadata:
                 label: waka.support::ticket_w.places.wait_managment 
                 icon: icon-clock-o
+                hidden_fields: [awake_at]
         en_cours:
             metadata:
                 label: waka.support::ticket_w.places.en_cours 
                 icon: icon-cogs
+                hidden_fields: [awake_at]
         wait_validation:
             metadata:
                 label: waka.support::ticket_w.places.wait_validation 
                 icon: wicon-document-checked
+                hidden_fields: [awake_at]
         validated:
             metadata:
                 label: waka.support::ticket_w.places.validated 
                 icon: icon-check
+                hidden_fields: [awake_at]
         sleep:
             metadata:
                 label: waka.support::ticket_w.places.sleep 
@@ -52,10 +58,12 @@ ticket:
             metadata:
                 label: waka.support::ticket_w.places.archived 
                 icon: icon-cubes
+                hidden_fields: [awake_at]
         abdn:
             metadata:
                 label: waka.support::ticket_w.places.abdn 
                 icon: icon-trash-o
+                hidden_fields: [awake_at]
     initial_places: draft  # or set to an array if multiple initial places
     transitions:
         draft_to_wait_support:
@@ -92,8 +100,10 @@ ticket:
         draft_to_sleep:
             metadata: 
                 label: waka.support::ticket_w.trans.draft_to_sleep 
-                redirect: "close:1"
                 type: info
+                fncs:
+                    askSleep:
+                        type: prod
             from: draft
             to: sleep
         draft_to_abdn:
@@ -148,6 +158,8 @@ ticket:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_sleep 
                 fncs:
+                    askSleep:
+                        type: prod
                     isSupport:
                         type: gard
             from: wait_support
@@ -234,10 +246,9 @@ ticket:
         wait_managment_to_sleep:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_sleep 
-                redirect: "redirect:1"
                 fncs:
-                    isClient:
-                        type: gard
+                    askSleep:
+                        type: prod
             from: wait_managment
             to: sleep
         wait_managment_to_abdn:

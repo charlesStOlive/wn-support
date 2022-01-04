@@ -58,6 +58,7 @@ class Ticket extends Model
     public $attributesToDs = [
     ];
 
+
     /**
      * @var array Attributes to be cast to native types
      */
@@ -174,6 +175,9 @@ class Ticket extends Model
     {
         if(!$this->user) {
             $this->user = \BackendAuth::getUser();
+        }
+        if(!$this->awake_at or $this->awake_at < Carbon::now()) {
+            $this->awake_at = $this->baseAwake;
         }
 
     }

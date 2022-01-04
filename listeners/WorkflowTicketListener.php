@@ -84,6 +84,10 @@ class WorkflowTicketListener extends WorkflowListener
      * 2 arguements $model et $arg
      * Ici les valeurs ne peuvent plus être modifié il faut passer par un traitement
      */
+    public function askSleep($model) {
+        //trace_log('fonction askSleep');
+        \Event::fire('waka.workflow.popup_afterSave', ['name' => 'sleep']);
+    }
 
 
     public function sendNotification($model, $args = null)
