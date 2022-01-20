@@ -13,7 +13,7 @@ class Tickets extends FncBase implements FncInterface
 
     public $jsonable = ['states'];
     //
-    public function fncDetails()
+    public function subFormDetails()
     {
         return [
             'name'        =>  'tickets',
