@@ -10,7 +10,10 @@ fields:
         path: field_tickets
 secondaryTabs:
     fields:
-        info:
+        infos:
+            label: waka.support::ticketgroup.infos
+            span: full
             type: modelinfo
-            mode: secondary
-            src: /waka/support/models/ticketgroup/fields_for_side_bar.yaml
+            editPermissions: [nobody]
+            tab: waka.support::ticketgroup.tab_base
+            src: waka/support/models/ticketgroup/fields_for_side_bar.yaml

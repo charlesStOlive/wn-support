@@ -7,7 +7,6 @@ datasource:
         plugin: Support
         name : Ticket
         class: Waka\Support\Models\Ticket
-        controller: waka/support/tickets
         relations:
             user: 
                 label: User
@@ -22,7 +21,6 @@ datasource:
         hidden: true
         label: Groupes de ticket
         class: Waka\Support\Models\TicketGroup
-        controller: waka/support/ticketgroups
 
     next:
         hidden: true

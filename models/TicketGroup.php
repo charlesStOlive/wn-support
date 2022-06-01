@@ -43,9 +43,11 @@ class TicketGroup extends Model
      * @var array attributes send to datasource for creating document
      */
     public $attributesToDs = [
-        'montant',
-        'nbTicket',
+        'qty',
+        'heures',
+        'total',
     ];
+
 
     /**
      * @var array Attributes to be cast to native types
@@ -96,7 +98,8 @@ class TicketGroup extends Model
     ];
     public $belongsToMany = [
     ];        
-    public $morphTo = [];
+    public $morphTo = [
+    ];
     public $morphOne = [
     ];
     public $morphMany = [
@@ -119,12 +122,15 @@ class TicketGroup extends Model
     /**
      * GETTERS
      **/
-    public function getMontantAttribute() {
+    public function getTotalAttribute() {
         return $this->tickets()->sum('temps') * 80;
     }
-
-    public function getNbTicketAttribute() {
+    public function getQtyAttribute() {
         return $this->tickets->count();
+        
+    }
+    public function getHeuresAttribute() {
+        return $this->tickets()->sum('temps');
     }
 
     /**

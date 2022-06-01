@@ -11,13 +11,12 @@ columns:
         type: switch
         searchable: false
         sortable: true
-    montant:
-        label: waka.support::ticketgroup.montant
-        type: euro
+    qty:
+        label: waka.support::ticketgroup.qty
         searchable: false
         sortable: false
-    nbTicket:
-        label: waka.support::ticketgroup.nbTicket
+    heures:
+        label: waka.support::ticketgroup.heures
         searchable: false
         sortable: false
     updated_at:

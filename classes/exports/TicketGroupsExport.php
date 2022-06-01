@@ -25,8 +25,9 @@ class TicketGroupsExport implements FromCollection, WithHeadings, ShouldAutoSize
             'id',
             'name',
             'is_factured',
-            'montant',
-            'nbTicket',
+            'qty',
+            'heures',
+            'total',
         ];
     }
 
@@ -71,8 +72,9 @@ class TicketGroupsExport implements FromCollection, WithHeadings, ShouldAutoSize
 //             'id',
 //             'name',
 //             'is_factured',
-//             'montant',
-//             'nbTicket',
+//             'qty',
+//             'heures',
+//             'total',
 //         ];
 //     }
 

@@ -1,7 +1,6 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
-
 fields:
     name:
         label: waka.support::ticketgroup.name
@@ -13,12 +12,17 @@ fields:
         type: switch
         default: false
         infoType: switch
-    montant:
-        label: waka.support::ticketgroup.montant
+    qty:
+        label: waka.support::ticketgroup.qty
         span: auto
         noUpdate: true
-    nbTicket:
-        label: waka.support::ticketgroup.nbTicket
+    heures:
+        label: waka.support::ticketgroup.heures
         span: auto
+        noUpdate: true
+    total:
+        label: waka.support::ticketgroup.total
+        span: auto
+        infoType: euro
         noUpdate: true
 

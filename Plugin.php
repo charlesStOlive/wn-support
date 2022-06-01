@@ -33,62 +33,17 @@ class Plugin extends PluginBase
     /**
      * Boot plugin
      */
+
     public function boot()
     {
         \DataSources::registerDataSources(plugins_path().'/waka/support/config/datasources.yaml');
-        
         Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketListener());
+    }
 
-        // Event::listen('backend.form.extendFields', function ($widget) {
-
-        //     //trace_log('yo');
-        //     if (!$widget->getController() instanceof \System\Controllers\Settings) {
-        //         return;
-        //     }
-
-        //     // Only for the Wconfig Settings
-        //     if (!$widget->model instanceof Settings) {
-        //         return;
-        //     }
-
-        //     if ($widget->isNested === true) {
-        //         return;
-        //     }
-        //     $widget->addTabFields(\Yaml::parseFile(plugins_path() . '/waka/support/models/settings/fields.yaml'));
-
-        //     // $widget->addTabFields([
-        //     //     'sf_responsable' => [
-        //     //         'tab' => 'Support',
-        //     //         'label' => "Collaborateurs recevant l'email de bilan Sales Force",
-        //     //         'type' => 'taglist',
-        //     //         'mode' => 'array',
-        //     //         'useKey' => 'true',
-        //     //         'options' => 'listUsers',
-        //     //     ],
-        //     //     'sf_active_imports' => [
-        //     //         'tab' => 'Support',
-        //     //         'label' => 'waka.salesforce::lang.settings.active_imports',
-        //     //         'type' => 'checkboxlist',
-        //     //         'quickselect' => true,
-        //     //         'options' => 'listImports',
-        //     //     ],
-
-        //     //     'sf_oldest_date' => [
-        //     //         'tab' => 'Support',
-        //     //         'label' => 'waka.salesforce::lang.settings.oldest_date',
-        //     //         'type' => 'datepicker',
-        //     //     ],
-        //     //     'sf_cron_time' => [
-        //     //         'tab' => 'Support',
-        //     //         'label' => "Heure d'execution du CRON",
-        //     //         'type' => 'datepicker',
-        //     //         'mode' => 'time',
-        //     //         'span' => 'left',
-        //     //         'width' => '100px',
-        //     //     ],
-        //     // ]);
-        // });
-        
+    public function registerWorkflows() {
+        return [
+            '/waka/support/config/ticket_w.yaml',
+        ];
     }
 
     public function registerSchedule($schedule)

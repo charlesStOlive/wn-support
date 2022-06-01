@@ -9,11 +9,13 @@ attributes:
     is_factured:
         label: waka.support::ticketgroup.is_factured
         type: switch
-    montant:
-        label: waka.support::ticketgroup.montant
+    qty:
+        label: waka.support::ticketgroup.qty
+    heures:
+        label: waka.support::ticketgroup.heures
+    total:
+        label: waka.support::ticketgroup.total
         type: euro
-    nbTicket:
-        label: waka.support::ticketgroup.nbTicket
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: date-medium

@@ -27,8 +27,6 @@ class TicketGroupsImport implements ToCollection, WithHeadingRow, WithCalculated
             $ticketGroup->id = $row['id'] ?? null;
             $ticketGroup->name = $row['name'] ?? null;
             $ticketGroup->is_factured = $row['is_factured'] ?? null;
-            $ticketGroup->montant = $row['montant'] ?? null;
-            $ticketGroup->nbTicket = $row['nbTicket'] ?? null;
             $ticketGroup->save();
         }
     }
@@ -55,8 +53,9 @@ class TicketGroupsImport implements ToCollection, WithHeadingRow, WithCalculated
 //             $ticketGroup->id = $row['id'] ?? null;
 //             $ticketGroup->name = $row['name'] ?? null;
 //             $ticketGroup->is_factured = $row['is_factured'] ?? null;
-//             $ticketGroup->montant = $row['montant'] ?? null;
-//             $ticketGroup->nbTicket = $row['nbTicket'] ?? null;
+//             $ticketGroup->qty = $row['qty'] ?? null;
+//             $ticketGroup->heures = $row['heures'] ?? null;
+//             $ticketGroup->total = $row['total'] ?? null;
 //             $ticketGroup->save();
 //         }
 //     }
