@@ -16,7 +16,7 @@ ticket:
                 messages: waka.support::ticket_wf_errors
     marking_store:
         type: single_state
-        arguments: [state]
+        property: state
     supports:
         - \Waka\Support\Models\Ticket
     places:
