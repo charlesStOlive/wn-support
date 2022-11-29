@@ -2,8 +2,7 @@
 #  Btn  Behavior Config
 # ===================================
 
-Description: >
-    //startKeep/
+
 modelClass: Waka\Support\Models\TicketGroup
 
 workflow: false 
@@ -57,62 +56,3 @@ action_bar:
     # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
     #     name:
     #         url: $/waka/support/controllers/ticketgroups/_test_update.htm
-Description: >
-    //endKeep/
-
-
-#     ##### SAUVEGARDE PURE ########
-
-# modelClass: Waka\Support\Models\TicketGroup
-
-# workflow: false 
-
-# ###BREADCRUMP
-# breadcrump:
-#     inSettings: false 
-#     indexUrl: waka/support/ticketgroups
-#     indexlabel: waka.support::ticketgroup.title
-#     title: waka.support::ticketgroup.form_name
-
-# ###TOOL_BAR
-# tool_bar:
-#     base:
-#         create: 
-#             show: true
-#             permissions: [waka.support.admin.super]
-#             url: waka/support/ticketgroups/create
-#         reorder: 
-#             show: false#  
-#         delete: 
-#             show: true
-#             permissions: [waka.support.admin.super]
-#     config_btns:
-#             format: all
-#             btns:
-# #                 importExcel:
-#                     config: waka.importexport::btns.importExcel
-# # #                 exportExcel:
-#                     config: waka.importexport::btns.exportExcel
-# #     config_lot:
-#         format: all
-#         btns: 
-# # # # #     # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
-#     #     testbtns:
-#     #         url: $/waka/support/controllers/ticketgroups/_test_btns.htm
-
-# ###ACTION_BAR Producteurs. Les behavior liée aux boutons doivent êtres instanciés implements = [waka.xxx.behaviors.yyy] dans le controller. 
-# action_bar:
-#     config_btns:
-#         format: grouped #unique : un seul bouton, all : tts les boutons
-#         groups:
-#             waka.utils::lang.prod.produce: oc-icon-file-text-o
-#             waka.utils::lang.prod.send: oc-icon-external-link
-#             waka.utils::lang.prod.tools: oc-icon-wrench
-#         btns:
-# # # # # # # # # #             exportChildExcel:
-#                 config: waka.importexport::btns.exportChildExcel
-#                 group: waka.utils::lang.prod.produce
-# # 
-#     # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
-#     #     name:
-#     #         url: $/waka/support/controllers/ticketgroups/_test_update.htm
