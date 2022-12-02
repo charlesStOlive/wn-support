@@ -40,11 +40,6 @@ ticket:
                 label: waka.support::ticket_w.places.en_cours 
                 icon: icon-cogs
                 hidden_fields: [awake_at]
-        wait_validation:
-            metadata:
-                label: waka.support::ticket_w.places.wait_validation 
-                icon: wicon-document-checked
-                hidden_fields: [awake_at]
         validated:
             metadata:
                 label: waka.support::ticket_w.places.validated 
@@ -78,8 +73,6 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: support
-                    isClient:
-                        type: gard
             from: draft
             to: wait_support
         draft_to_wait_managment:
@@ -140,20 +133,6 @@ ticket:
                         type: gard
             from: wait_support
             to: wait_managment
-        wait_support_to_wait_validation:
-            metadata: 
-                label: waka.support::ticket_w.trans.wait_support_to_wait_validation 
-                redirect: "redirect:1"
-                fncs:
-                    sendNotification:
-                        type: prod
-                        args:
-                            code: waka.support::new_ticket
-                            mode: client
-                    isSupport:
-                        type: gard
-            from: wait_support
-            to: wait_validation
         wait_support_to_sleep:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_sleep 
@@ -175,7 +154,7 @@ ticket:
                         args:
                             code: waka.support::new_ticket
                             mode: all
-                    isSupport:
+                    isCreatorAsking:
                         type: gard
             from: wait_support
             to: abdn
@@ -197,15 +176,6 @@ ticket:
                         type: gard
             from: en_cours
             to: wait_support
-        en_cours_to_wait_validation:
-            metadata: 
-                label: waka.support::ticket_w.trans.en_cours_to_wait_validation 
-                redirect: "redirect:1"
-                fncs:
-                    isSupport:
-                        type: gard
-            from: en_cours
-            to: wait_validation
         en_cours_to_wait_managment:
             metadata: 
                 label: waka.support::ticket_w.trans.en_cours_to_wait_managment 
@@ -232,7 +202,7 @@ ticket:
         wait_managment_to_validated:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_validated 
-                redirect: "redirect:1"
+                redirect: "close:1"
                 fncs:
                     sendNotification:
                         type: prod
@@ -256,35 +226,15 @@ ticket:
                 label: waka.support::ticket_w.trans.wait_managment_to_abdn 
                 redirect: "redirect:1"
                 type: danger
+                fncs:
+                    isCreatorAsking:
+                        type: gard
             from: wait_managment
             to: abdn
-        wait_validation_to_validated:
-            metadata: 
-                label: waka.support::ticket_w.trans.wait_validation_to_validated 
-                redirect: "redirect:1"
-                type: success
-                fncs:
-                    isClient:
-                        type: gard
-            from: wait_validation
-            to: validated
-        wait_validation_to_wait_support:
-            metadata: 
-                label: waka.support::ticket_w.trans.wait_validation_to_wait_support 
-                redirect: "redirect:1"
-                type: danger
-                fncs:
-                    isClient:
-                        type: gard
-            from: wait_validation
-            to: wait_support
         sleep_to_wait_support:
             metadata: 
                 label: waka.support::ticket_w.trans.sleep_to_wait_support 
                 redirect: "redirect:1"
-                fncs:
-                    isClient:
-                        type: gard
             from: sleep
             to: wait_support
         sleep_to_wait_managment:
@@ -312,30 +262,6 @@ ticket:
         validated_to_archived:
             metadata: 
                 label: waka.support::ticket_w.trans.validated_to_archived 
-                redirect: "redirect:1"
+                redirect: "close:1"
             from: validated
             to: archived
-        archived_to_wait_support:
-            metadata: 
-                label: waka.support::ticket_w.trans.archived_to_wait_support 
-                redirect: "redirect:1"
-                fncs:
-                    isClient:
-                        type: gard
-            from: archived
-            to: wait_support
-        archived_to_wait_managment:
-            metadata: 
-                label: waka.support::ticket_w.trans.archived_to_wait_managment 
-                redirect: "redirect:1"
-                fncs:
-                    isSupport:
-                        type: gard
-            from: archived
-            to: wait_managment
-        abdn_to_draft:
-            metadata: 
-                label: waka.support::ticket_w.trans.abdn_to_draft 
-                redirect: "redirect:1"
-            from: abdn
-            to: draft

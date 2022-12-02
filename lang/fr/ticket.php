@@ -20,7 +20,7 @@ return [
     'sb_section_i' => 'Infos',
     'sb_section_w' => 'Historique',
     'silent_mode' => 'Mode silencieux',
-    'silent_mode_com' => 'Les emails de notification ne seront pas envoyés. Utile si vous créez plusieurs tickets en même temps. ',
+    'silent_mode_com' => 'Les emails de notification ne seront pas envoyés. (utile si notifications actives)',
     'state' => 'Etat',
     'support_client' => 'Client',
     'support_user' => 'Support',

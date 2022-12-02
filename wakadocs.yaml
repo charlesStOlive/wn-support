@@ -1,0 +1,6 @@
+files:
+    wf_ticket:
+        title: Workflow ticket support
+        group: "01 Workflow"
+        relativePath: waka/support/docs
+        order: 100

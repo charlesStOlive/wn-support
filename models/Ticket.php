@@ -90,6 +90,12 @@ class Ticket extends Model
         'awake_at',
     ];
 
+/**
+    * @var array Spécifié le type d'export à utiliser pour chaque champs
+    */
+    public $importExportConfig = [
+    ]; 
+
     /**
      * @var array Relations
      */
@@ -115,7 +121,8 @@ class Ticket extends Model
     ];
     public $belongsToMany = [
     ];        
-    public $morphTo = [];
+    public $morphTo = [
+    ];
     public $morphOne = [
     ];
     public $morphMany = [
@@ -241,7 +248,7 @@ class Ticket extends Model
         $query->whereIn('state', ['abdn', 'archived']);
     }
     public function scopeActive($query) {
-        $query->whereIn('state', ['draft', 'wait_support', 'wait_managment', 'wait_validation', 'validated', ''])
+        $query->whereIn('state', ['draft', 'wait_support', 'wait_managment', 'en_cours', 'wait_validation', 'validated', ''])
         ->orWhereNull('state');
 
     }
@@ -303,11 +310,15 @@ class Ticket extends Model
 
     public function getMessagesAsTxt()
     {
-        $messages = $this->ticket_messages()->get(['content'])->pluck('content')->toArray();
-        $messagesTxt = implode("\n", $messages);
-        $messagesTxt = html_entity_decode(preg_replace("/[\r\n]{2,}/", "\n", $messagesTxt), ENT_QUOTES, 'UTF-8');
-        $messagesTxt = strip_tags($messagesTxt);
-        return $messagesTxt;
+        $messages = $this->ticket_messages()->get(['content'])->pluck('content');
+        $firstTxtMessage = \Soundasleep\Html2Text::convert($messages->first(), ['ignore_errors' => true]);
+        $lastTxtMessage = '';
+        if($messages->last()) {
+            $lastTxtMessage = \Soundasleep\Html2Text::convert($messages->last(), ['ignore_errors' => true]);
+        }
+        $messagesConcatended = "---PREMIER MESSAGE: \n  ".$firstTxtMessage."\n ---DERNIER MESSAGE: \n  ".$lastTxtMessage;
+        //trace_log($messagesConcatended);
+        return $messagesConcatended;
     }
 
     /**

@@ -18,7 +18,6 @@ datasource:
                 label: Group de ticket
                 
     ticket_group:
-        hidden: true
         label: Groupes de ticket
         class: Waka\Support\Models\TicketGroup
 

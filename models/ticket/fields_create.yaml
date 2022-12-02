@@ -7,6 +7,7 @@ fields:
         label: waka.support::ticket.silent_mode
         span: left
         type: checkbox
+        default: true
         comment: waka.support::ticket.silent_mode_com
     urgent:
         label: waka.support::ticket.urgent
@@ -63,4 +64,3 @@ fields:
         label: waka.support::ticket.first_message
         span: full
         type: richeditor
-        toolbarButtons: bold,italic,underline,strikeThrough

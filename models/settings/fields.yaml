@@ -3,8 +3,8 @@
 # ===================================
 
 fields:
-    activate:
-        label: waka.support::lang.settings.activate
+    activate_bilans:
+        label: waka.support::lang.settings.activate_bilans
         type: switch
         span: auto
     recap_team_cron:

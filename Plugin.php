@@ -53,7 +53,7 @@ class Plugin extends PluginBase
             //Il n' y a pas de date cela rique d'engendrer un email par minute
             return;
         }
-        if(!Settings::get('activate')) {
+        if(!Settings::get('activate_bilans')) {
             //On bloque si desactivé
             return;
         }
