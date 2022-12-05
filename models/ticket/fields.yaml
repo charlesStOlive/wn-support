@@ -36,7 +36,7 @@ fields:
         label: waka.support::ticket.next_message
         span: full
         type: richeditor
-        toolbarButtons:  fullscreen|bold|italic|underline|strikeThrough|color|align|formatOL|formatUL|outdent|indent|quote|insertHR|undo|redo|clearFormatting|selectAll|html
+        toolbarButtons:  fullscreen|bold|italic|underline|strikeThrough|color|align|formatOL|formatUL|outdent|indent|quote|insertHR|insertLink|undo|redo|clearFormatting|selectAll|html
     awake_at:
         label: waka.support::ticket.awake_at
         span: auto

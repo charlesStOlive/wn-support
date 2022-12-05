@@ -97,6 +97,13 @@ class WorkflowTicketListener extends WorkflowListener
         $subject = $model->name;
         $modelId = $model->id;
         //trace_log($model->ticket_messages);
+        $nextUserid = $model->next_id;
+        $userNext = User::find($nextUserid);
+        // trace_log("userEmail");
+        // trace_log("nextUserid ".$nextUserid);
+        // trace_log($userNext->email);
+        //
+
         $model = $model->toArray();
         $model = compact('model');
         $dotedModel = array_dot($model);
@@ -106,28 +113,16 @@ class WorkflowTicketListener extends WorkflowListener
         $code = $args['code'];
         $mode =  $args['mode'];
 
-        $clientManagerIds = [];
-
-        if($mode == 'support') {
-            $userIds = Settings::getSupportUsers();
-        } else {
-            $userIds = Settings::getClientManagers();
-        }
-
-        
-        $users = User::whereIn('id', $userIds)->get(['email'])->pluck('email')->toArray();
-        //trace_log($users);
-        $usersEmails = implode(',',$users);
-
         $datasEmail = [
-            'emails' => $usersEmails,
+            'emails' => $userNext->email,
             'subject' => null,
         ];
-        //trace_log('envoyer un email -----------------------');
-        //trace_log($dotedModel);
-        //trace_log($code);
-        //trace_log($datasEmail);
-        //trace_log('----------------------Fin email');
+        trace_log('envoyer un email -----------------------');
+        trace_log($dotedModel);
+        trace_log($code);
+        trace_log($datasEmail);
+        trace_log('----------------------Fin email');
+        \Waka\Mailer\Classes\MailCreator::find($code, true)->setModelId($modelId)->renderMail($datasEmail);
     }
 
 }

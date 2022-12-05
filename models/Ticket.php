@@ -56,6 +56,7 @@ class Ticket extends Model
      * @var array attributes send to datasource for creating document
      */
     public $attributesToDs = [
+        'lastMessage',
     ];
 
 
@@ -306,6 +307,10 @@ class Ticket extends Model
     public function getOpenedCount()
     {
         return $this->opened()->count();
+    }
+
+    public function getLastMessageAttribute() {
+        return $this->ticket_messages->last()->content;
     }
 
     public function getMessagesAsTxt()

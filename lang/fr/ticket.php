@@ -10,6 +10,7 @@ return [
     'facturable' => 'Facturable',
     'first_message' => 'Premier message',
     'form_name' => 'Gestion ticket',
+    'lastMessage' => 'Dernier message',
     'name' => 'Nom/Sujet',
     'next' => 'Attente de',
     'next_message' => 'Votre message',

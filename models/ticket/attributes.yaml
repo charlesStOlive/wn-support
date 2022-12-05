@@ -18,6 +18,9 @@ attributes:
         label: waka.support::ticket.url
     temps:
         label: waka.support::ticket.temps
+    lastMessage:
+        label: waka.support::ticket.lastMessage
+        type: raw
     awake_at:
         label: waka.support::ticket.awake_at
         type: date
