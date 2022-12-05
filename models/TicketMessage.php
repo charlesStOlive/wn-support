@@ -138,7 +138,8 @@ class TicketMessage extends Model
      */
     public function isOwner() {
         $userId = \BackendAuth::getUser()->id;
-        if($userId == $this->user->id) {
+        $messageUserId = $this->user?->id;
+        if($userId == $messageUserId) {
             return true;
         } else {
             return false;
