@@ -120,14 +120,14 @@ class Plugin extends PluginBase
         return [
             'support' => [
                 'label'       => 'waka.support::lang.navigation.support',
-                'icon'        => 'icon-life-ring',
+                'icon'        => 'icon-bug',
                 'url'         => Backend::url('waka/support/tickets'),
                 'permissions' => ['waka.support.*'],
                 'order'       => 600,
                 'sideMenu' => [
                     'side-menu-tickets' => [
                         'label' => 'waka.support::lang.navigation.support',
-                        'icon' => 'icon-life-ring',
+                        'icon' => 'icon-bug',
                         'url' => Backend::url('waka/support/tickets'),
                         'permissions' => ['waka.support.*'],
                         'counter' => \Waka\Support\Models\Ticket::countScope('nextUser'),
@@ -226,7 +226,7 @@ class Plugin extends PluginBase
                 'label'       => 'waka.support::lang.settings.label_support_settings',
                 'description' => 'waka.support::lang.settings.description',
                 'category'    => 'waka.support::lang.settings.category',
-                'icon'        => 'icon-life-ring',
+                'icon'        => 'icon-bug',
                 'class'       => 'Waka\Support\Models\Settings',
                 'order'       => 500,
                 'keywords'    => 'support help',
