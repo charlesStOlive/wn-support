@@ -92,6 +92,7 @@ class WorkflowTicketListener extends WorkflowListener
 
     public function sendNotification($model, $args = null)
     {
+        if($model->silent_mode) return;
         //trace_log('sendNotification');
         //trace_log($args);
         $subject = $model->name;
@@ -117,11 +118,11 @@ class WorkflowTicketListener extends WorkflowListener
             'emails' => $userNext->email,
             'subject' => null,
         ];
-        trace_log('envoyer un email -----------------------');
-        trace_log($dotedModel);
-        trace_log($code);
-        trace_log($datasEmail);
-        trace_log('----------------------Fin email');
+        // trace_log('envoyer un email -----------------------');
+        // trace_log($dotedModel);
+        // trace_log($code);
+        // trace_log($datasEmail);
+        // trace_log('----------------------Fin email');
         \Waka\Mailer\Classes\MailCreator::find($code, true)->setModelId($modelId)->renderMail($datasEmail);
     }
 
