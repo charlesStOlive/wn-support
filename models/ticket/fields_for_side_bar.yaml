@@ -59,9 +59,6 @@ fields:
         placeholder: waka.utils::lang.global.placeholder
         scope: opened
         permissions: [wcli.ticket.admin.super]
-        infoType: link
-        bkRacine: waka/support/ticketgroups/update/
-        linkValue: ticket_group.id
         value: ticket_group.name
     sb_section_a:
         label: waka.support::ticket.sb_section_a
