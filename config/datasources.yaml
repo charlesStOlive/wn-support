@@ -30,6 +30,11 @@ datasource:
         attributes: wcli/wconfig/models/user/attributes.yaml
         outputName: full_name
 
+    parent:
+        hidden: true
+        label: Ticket parent
+        class: Waka\Support\Models\Ticket
+
     ticket_type:
         label: Type de tickets
         class: Waka\Support\Models\TicketType
