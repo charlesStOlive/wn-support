@@ -311,7 +311,7 @@ class Ticket extends Model
         if($this->state == 'archived') {
             $modelCloned->state = 'draft';
         }
-        trace_log($modelCloned->toArray());
+        //trace_log($modelCloned->toArray());
         $modelCloned->save();
         return $modelCloned->id;
     }

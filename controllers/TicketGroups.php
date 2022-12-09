@@ -49,27 +49,27 @@ class TicketGroups extends Controller
 
     public function onClotureTicketGroup() {
         $model =  \Waka\Support\Models\TicketGroup::find($this->params[0]);
-        trace_log($model->name);
+        //trace_log($model->name);
         $countRunning = $model->tickets()->where('state', 'running')->count();
-        trace_log($countRunning);
-        trace_log($model->tickets()->where('state', 'running')->get()->toArray());
+        //trace_log($countRunning);
+        //trace_log($model->tickets()->where('state', 'running')->get()->toArray());
         if($countRunning)  {
             \Flash::error('Un ticket est en cours de production impossible de cloturer le groupe');
              return \Redirect::refresh();
         } 
         foreach($model->tickets as $ticket) {
             if($ticket->workflow_can('to_archived_factu')) {
-                trace_log('ticket a archiver et à recreer : '.$ticket->name);
+                //trace_log('ticket a archiver et à recreer : '.$ticket->name);
                 $ticket->workflow_apply('to_archived_factu');
                 $ticket->save();
             } else {
-                trace_log('ticket déjà  archiver : '.$ticket->name);
+                //trace_log('ticket déjà  archiver : '.$ticket->name);
             }
         }
         $model->is_factured = true;
         $model->save();
         $redirectUrl = $this->formGetRedirectUrl('update-close', $model);
-        trace_log($redirectUrl);
+        //trace_log($redirectUrl);
         \Flash::success('groupe de tickets cloturé !');
         return \Backend::redirect($redirectUrl);
     }

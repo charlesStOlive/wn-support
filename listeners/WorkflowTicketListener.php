@@ -69,10 +69,10 @@ class WorkflowTicketListener extends WorkflowListener
      */
     public function createChildTicket($event, $args = null)
     {
-        trace_log('createChildTicket');
+        //trace_log('createChildTicket');
         
         $model = $event->getSubject();
-        trace_log($model->name);
+        //trace_log($model->name);
         $model->createChildTicket();
     }
 
