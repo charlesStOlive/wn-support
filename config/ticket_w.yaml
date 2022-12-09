@@ -35,9 +35,9 @@ ticket:
                 label: waka.support::ticket_w.places.wait_managment 
                 icon: icon-clock-o
                 hidden_fields: [awake_at]
-        en_cours:
+        running:
             metadata:
-                label: waka.support::ticket_w.places.en_cours 
+                label: waka.support::ticket_w.places.running 
                 icon: icon-cogs
                 hidden_fields: [awake_at]
         validated:
@@ -53,6 +53,7 @@ ticket:
             metadata:
                 label: waka.support::ticket_w.places.archived 
                 icon: icon-cubes
+                must_trans: true
                 hidden_fields: [awake_at]
         abdn:
             metadata:
@@ -158,45 +159,34 @@ ticket:
                         type: gard
             from: wait_support
             to: abdn
-        wait_support_to_en_cours:
+        wait_support_to_running:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_support_to_en_cours 
+                label: waka.support::ticket_w.trans.wait_support_to_running 
                 redirect: "redirect:1"
                 fncs:
                     isSupport:
                         type: gard
             from: wait_support
-            to: en_cours
-        en_cours_to_wait_support:
+            to: running
+        running_to_wait_managment:
             metadata: 
-                label: waka.support::ticket_w.trans.en_cours_to_wait_support 
-                redirect: "redirect:1"
+                label: waka.support::ticket_w.trans.running_to_wait_managment 
+                redirect: "close:1"
                 fncs:
                     isSupport:
                         type: gard
-            from: en_cours
-            to: wait_support
-        en_cours_to_wait_managment:
-            metadata: 
-                label: waka.support::ticket_w.trans.en_cours_to_wait_managment 
-                redirect: "redirect:1"
-                fncs:
-                    isSupport:
-                        type: gard
-            from: en_cours
+            from: running
             to: wait_managment
         wait_managment_to_wait_support:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_wait_support 
-                redirect: "redirect:1"
+                redirect: "close:1"
                 fncs:
                     sendNotification:
                         type: prod
                         args:
                             code: waka.support::new_ticket
                             mode: support
-                    isClient:
-                        type: gard
             from: wait_managment
             to: wait_support
         wait_managment_to_validated:
@@ -264,4 +254,17 @@ ticket:
                 label: waka.support::ticket_w.trans.validated_to_archived 
                 redirect: "close:1"
             from: validated
+            to: archived
+        to_archived_factu:
+            metadata: 
+                label: waka.support::ticket_w.trans.to_archived_factu 
+                hidden: true
+                fncs:
+                    createChildTicket:
+                        type: trait_onEnter
+            from: 
+                - wait_managment
+                - wait_support
+                - sleep
+                - draft
             to: archived

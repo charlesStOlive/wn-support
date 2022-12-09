@@ -21,7 +21,7 @@ class WorkflowTicketListener extends WorkflowListener
         //Evenement optionels à déclarer ici.
         //$event->listen('workflow.ticket.leave', [$this, 'onLeave']);
         //$event->listen('workflow.ticket.transition', [$this, 'onTransition']);
-        //$event->listen('workflow.ticket.enter', [$this, 'onEnter']);
+        $event->listen('workflow.ticket.enter', [$this, 'onEnter']);
     }
 
     /**
@@ -62,9 +62,19 @@ class WorkflowTicketListener extends WorkflowListener
         return $blocked;
     }
 
+    
+
     /**
      * FONCTIONS DE TRAITEMENT PEUVENT ETRE APPL DANS LES FONCTIONS CLASSIQUES
      */
+    public function createChildTicket($event, $args = null)
+    {
+        trace_log('createChildTicket');
+        
+        $model = $event->getSubject();
+        trace_log($model->name);
+        $model->createChildTicket();
+    }
 
     // public function cleanData($event, $args = null)
     // {

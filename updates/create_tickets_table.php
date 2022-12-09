@@ -18,6 +18,8 @@ class CreateTicketsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('url')->nullable();
             $table->double('temps', 15, 2)->default(0);
+            //simpletree
+            $table->integer('parent_id')->unsigned()->nullable();
             //reorder
             $table->integer('sort_order')->default(0);
             $table->timestamps();

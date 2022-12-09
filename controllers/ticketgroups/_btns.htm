@@ -1,0 +1,7 @@
+<?php if(!$this->controller->formGetModel()->is_factured): ?>
+<button class="btn btn-secondary"
+        data-request-data="redirect:0,productorId:'<?=$modelId?>'"
+        data-request="onClotureTicketGroup"
+        >Cloturer et facturer ce groupe
+            </button>
+<?php endif ?>

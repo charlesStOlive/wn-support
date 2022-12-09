@@ -19,13 +19,15 @@ tool_bar:
     base:
         create: 
             show: true
-            permissions: [waka.support.admin.super]
+            permissions: nobody
             url: waka/support/ticketgroups/create
+        update: 
+            permissions: nobody
         reorder: 
             show: false 
         delete: 
             show: true
-            permissions: [waka.support.admin.super]
+            permissions: nobody
     config_btns:
             format: all
             btns:
@@ -53,6 +55,6 @@ action_bar:
                 config: waka.importexport::btns.exportChildExcel
                 group: waka.utils::lang.prod.produce
 
-    # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
-    #     name:
-    #         url: $/waka/support/controllers/ticketgroups/_test_update.htm
+    partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+        name:
+            url: $/waka/support/controllers/ticketgroups/_btns.htm

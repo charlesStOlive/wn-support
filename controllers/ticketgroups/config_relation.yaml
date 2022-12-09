@@ -5,11 +5,11 @@
 tickets:
     label: waka.support::ticketgroup.tickets
     manage:
-        form: $/waka/support/models/ticket/fields_for_ticketgroup.yaml
         list: $/waka/support/models/ticket/columns_for_ticketgroup.yaml
         scope: noGroup
     view:
         list: $/waka/support/models/ticket/columns_for_ticketgroup.yaml
+        recordUrl: waka/support/tickets/update/:id
         toolbarButtons: link|unlink
         defaultSort:
             column: name

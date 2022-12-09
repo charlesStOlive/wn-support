@@ -43,6 +43,12 @@ class Tickets extends Controller
         return $this->asExtension('FormController')->update($id);
     }
 
+    public function onCreateNewFromArchived() {
+        $ticket = \Waka\Support\Models\Ticket::find($this->params[0]);
+        $newId = $ticket->createChildTicket();
+        return \Redirect::to(\Backend::url('waka/support/tickets/update/'.$newId));
+    }
+
     public function onAfterSaveWorkflowJs() {
         $wfPopupAfterSave = \Session::pull('popup_afterSave');
         if(!$wfPopupAfterSave) {

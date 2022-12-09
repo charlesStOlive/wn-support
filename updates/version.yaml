@@ -8,3 +8,6 @@
     - Ajout des groupes tickets.
     - create_tickets_table_u110.php
     - create_ticket_groups_table.php
+1.1.1:
+    - Ajout du champs parent_id pour les anciennent versions
+    - create_tickets_table_u111.php

@@ -11,6 +11,7 @@ use Backend\Models\User;
 class Ticket extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
+    use \Winter\Storm\Database\Traits\SimpleTree;
     use \Winter\Storm\Database\Traits\Sortable;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
     use \Waka\Utils\Classes\Traits\WakaWorkflowTrait;
@@ -224,7 +225,7 @@ class Ticket extends Model
         if($this->state == "draft") {
             return $this->user_id;
         }
-        else if(in_array($this->state, ['wait_support', 'validated'])) {
+        else if(in_array($this->state, ['wait_support', 'validated', 'en_cours' ])) {
             return $this->support_user_id ? $this->support_user_id : Settings::getSupportUsers()[0] ?? null;
         }
         else if(in_array($this->state, ['wait_managment', 'wait_validation'])) {
@@ -298,8 +299,22 @@ class Ticket extends Model
     /**
      * OTHERS
      */
-    
 
+    public function createChildTicket() {
+        $modelCloned = $this->replicate();
+        $modelCloned->created_at = Carbon::now();
+        $modelCloned->temps = 0;
+        $modelCloned->name = $this->name.' (reprise)';
+        $modelCloned->parent_id = $this->id;
+        $modelCloned->ticket_group = null;
+        $modelCloned->first_message = "Reprise du ticket : ".$this->name;
+        if($this->state == 'archived') {
+            $modelCloned->state = 'draft';
+        }
+        trace_log($modelCloned->toArray());
+        $modelCloned->save();
+        return $modelCloned->id;
+    }
 
     /**
      * @return mixed

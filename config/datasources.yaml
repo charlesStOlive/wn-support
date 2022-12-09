@@ -8,6 +8,8 @@ datasource:
         name : Ticket
         class: Waka\Support\Models\Ticket
         relations:
+            parent:
+                label: ticket Parent
             user: 
                 label: User
             next: 

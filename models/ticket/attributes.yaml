@@ -16,6 +16,8 @@ attributes:
         type: workflow
     url:
         label: waka.support::ticket.url
+    parent:
+        label: waka.support::ticket.parent
     temps:
         label: waka.support::ticket.temps
     lastMessage:

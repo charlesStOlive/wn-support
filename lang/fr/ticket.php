@@ -15,6 +15,7 @@ return [
     'next' => 'Attente de',
     'next_message' => 'Votre message',
     'only_active' => 'Actif',
+    'parent' => 'Ticket Parent',
     'preview_name' => 'Voir ticket',
     'sb_section_a' => 'Autres',
     'sb_section_f' => 'Facturation',
