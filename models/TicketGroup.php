@@ -123,15 +123,20 @@ class TicketGroup extends Model
      * GETTERS
      **/
     public function getTotalAttribute() {
-        return $this->tickets()->sum('temps') * 80;
+        return $this->tickets->sum('temps') * 80;
     }
     public function getQtyAttribute() {
         return $this->tickets->count();
         
     }
-    public function getHeuresAttribute() {
-        return $this->tickets()->sum('temps');
+    public function getQtyOpenedAttribute() {
+        return $this->tickets()->whereNotIn('state', ['archived', 'abd'])->count();
     }
+    
+    public function getHeuresAttribute() {
+        return $this->tickets->sum('temps');
+    }
+    
 
     /**
      * SCOPES

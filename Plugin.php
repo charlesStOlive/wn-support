@@ -200,6 +200,26 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerReportWidgets()
+    {
+        return [
+            'Waka\Support\ReportWidgets\ReportSupport' => [
+                'label'   => 'Résumé dernier tickets',
+                'context' => 'dashboard',
+                'permissions' => [
+                    'waka.support.*',
+                ],
+            ],
+            'Waka\Support\ReportWidgets\ReportTickets' => [
+                'label'   => 'liste de tickets utilisateurs',
+                'context' => 'dashboard',
+                'permissions' => [
+                    'waka.support.*',
+                ],
+            ],
+        ];
+    }
+
     /**
      * Register mail templates
      *

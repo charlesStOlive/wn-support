@@ -1,0 +1,54 @@
+.waka-supportwidget div.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.waka-supportwidget div.scoreboard div.scoreboard-item {
+    flex-grow: 0;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.waka-supportwidget div.scoreboard div.scoreboard-item.onepilot-presentation {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #999;
+}
+
+.waka-supportwidget div.scoreboard div.scoreboard-item.onepilot-presentation a {
+    color: #E6695F;
+    font-weight: bold;
+}
+
+.waka-supportwidget .title-value p.increase:after,
+.waka-supportwidget .title-value p.decrease:after {
+    content: "\f178";
+    display: inline-block;
+    width: 8px;
+    font-size: 13px;
+}
+
+.waka-supportwidget .title-value p.increase:after {
+    transform: rotate(-45deg);
+}
+
+.waka-supportwidget .title-value p.decrease:after {
+    transform: rotate(45deg);
+}
+
+.waka-supportwidget .title-value p.equal:after {
+    content: "";
+}
+
+.waka-supportwidget .logo-link {
+    float: right;
+}
+
+.waka-supportwidget .logo-link svg {
+    width: 80px;
+    display: block;
+}
