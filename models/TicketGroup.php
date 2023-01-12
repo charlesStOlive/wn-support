@@ -130,7 +130,7 @@ class TicketGroup extends Model
         
     }
     public function getQtyOpenedAttribute() {
-        return $this->tickets()->whereNotIn('state', ['archived', 'abd'])->count();
+        return $this->tickets()->whereNotIn('state', ['archived', 'abdn', 'sleep'])->count();
     }
     
     public function getHeuresAttribute() {
