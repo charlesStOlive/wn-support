@@ -214,7 +214,7 @@ class Plugin extends PluginBase
                 'label'   => 'liste de tickets utilisateurs',
                 'context' => 'dashboard',
                 'permissions' => [
-                    'waka.support.*',
+                    'waka.support.admin',
                 ],
             ],
         ];

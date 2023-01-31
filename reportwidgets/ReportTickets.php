@@ -88,17 +88,11 @@ class ReportTickets extends ReportWidgetBase
         trace_log($userTickets->toArray());
     }
 
-    public function evalTimetenseTypeValue($date)
+    public function evalDate($date)
     {
         if ($date === null) {
             return null;
         }
-        $value = DateTimeHelper::timeTense($date);
-
-        $options = [
-            'defaultValue' => $value,
-            'timeTense' => true
-        ];
-        return \Backend::dateTime($value, $options);
+        return \Backend::dateTime($date, ['timeSince' => true]);
     }
 }

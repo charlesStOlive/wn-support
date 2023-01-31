@@ -15,7 +15,7 @@
                             </a>
                         </td>
                         <td><?=$ticket->name?></td>
-                        <td><?=$this->evalTimetenseTypeValue($ticket->updated_at);?></td>
+                        <td><?=$this->evalDate($ticket->updated_at);?></td>
                     </tr>
                 <?php endforeach ?>
                 
