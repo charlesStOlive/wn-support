@@ -53,16 +53,16 @@ class Plugin extends PluginBase
             //Il n' y a pas de date cela rique d'engendrer un email par minute
             return;
         }
-        if(!Settings::get('activate_bilans')) {
-            //On bloque si desactivé
-            return;
-        }
+        // if(!Settings::get('activate_bilans')) {
+        //     //On bloque si desactivé
+        //     return;
+        // }
 
 
 
         $schedule->call(function () {
             //Partie 1 : réactivation des tâches endormis
-            $sleepIngTickets = \Waka\Support\Models\Ticket::where('state', 'sleep')->whereDate('awake_at' ,'<', \Carbon\Carbon::now());
+            $sleepIngTickets = \Waka\Support\Models\Ticket::where('state', 'sleep')->whereDate('awake_at' ,'<=', \Carbon\Carbon::now());
             //trace_log($sleepIngTickets->count());
             foreach($sleepIngTickets->get() as $ticketToOpen) {
                 //trace_log($ticketToOpen->workflow_can('sleep_to_wait_support'));
@@ -78,33 +78,33 @@ class Plugin extends PluginBase
             }
             //trace_log('call support');
             //trace_log('call support');
-            $support_team = Settings::getSupportUsers();
-            //trace_log(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
-            foreach ($support_team as $userId) {
-                //trace_log($userId." : Utilisateur");
+            // $support_team = Settings::getSupportUsers();
+            // //trace_log(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
+            // foreach ($support_team as $userId) {
+            //     //trace_log($userId." : Utilisateur");
                 
-                $countNext = \Waka\Support\Models\Ticket::opened()->nextUser($userId)->count();
-                //trace_log($countNext);
-                //trace_log(\Waka\Support\Models\Ticket::opened()->get()->toArray());
-                if($countNext) {
-                    \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
-                }   
-                //\Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
-            }
+            //     $countNext = \Waka\Support\Models\Ticket::opened()->nextUser($userId)->count();
+            //     //trace_log($countNext);
+            //     //trace_log(\Waka\Support\Models\Ticket::opened()->get()->toArray());
+            //     if($countNext) {
+            //         \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
+            //     }   
+            //     //\Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($userId)->renderMail();
+            // }
 
-            $client_team = Settings::get('client_manage_team');
-            //trace_log($client_team);
-            foreach ($client_team as $client) {
-                //trace_log($client['id']." : Utilisateur");
-                //trace_log($client['receive_recap']);
-                if($client['receive_recap']) {
-                    $countNext = \Waka\Support\Models\Ticket::opened()->nextUser($client['id'])->count();
-                    if($countNext) {
-                        \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($client['id'])->renderMail();
-                    }   
-                }
-                //
-            }
+            // $client_team = Settings::get('client_manage_team');
+            // //trace_log($client_team);
+            // foreach ($client_team as $client) {
+            //     //trace_log($client['id']." : Utilisateur");
+            //     //trace_log($client['receive_recap']);
+            //     if($client['receive_recap']) {
+            //         $countNext = \Waka\Support\Models\Ticket::opened()->nextUser($client['id'])->count();
+            //         if($countNext) {
+            //             \Waka\Mailer\Classes\MailCreator::find('waka.support::client_team', true)->setModelId($client['id'])->renderMail();
+            //         }   
+            //     }
+            //     //
+            // }
         })->dailyAt(Carbon::parse(Settings::get('recap_team_cron'))->format('H:i'));
 
 

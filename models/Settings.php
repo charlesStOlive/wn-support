@@ -40,7 +40,10 @@ class Settings extends Model
     }
     //
     public static function isSupportMember() {
-        $userId = \BackendAuth::getUser()->id;
+        $userId = \BackendAuth::getUser()?->id;
+        if(!$userId) {
+            return false;
+        }
         $clientUsers = self::getSupportUsers();
         if(in_array($userId, $clientUsers)) {
             return true;
@@ -49,7 +52,10 @@ class Settings extends Model
         }
     }
     public static function isClientManager() {
-        $userId = \BackendAuth::getUser()->id;
+        $userId = \BackendAuth::getUser()?->id;
+        if(!$userId) {
+            return false;
+        }
         $clientManagers = self::getClientManagers();
         if(in_array($userId, $clientManagers)) {
             return true;
