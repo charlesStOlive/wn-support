@@ -79,13 +79,13 @@ class ReportTickets extends ReportWidgetBase
     public function prepareVars()
     {
         $userSelected = $this->property('user');
-        trace_log($userSelected);
+        //trace_log($userSelected);
         if(!$userSelected or $userSelected == 'me') {
             $userSelected = \BackendAuth::getUser()->id;
         }
         $userTickets = Ticket::where('next_id', $userSelected)->whereNotIn('state', ['archived', 'abdn'])->get();
         $this->vars['userTickets'] = $userTickets;
-        trace_log($userTickets->toArray());
+        //trace_log($userTickets->toArray());
     }
 
     public function evalDate($date)

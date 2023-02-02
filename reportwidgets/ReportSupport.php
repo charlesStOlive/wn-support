@@ -63,7 +63,7 @@ class ReportSupport extends ReportWidgetBase
     public function prepareVars()
     {
         $lastTicketsGroup = TicketGroup::orderBy('created_at', 'desc')->where('is_factured', false)->first();
-        trace_log($lastTicketsGroup->toArray());
+        //trace_log($lastTicketsGroup->toArray());
         $this->vars['ticketsGroup'] = $lastTicketsGroup;
     }
 }
