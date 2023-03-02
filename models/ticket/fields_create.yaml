@@ -7,7 +7,6 @@ fields:
         label: waka.support::ticket.silent_mode
         span: left
         type: checkbox
-        default: true
         comment: waka.support::ticket.silent_mode_com
     urgent:
         label: waka.support::ticket.urgent
