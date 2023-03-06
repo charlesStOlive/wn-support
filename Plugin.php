@@ -65,13 +65,13 @@ class Plugin extends PluginBase
             $sleepIngTickets = \Waka\Support\Models\Ticket::where('state', 'sleep')->whereDate('awake_at' ,'<=', \Carbon\Carbon::now());
             //trace_log($sleepIngTickets->count());
             foreach($sleepIngTickets->get() as $ticketToOpen) {
-                //trace_log($ticketToOpen->workflow_can('sleep_to_wait_support'));
-                if($ticketToOpen->workflow_can('sleep_to_wait_support')) {
+                //trace_log($ticketToOpen->wakaWorkflowCan('sleep_to_wait_support'));
+                if($ticketToOpen->wakaWorkflowCan('sleep_to_wait_support')) {
                     $ticketToOpen->workflow_apply('sleep_to_wait_support');
                     $ticketToOpen->save();
                 }
-                //trace_log($ticketToOpen->workflow_can('sleep_to_wait_managment'));
-                if($ticketToOpen->workflow_can('sleep_to_wait_managment')) {
+                //trace_log($ticketToOpen->wakaWorkflowCan('sleep_to_wait_managment'));
+                if($ticketToOpen->wakaWorkflowCan('sleep_to_wait_managment')) {
                     $ticketToOpen->workflow_apply('sleep_to_wait_managment');
                     $ticketToOpen->save();
                 }

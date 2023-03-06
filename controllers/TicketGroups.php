@@ -58,7 +58,7 @@ class TicketGroups extends Controller
              return \Redirect::refresh();
         } 
         foreach($model->tickets as $ticket) {
-            if($ticket->workflow_can('to_archived_factu')) {
+            if($ticket->wakaWorkflowCan('to_archived_factu')) {
                 //trace_log('ticket a archiver et à recreer : '.$ticket->name);
                 $ticket->workflow_apply('to_archived_factu');
                 $ticket->save();
