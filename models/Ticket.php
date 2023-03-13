@@ -22,7 +22,7 @@ class Ticket extends Model
      * @var string The database table used by the model.
      */
     public $table = 'waka_support_tickets';
-    public $defaultWorkflowName ="ticket_w";
+    public $defaultWorkflowName ="ticket";
 
     public $implement = [
         'October.Rain.Database.Behaviors.Purgeable',
