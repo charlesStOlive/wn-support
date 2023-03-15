@@ -15,19 +15,19 @@ fields:
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         options: ListClientTeam
-    attachments:
-        label: waka.support::ticket.attachments
-        span: left
-        type: fileupload
-        mode: image
-        imageHeight: 260
-        thumbOptions:
-            mode: auto
-            quality: 90
-            sharpen: 0
-            interlace: false
-            extension: auto
-        useCaption: false
+    # attachments:
+    #     label: waka.support::ticket.attachments
+    #     span: left
+    #     type: fileupload
+    #     mode: image
+    #     imageHeight: 260
+    #     thumbOptions:
+    #         mode: auto
+    #         quality: 90
+    #         sharpen: 0
+    #         interlace: false
+    #         extension: auto
+    #     useCaption: false
     ticket_messages:
         label: waka.support::ticket.ticket_messages
         span: full
@@ -35,8 +35,7 @@ fields:
     next_message:
         label: waka.support::ticket.next_message
         span: full
-        type: richeditor
-        toolbarButtons:  fullscreen|bold|italic|underline|strikeThrough|color|align|formatOL|formatUL|outdent|indent|quote|insertHR|insertLink|undo|redo|clearFormatting|selectAll|html
+        type: wakaeditor 
     awake_at:
         label: waka.support::ticket.awake_at
         span: auto

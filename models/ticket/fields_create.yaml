@@ -35,19 +35,19 @@ fields:
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         options: ListClientTeam
-    attachments:
-        label: waka.support::ticket.attachments
-        span: left
-        type: fileupload
-        mode: image
-        imageHeight: 260
-        thumbOptions:
-            mode: auto
-            quality: 90
-            sharpen: 0
-            interlace: false
-            extension: auto
-        useCaption: false
+    # attachments:
+    #     label: waka.support::ticket.attachments
+    #     span: left
+    #     type: fileupload
+    #     mode: image
+    #     imageHeight: 260
+    #     thumbOptions:
+    #         mode: auto
+    #         quality: 90
+    #         sharpen: 0
+    #         interlace: false
+    #         extension: auto
+    #     useCaption: false
     url:
         label: waka.support::ticket.url
         span: right
@@ -62,4 +62,4 @@ fields:
     first_message:
         label: waka.support::ticket.first_message
         span: full
-        type: richeditor
+        type: wakaeditor
