@@ -23,11 +23,21 @@ scopes:
         modelClass: Waka\Support\Models\TicketType
         nameFrom: name
         conditions: type_id in (:filtered)
+    nextuser_me:
+        label: waka.support::ticket.nextuser_me
+        type: checkbox 
+        default: true 
+        scope: nextUser
     only_active:
         label: waka.support::ticket.only_active
         type: checkbox
         default: true
         scope: active
+    is_sleeping:
+        label: waka.support::ticket.is_sleeping
+        type: checkbox
+        default: true
+        scope: isNotSleeping
     facturable:
         label: waka.support::ticket.facturable
         type: checkbox

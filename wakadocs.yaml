@@ -1,5 +1,5 @@
 files:
-    wf_ticket:
+    wf_ticket_w:
         title: Workflow ticket support
         group: "01 Workflow"
         relativePath: waka/support/docs

@@ -42,7 +42,7 @@ class Plugin extends PluginBase
 
     public function registerWorkflows() {
         return [
-            'ticket' => '/waka/support/config/ticket.yaml',
+            '/waka/support/config/ticket_w.yaml',
         ];
     }
 

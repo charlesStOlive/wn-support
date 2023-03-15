@@ -22,7 +22,7 @@ class Ticket extends Model
      * @var string The database table used by the model.
      */
     public $table = 'waka_support_tickets';
-    public $defaultWorkflowName ="ticket";
+    public $defaultWorkflowName ="ticket_w";
 
     public $implement = [
         'October.Rain.Database.Behaviors.Purgeable',
@@ -226,10 +226,10 @@ class Ticket extends Model
         if($this->state == "draft") {
             return $this->user_id;
         }
-        else if(in_array($this->state, ['wait_support', 'validated', 'en_cours' ])) {
+        else if(in_array($this->state, ['wait_support', 'running', 'validated', ])) {
             return $this->support_user_id ? $this->support_user_id : Settings::getSupportUsers()[0] ?? null;
         }
-        else if(in_array($this->state, ['wait_managment', 'wait_validation'])) {
+        else if(in_array($this->state, ['wait_managment',])) {
             return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null;   
         } 
         else {
@@ -251,9 +251,12 @@ class Ticket extends Model
         $query->whereIn('state', ['abdn', 'archived']);
     }
     public function scopeActive($query) {
-        $query->whereIn('state', ['draft', 'wait_support', 'wait_managment', 'en_cours', 'wait_validation', 'validated', ''])
+        $query->whereIn('state', ['draft', 'wait_support', 'wait_managment', 'running', 'validated', 'sleep'])
         ->orWhereNull('state');
 
+    }
+    public function scopeIsNotSleeping($query) {
+        $query->whereNotIn('state', ['sleep']);
     }
     public function scopeNoGroup($query) {
         $query->whereNull('ticket_group_id');

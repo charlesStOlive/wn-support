@@ -1,10 +1,10 @@
-# Workflow : **ticket**
+# Workflow : **ticket_w**
 * type: **state_machine / single_state**
-* Nom : ticket
+* Nom : ticket_w
 * comentaire : 
 
 ## Representation graphique
-![](../assets/docs_images/ticket_tb.jpeg)
+![](../assets/docs_images/ticket_w_tb.jpeg)
 
 ## Liste des états
 * **Brouillon** | code : draft
@@ -44,7 +44,6 @@
         *  isSupport | type : gard  | description : Est dans l&#039;équipe support
 * **Abandonner le ticket** | code : wait_support_to_abdn
     * Liste des fonctions 
-        *  sendNotification | type : prod  |  Arguments : waka.support::new_ticket, all  | description : Envoyer une notification
         *  isCreatorAsking | type : gard  | description : Est-ce le créateur de la tâche
 * **En cours de production** | code : wait_support_to_running
     * Liste des fonctions 
@@ -70,7 +69,6 @@
     * Liste des fonctions 
         *  isSupport | type : gard  | description : Est dans l&#039;équipe support
 * **Réveiller et valider** | code : sleep_to_validated
-* **Abandonner ticket** | code : sleep_to_abdn
 * **Archivage du ticket** | code : validated_to_archived
 * **Archivage facturation** | code : to_archived_factu
     * Liste des fonctions 

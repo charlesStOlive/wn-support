@@ -30,7 +30,6 @@ return [
         'sleep_to_wait_support' => 'Réveiller + transmission Notilac',
         'sleep_to_wait_managment' => 'Réveiller + transmission client',
         'sleep_to_validated' => 'Réveiller et valider',
-        'sleep_to_abdn' => 'Abandonner ticket',
         'validated_to_archived' => 'Archivage du ticket',
         'to_archived_factu' => 'Archivage facturation',
     ],
