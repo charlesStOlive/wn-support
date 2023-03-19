@@ -51,6 +51,7 @@ fields:
     temps:
         label: waka.support::ticket.temps
         span: left
+        default: 0
         permissions: [wcli.ticket.admin.super]
     ticket_group:
         label: waka.support::ticket.ticket_group

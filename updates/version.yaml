@@ -11,3 +11,6 @@
 1.1.1:
     - Ajout du champs parent_id pour les anciennent versions
     - create_tickets_table_u111.php
+2.0.0:
+    - "Modifications des workflows"
+    - create_tickets_table_u200.php

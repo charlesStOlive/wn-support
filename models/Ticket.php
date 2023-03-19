@@ -147,6 +147,7 @@ class Ticket extends Model
      **/
     public function beforeCreate() {
             $id = $this->getNextStringId(5);
+            if(!$this->temps) $this->temps = 0.0;
             $this->code = 'EM_'.$id;  
     }
     public function afterCreate() 
@@ -233,7 +234,7 @@ class Ticket extends Model
             return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null;   
         } 
         else {
-            return null;
+            return $this->next_id;
         }
         
     }
@@ -264,15 +265,8 @@ class Ticket extends Model
     public function scopeIsFacturable($query) {
         $query->where('temps','>', 0);
     }
-    public function scopeNextUser($query, $forceUserId = false) {
-        $userId = null;
-        if($forceUserId) {
-            $userId = $forceUserId;
-        } else {
-            $userId = \BackendAuth::getUser()->id;
-        }
-        
-        $query->where('next_id', $userId);
+    public function scopeNextUser($query) {
+        $query->where('next_id', \BackendAuth::getUser()->id);
     }
 
     
@@ -294,6 +288,7 @@ class Ticket extends Model
      */
     public function filterFields($fields, $context = null)
     {
+        trace_log("filterFields");
         if (!isset($fields->name)) {
             return;
         }

@@ -1,4 +1,5 @@
 <?php
 return [
-        'price.required' => 'Le champ &#039;débute le&#039; doit être rempli',
+        'support_user.required' => 'Le champs XXX est requis',
+        'support_client.required' => 'Le champs YYY est requis',
 ];

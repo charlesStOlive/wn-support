@@ -15,13 +15,17 @@ class WorkflowTicketListener extends WorkflowListener
     public function subscribe($event)
     {
         //Evenement obligatoires
-        $event->listen('workflow.ticket.guard', [$this, 'onGuard']);
-        $event->listen('workflow.ticket.entered', [$this, 'onEntered']);
-        $event->listen('workflow.ticket.afterModelSaved', [$this, 'onAfterSavedFunction']);
+        $event->listen('workflow.ticket_w.guard', [$this, 'onGuard']);
+        $event->listen('workflow.ticket_w.entered', [$this, 'onEntered']);
+        $event->listen('workflow.ticket_w.afterModelSaved', [$this, 'onAfterSavedFunction']);
+        $event->listen('workflow.ticket_w.enter', [$this, 'onEnter']);
         //Evenement optionels à déclarer ici.
         //$event->listen('workflow.ticket.leave', [$this, 'onLeave']);
         //$event->listen('workflow.ticket.transition', [$this, 'onTransition']);
-        $event->listen('workflow.ticket.enter', [$this, 'onEnter']);
+        
+    }
+    public function test($event) {
+        trace_log($event);
     }
 
     /**
@@ -76,6 +80,12 @@ class WorkflowTicketListener extends WorkflowListener
         $model->createChildTicket();
     }
 
+    public function removeTicketGroup($event, $args = null)
+    {
+        $model = $event->getSubject();
+        $model->ticket_group_id = null;
+    }
+
     // public function cleanData($event, $args = null)
     // {
     //     //trace_log('nettoyage des donnes');
@@ -95,8 +105,14 @@ class WorkflowTicketListener extends WorkflowListener
      * Ici les valeurs ne peuvent plus être modifié il faut passer par un traitement
      */
     public function askSleep($model) {
-        //trace_log('fonction askSleep');
+        trace_log('fonction askSleep');
+        $model->ticket_group_id = null;
         \Event::fire('waka.workflow.popup_afterSave', ['name' => 'sleep']);
+    }
+
+    public function cleanAwake($model) {
+        trace_log('fonction cleanAwake');
+        $model->awake_at = null;
     }
 
 

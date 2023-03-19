@@ -6,13 +6,8 @@ ticket_w:
         rulesSets:
             default:
                 fields:  
-                messages: waka.support::ticket_w_errors
-            none:
-                fields:  
-                messages: waka.support::ticket_w_errors
-            factu:
-                fields:  
-                    price: required              
+                    support_user: required              
+                    support_client: required              
                 messages: waka.support::ticket_w_errors
     marking_store:
         type: single_state
@@ -38,6 +33,7 @@ ticket_w:
         running:
             metadata:
                 label: waka.support::ticket_w.places.running 
+                noroles: [admin-nlpd,admin_pays]
                 icon: icon-cogs
                 hidden_fields: [awake_at]
         validated:
@@ -48,12 +44,12 @@ ticket_w:
         sleep:
             metadata:
                 label: waka.support::ticket_w.places.sleep 
+                cron_auto: [sleep_to_wait_support]
                 icon: icon-bed
         archived:
             metadata:
                 label: waka.support::ticket_w.places.archived 
                 icon: icon-cubes
-                must_trans: true
                 hidden_fields: [awake_at]
         abdn:
             metadata:
@@ -62,119 +58,101 @@ ticket_w:
                 hidden_fields: [awake_at]
     initial_places: draft  # or set to an array if multiple initial places
     transitions:
-        draft_to_wait_support:
-            metadata: 
-                label: waka.support::ticket_w.trans.draft_to_wait_support 
-                rulesSet: none
-                redirect: "redirect:1"
-                type: success
-                fncs:
-                    sendNotification:
-                        type: prod
-                        args:
-                            code: waka.support::new_ticket
-                            mode: support
-            from: draft
-            to: wait_support
-        draft_to_wait_managment:
-            metadata: 
-                label: waka.support::ticket_w.trans.draft_to_wait_managment 
-                redirect: "redirect:1"
-                type: success
-                fncs:
-                    sendNotification:
-                        type: prod
-                        args:
-                            code: waka.support::new_ticket
-                            mode: client
-                    isSupport:
-                        type: gard
-            from: draft
-            to: wait_managment
-        draft_to_sleep:
-            metadata: 
-                label: waka.support::ticket_w.trans.draft_to_sleep 
-                type: info
-                fncs:
-                    askSleep:
-                        type: prod
-            from: draft
-            to: sleep
-        draft_to_abdn:
-            metadata: 
-                label: waka.support::ticket_w.trans.draft_to_abdn 
-                redirect: "redirect:1"
-                type: danger
-                fncs:
-                    isCreatorAsking:
-                        type: gard
-            from: draft
-            to: abdn
-        draft_to_validated:
-            metadata: 
-                label: waka.support::ticket_w.trans.draft_to_validated 
-                redirect: "close:1"
-                type: success
-                fncs:
-                    isCreatorAsking:
-                        type: gard
-            from: draft
-            to: validated
-        wait_support_to_wait_managment:
-            metadata: 
-                label: waka.support::ticket_w.trans.wait_support_to_wait_managment 
-                redirect: "redirect:1"
-                fncs:
-                    sendNotification:
-                        type: prod
-                        args:
-                            code: waka.support::new_ticket
-                            mode: client
-                    isSupport:
-                        type: gard
-            from: wait_support
-            to: wait_managment
-        wait_support_to_sleep:
-            metadata: 
-                label: waka.support::ticket_w.trans.wait_support_to_sleep 
-                fncs:
-                    askSleep:
-                        type: prod
-                    isSupport:
-                        type: gard
-            from: wait_support
-            to: sleep
         wait_support_to_abdn:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_abdn 
+                button: waka.support::ticket_w.trans.wait_support_to_abdn_btn 
                 redirect: "redirect:1"
-                type: danger
+                color: red
                 fncs:
                     isCreatorAsking:
                         type: gard
             from: wait_support
             to: abdn
-        wait_support_to_running:
+        wait_managment_to_abdn:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_support_to_running 
+                label: waka.support::ticket_w.trans.wait_managment_to_abdn 
+                button: waka.support::ticket_w.trans.wait_managment_to_abdn_btn 
+                redirect: "redirect:1"
+                color: red
+                fncs:
+                    isCreatorAsking:
+                        type: gard
+            from: wait_managment
+            to: abdn
+        validated_to_archived:
+            metadata: 
+                label: waka.support::ticket_w.trans.validated_to_archived 
+                button: waka.support::ticket_w.trans.validated_to_archived_btn 
+                redirect: "close:1"
+            from: validated
+            to: archived
+        to_archived_factu:
+            metadata: 
+                label: waka.support::ticket_w.trans.to_archived_factu 
+                button: waka.support::ticket_w.trans.to_archived_factu_btn 
+                hidden: true
+                fncs:
+                    createChildTicket:
+                        type: trait_onEnter
+            from: 
+                - wait_managment
+                - wait_support
+            to: archived
+        wait_support_to_wait_managment:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_wait_managment 
+                button: waka.support::ticket_w.trans.wait_support_to_wait_managment_btn 
                 redirect: "redirect:1"
                 fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: client
                     isSupport:
                         type: gard
             from: wait_support
-            to: running
+            to: wait_managment
         running_to_wait_managment:
             metadata: 
                 label: waka.support::ticket_w.trans.running_to_wait_managment 
+                button: waka.support::ticket_w.trans.running_to_wait_managment_btn 
                 redirect: "close:1"
                 fncs:
                     isSupport:
                         type: gard
             from: running
             to: wait_managment
+        wait_support_to_sleep:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_sleep 
+                button: waka.support::ticket_w.trans.wait_support_to_sleep_btn 
+                color: info
+                fncs:
+                    askSleep:
+                        type: prod
+                    removeTicketGroup:
+                        type: trait_onEnter
+                    isSupport:
+                        type: gard
+            from: wait_support
+            to: sleep
+        wait_support_to_running:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_support_to_running 
+                button: waka.support::ticket_w.trans.wait_support_to_running_btn 
+                redirect: "redirect:1"
+                color: info
+                fncs:
+                    isSupport:
+                        type: gard
+            from: wait_support
+            to: running
         wait_managment_to_wait_support:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_wait_support 
+                button: waka.support::ticket_w.trans.wait_managment_to_wait_support_btn 
                 redirect: "close:1"
                 fncs:
                     sendNotification:
@@ -184,10 +162,60 @@ ticket_w:
                             mode: support
             from: wait_managment
             to: wait_support
+        sleep_to_wait_managment:
+            metadata: 
+                label: waka.support::ticket_w.trans.sleep_to_wait_managment 
+                button: waka.support::ticket_w.trans.sleep_to_wait_managment_btn 
+                redirect: "redirect:1"
+                fncs:
+                    cleanAwake:
+                        type: trait_onEnter
+            from: sleep
+            to: wait_managment
+        sleep_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.sleep_to_wait_support 
+                button: waka.support::ticket_w.trans.sleep_to_wait_support_btn 
+                redirect: "redirect:1"
+                fncs:
+                    cleanAwake:
+                        type: trait_onEnter
+            from: sleep
+            to: wait_support
+        draft_to_wait_managment:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_wait_managment 
+                button: waka.support::ticket_w.trans.draft_to_wait_managment_btn 
+                redirect: "redirect:1"
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: client
+                    isSupport:
+                        type: gard
+            from: draft
+            to: wait_managment
+        draft_to_wait_support:
+            metadata: 
+                label: waka.support::ticket_w.trans.draft_to_wait_support 
+                button: waka.support::ticket_w.trans.draft_to_wait_support_btn 
+                redirect: "redirect:1"
+                fncs:
+                    sendNotification:
+                        type: prod
+                        args:
+                            code: waka.support::new_ticket
+                            mode: support
+            from: draft
+            to: wait_support
         wait_managment_to_validated:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_validated 
+                button: waka.support::ticket_w.trans.wait_managment_to_validated_btn 
                 redirect: "close:1"
+                color: success
                 fncs:
                     sendNotification:
                         type: prod
@@ -198,61 +226,13 @@ ticket_w:
                         type: gard
             from: wait_managment
             to: validated
-        wait_managment_to_sleep:
+        draft_to_validated:
             metadata: 
-                label: waka.support::ticket_w.trans.wait_managment_to_sleep 
-                fncs:
-                    askSleep:
-                        type: prod
-            from: wait_managment
-            to: sleep
-        wait_managment_to_abdn:
-            metadata: 
-                label: waka.support::ticket_w.trans.wait_managment_to_abdn 
-                redirect: "redirect:1"
-                type: danger
+                label: waka.support::ticket_w.trans.draft_to_validated 
+                button: waka.support::ticket_w.trans.draft_to_validated_btn 
+                redirect: "close:1"
                 fncs:
                     isCreatorAsking:
                         type: gard
-            from: wait_managment
-            to: abdn
-        sleep_to_wait_support:
-            metadata: 
-                label: waka.support::ticket_w.trans.sleep_to_wait_support 
-                redirect: "redirect:1"
-            from: sleep
-            to: wait_support
-        sleep_to_wait_managment:
-            metadata: 
-                label: waka.support::ticket_w.trans.sleep_to_wait_managment 
-                redirect: "redirect:1"
-                fncs:
-                    isSupport:
-                        type: gard
-            from: sleep
-            to: wait_managment
-        sleep_to_validated:
-            metadata: 
-                label: waka.support::ticket_w.trans.sleep_to_validated 
-                redirect: "redirect:1"
-            from: sleep
+            from: draft
             to: validated
-        validated_to_archived:
-            metadata: 
-                label: waka.support::ticket_w.trans.validated_to_archived 
-                redirect: "close:1"
-            from: validated
-            to: archived
-        to_archived_factu:
-            metadata: 
-                label: waka.support::ticket_w.trans.to_archived_factu 
-                hidden: true
-                fncs:
-                    createChildTicket:
-                        type: trait_onEnter
-            from: 
-                - wait_managment
-                - wait_support
-                - sleep
-                - draft
-            to: archived
