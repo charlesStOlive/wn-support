@@ -119,21 +119,21 @@ class Plugin extends PluginBase
     {
         return [
             'support' => [
-                'label'       => 'waka.support::lang.navigation.support',
+                'label'       => \Lang::get('waka.support::lang.navigation.support'),
                 'icon'        => 'icon-bug',
                 'url'         => Backend::url('waka/support/tickets'),
                 'permissions' => ['waka.support.*'],
                 'order'       => 600,
                 'sideMenu' => [
                     'side-menu-tickets' => [
-                        'label' => 'waka.support::lang.navigation.support',
+                        'label' => \Lang::get('waka.support::lang.navigation.support'),
                         'icon' => 'icon-bug',
                         'url' => Backend::url('waka/support/tickets'),
                         'permissions' => ['waka.support.*'],
                         'counter' => \Waka\Support\Models\Ticket::countScope('nextUser'),
                     ],
                     'side-menu-ticketgroups' => [
-                        'label' => 'waka.support::lang.settings.label_ticket_groupes',
+                        'label' => \Lang::get('waka.support::lang.settings.label_ticket_groupes'),
                         'icon' => 'icon-gear',
                         'url' => Backend::url('waka/support/ticketgroups'),
                         'permissions' => ['waka.support.*']
