@@ -15,5 +15,4 @@ secondaryTabs:
             span: full
             type: modelinfo
             editPermissions: [nobody]
-            tab: waka.support::ticketgroup.tab_base
             src: waka/support/models/ticketgroup/fields_for_side_bar.yaml
