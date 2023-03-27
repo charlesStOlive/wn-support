@@ -11,7 +11,7 @@ return [
     "form_name" => "Gestion ticket",
     "is_sleeping" => "Cacher endormis",
     "lastMessage" => "Dernier message",
-    "name" => "Nom\/Sujet",
+    "name" => "Nom ou Sujet",
     "next" => "Attente de",
     "next_message" => "Votre message",
     "nextuser_me" => "En attente de moi",

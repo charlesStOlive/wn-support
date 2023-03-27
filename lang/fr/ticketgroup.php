@@ -6,7 +6,7 @@ return [
     "heures" => "Nombre d'heures",
     "infos" => "Infos",
     "is_factured" => "est facturé ? ",
-    "name" => "Nom\/Sujet du  ticket",
+    "name" => "Nom ou Sujet du  ticket",
     "preview_name" => "Voir groupe de tickets",
     "qty" => "Nb tickets",
     "tickets" => "Tickets",
