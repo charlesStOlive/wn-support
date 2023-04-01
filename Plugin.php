@@ -151,23 +151,22 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'waka.support.user'        => [
-                'label' => 'waka.support::lang.permissions.user',
-                'tab'   => 'waka.support::lang.permissions.tab'
+            'waka.support.user.base'        => [
+                'label' => \Lang::get('waka.support::lang.permissions.user'),
+                'tab' => \Lang::get('waka.support::lang.permissions.tab')
+            ],
+            'waka.support.user.super'        => [
+                'label' => \Lang::get('waka.support::lang.permissions.user_super'),
+                'tab' => \Lang::get('waka.support::lang.permissions.tab')
             ],
             'waka.support.admin.base'         => [
-                'label' => 'waka.support::lang.permissions.admin_base',
-                'tab'   => 'waka.support::lang.permissions.tab'
+                'label' => \Lang::get('waka.support::lang.permissions.admin_base'),
+                'tab'   => \Lang::get('waka.support::lang.permissions.tab')
             ],
             'waka.support.admin.super'    => [
-                'label' => 'waka.support::lang.permissions.admin_super',
-                'tab'   => 'waka.support::lang.permissions.tab'
+                'label' => \Lang::get('waka.support::lang.permissions.admin_super'),
+                'tab'   => \Lang::get('waka.support::lang.permissions.tab')
             ],
-            'waka.support.access_ticket_types'    => [
-                'label' => 'waka.support::lang.permissions.ticket_types',
-                'tab'   => 'waka.support::lang.permissions.tab'
-            ],
-            
         ];
     }
 
@@ -243,9 +242,9 @@ class Plugin extends PluginBase
     {
         return [
             'support_settings' => [
-                'label'       => 'waka.support::lang.settings.label_support_settings',
-                'description' => 'waka.support::lang.settings.description',
-                'category'    => 'waka.support::lang.settings.category',
+                'label'       => \Lang::get('waka.support::lang.settings.label_support_settings'),
+                'description' => \Lang::get('waka.support::lang.settings.description'),
+                'category'    => \Lang::get('waka.support::lang.settings.category'),
                 'icon'        => 'icon-bug',
                 'class'       => 'Waka\Support\Models\Settings',
                 'order'       => 500,
@@ -253,9 +252,9 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.support.access_settings']
             ],
              'TicketTypes' => [
-                'label'       => 'waka.support::lang.settings.label_ticket_types',
-                'description' => 'waka.support::lang.settings.description',
-                'category'    => 'waka.support::lang.settings.category',
+                'label'       => \Lang::get('waka.support::lang.settings.label_ticket_types'),
+                'description' => \Lang::get('waka.support::lang.settings.types_description'),
+                'category'    => \Lang::get('waka.support::lang.settings.category'),
                 'icon'        => 'icon-gear',
                 'url' => Backend::url('waka/support/tickettypes'),
                 'order'       => 501,

@@ -20,7 +20,7 @@ class TicketTypes extends Controller
     public $btnsConfig = 'config_btns.yaml';
     public $reorderConfig = 'config_reorder.yaml';
 
-    public $requiredPermissions = ['waka.ticket.admin.super'];
+    public $requiredPermissions = ['waka.support.*'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()

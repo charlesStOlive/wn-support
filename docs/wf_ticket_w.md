@@ -12,6 +12,8 @@
 * les réctangles arronds représentent les états
 * CRON_AUTO : indique que des tentatives de transitions seront automatiquement effectués par l'app. 
 * FORM_AUTO : indique que le formulaire va tenter d'éffectuer une transition automatique en fonction des données qu'il possède. 
+* Si il y a une permission alors seul les utilisateurs avec ses permissions auront accès à l'état. 
+* Si il y a une NO permission alors seul les  utilisateurs ayant une permission différente auront assès à l'état. A noter : N'écrase pas la config du controller. 
 
 ### Transitions :  
 * les rectangles droits représentent les transitions 
@@ -25,8 +27,9 @@
 * **Brouillon** | code : draft
 * **Retour Notilac attendu** | code : wait_support
 * **Retour Client attendu** | code : wait_managment
+    * Permissions : **waka.support.user.***
 * **En production** | code : running
-    * Rôles bloquées : **admin-nlpd,admin_pays**
+    * Permissions : **waka.support.admin.***
 * **Ticket validé** | code : validated
 * **En sommeil** | code : sleep
 * **Archivé** | code : archived
@@ -42,7 +45,7 @@
     * Liste des fonctions 
         *  isCreatorAsking | type : gard  | description : Est-ce le créateur de la tâche
 * **Archivage** | code : validated_to_archived
-    * Bouton : Archivage du ticket XX
+    * Bouton : Archivage du ticket
 * **Archivage facturation** | code : to_archived_factu
     * Bouton : Archivage facturation
     * Liste des fonctions 

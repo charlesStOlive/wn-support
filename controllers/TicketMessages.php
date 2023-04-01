@@ -16,6 +16,8 @@ class TicketMessages extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
     public $btnsConfig = 'config_btns.yaml';
+
+    public $requiredPermissions = ['waka.support.*'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()

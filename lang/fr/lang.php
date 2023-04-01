@@ -8,10 +8,12 @@ return [
         "support" => "Support"
     ],
     "permissions" => [
-        "admin_base" => "Admin",
-        "admin_super" => "Super admin",
+        "admin_base" => "Droit utilisateur Admin (Notilac)",
+        "admin_super" => "Droit utilisateur Admin (Notilac) Avancé",
         "ticket_types" => "Accès type de ticket",
-        "user" => "Utilisateur"
+        "user" => "Droit utilisateur client",
+        "tab" => "Autorisation liée au support",
+        "user_super" => "Droit utilisateur client avancé"
     ],
     "settings" => [
         "activate_bilans" => "Activer les bilans de ticket par email",
@@ -22,7 +24,12 @@ return [
         "receive_notify" => "Reçois les notifications (sauf si tâche silencieuse)",
         "receive_recap" => "Reçoit les emails de recap",
         "support_team" => "Equipe de support",
-        "support_user" => "Utilisateur support"
+        "support_user" => "Utilisateur support",
+        "label_support_settings" => "Reglage Support",
+        "description" => "Gestion des utilisateurs de support et options",
+        "category" => "Support",
+        "label_ticket_types" => "Type de ticket",
+        "types_description" => "Gestion des types de tickets"
     ],
     "ticket" => [
         "delete_confirm" => "Do you really want to delete this Ticket?",

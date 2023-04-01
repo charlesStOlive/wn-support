@@ -25,7 +25,7 @@ class WorkflowTicketListener extends WorkflowListener
         
     }
     public function test($event) {
-        trace_log($event);
+        //trace_log($event);
     }
 
     /**
@@ -105,13 +105,13 @@ class WorkflowTicketListener extends WorkflowListener
      * Ici les valeurs ne peuvent plus être modifié il faut passer par un traitement
      */
     public function askSleep($model) {
-        trace_log('fonction askSleep');
+        //trace_log('fonction askSleep');
         $model->ticket_group_id = null;
         \Event::fire('waka.workflow.popup_afterSave', ['name' => 'sleep']);
     }
 
     public function cleanAwake($model) {
-        trace_log('fonction cleanAwake');
+        //trace_log('fonction cleanAwake');
         $model->awake_at = null;
     }
 

@@ -288,7 +288,7 @@ class Ticket extends Model
      */
     public function filterFields($fields, $context = null)
     {
-        trace_log("filterFields");
+        //trace_log("filterFields");
         if (!isset($fields->name)) {
             return;
         }

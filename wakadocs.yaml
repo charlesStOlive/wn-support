@@ -3,4 +3,5 @@ files:
         title: Workflow ticket support
         group: "01 Workflow"
         relativePath: waka/support/docs
+        permission: waka.support.*
         order: 100
