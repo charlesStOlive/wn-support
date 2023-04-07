@@ -9,6 +9,14 @@ ticket_w:
                     support_user: required              
                     support_client: required              
                 messages: waka.support::ticket_w_errors
+
+        scopes:
+            running:
+                label: waka.support::ticket_w.scopes.running
+                value: [draft,wait_support,wait_managment,running]             
+            closed:
+                label: waka.support::ticket_w.scopes.closed
+                value: [archived,abdn]             
     marking_store:
         type: single_state
         property: state
@@ -30,13 +38,11 @@ ticket_w:
             metadata:
                 label: waka.support::ticket_w.places.wait_managment 
                 com: waka.support::ticket_w.places.comments.wait_managment 
-                permissions: [waka.support.user.*]
                 icon: icon-clock-o
                 hidden_fields: [awake_at]
         running:
             metadata:
                 label: waka.support::ticket_w.places.running 
-                permissions: [waka.support.admin.*]
                 icon: icon-cogs
                 hidden_fields: [awake_at]
         validated:
@@ -97,7 +103,7 @@ ticket_w:
                 hidden: true
                 fncs:
                     createChildTicket:
-                        type: trait_onEnter
+                        type: enter
             from: 
                 - wait_managment
                 - wait_support
@@ -108,13 +114,13 @@ ticket_w:
                 button: waka.support::ticket_w.trans.buttons.wait_support_to_wait_managment 
                 redirect: "redirect:1"
                 fncs:
+                    isSupport:
+                        type: gard
                     sendNotification:
                         type: prod
                         args:
                             code: waka.support::new_ticket
                             mode: client
-                    isSupport:
-                        type: gard
             from: wait_support
             to: wait_managment
         running_to_wait_managment:
@@ -132,12 +138,12 @@ ticket_w:
                 label: waka.support::ticket_w.trans.wait_support_to_sleep 
                 button: waka.support::ticket_w.trans.buttons.wait_support_to_sleep 
                 fncs:
-                    askSleep:
-                        type: prod
-                    removeTicketGroup:
-                        type: trait_onEnter
                     isSupport:
                         type: gard
+                    removeTicketGroup:
+                        type: enter
+                    askSleep:
+                        type: prod
             from: wait_support
             to: sleep
         wait_support_to_running:
@@ -170,7 +176,7 @@ ticket_w:
                 redirect: "redirect:1"
                 fncs:
                     cleanAwake:
-                        type: trait_onEnter
+                        type: enter
             from: sleep
             to: wait_managment
         sleep_to_wait_support:
@@ -180,7 +186,7 @@ ticket_w:
                 redirect: "redirect:1"
                 fncs:
                     cleanAwake:
-                        type: trait_onEnter
+                        type: enter
             from: sleep
             to: wait_support
         draft_to_wait_managment:
@@ -189,13 +195,13 @@ ticket_w:
                 button: waka.support::ticket_w.trans.buttons.draft_to_wait_managment 
                 redirect: "redirect:1"
                 fncs:
+                    isSupport:
+                        type: gard
                     sendNotification:
                         type: prod
                         args:
                             code: waka.support::new_ticket
                             mode: client
-                    isSupport:
-                        type: gard
             from: draft
             to: wait_managment
         draft_to_wait_support:
@@ -215,16 +221,17 @@ ticket_w:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_managment_to_validated 
                 button: waka.support::ticket_w.trans.buttons.wait_managment_to_validated 
+                com: waka.support::ticket_w.trans.comments.wait_managment_to_validated 
                 redirect: "close:1"
                 color: success
                 fncs:
+                    isClient:
+                        type: gard
                     sendNotification:
                         type: prod
                         args:
                             code: waka.support::new_ticket
                             mode: support
-                    isClient:
-                        type: gard
             from: wait_managment
             to: validated
         draft_to_validated:

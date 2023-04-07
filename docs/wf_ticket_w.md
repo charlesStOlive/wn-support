@@ -27,9 +27,7 @@
 * **Brouillon** | code : draft
 * **Retour Notilac attendu** | code : wait_support
 * **Retour Client attendu** | code : wait_managment
-    * Permissions : **waka.support.user.***
 * **En production** | code : running
-    * Permissions : **waka.support.admin.***
 * **Ticket validé** | code : validated
 * **En sommeil** | code : sleep
 * **Archivé** | code : archived
@@ -39,66 +37,80 @@
 * **Abandonner** | code : wait_support_to_abdn
     * Bouton : Abandonner le ticket
     * Liste des fonctions 
-        *  isCreatorAsking | type : gard  | description : Est-ce le créateur de la tâche
+        *  isCreatorAsking | type : gard
 * **Abandonner** | code : wait_managment_to_abdn
     * Bouton : Abandonner le ticket
     * Liste des fonctions 
-        *  isCreatorAsking | type : gard  | description : Est-ce le créateur de la tâche
+        *  isCreatorAsking | type : gard
 * **Archivage** | code : validated_to_archived
     * Bouton : Archivage du ticket
 * **Archivage facturation** | code : to_archived_factu
     * Bouton : Archivage facturation
     * Liste des fonctions 
-        *  createChildTicket | type : trait_onEnter  | description : Fonction qui va créer un ticket enfants
+        *  createChildTicket | type : enter
 * **Envoyer  client** | code : wait_support_to_wait_managment
     * Bouton : Envoyer au client
     * Liste des fonctions 
-        *  sendNotification | type : prod  |  Arguments : waka.support::new_ticket, client  | description : Envoyer une notification
-        *  isSupport | type : gard  | description : Est dans l&#039;équipe support
+        *  isSupport | type : gard
+        *  sendNotification | type : prod
+            * code : waka.support::new_ticket 
+            * mode : client 
 * **FIN prod** | code : running_to_wait_managment
     * Bouton : Envoyer au client
     * Liste des fonctions 
-        *  isSupport | type : gard  | description : Est dans l&#039;équipe support
+        *  isSupport | type : gard
 * **Mise en sommeil ** | code : wait_support_to_sleep
     * Bouton : Mise en sommeil du ticket
     * Liste des fonctions 
-        *  askSleep | type : prod  | description : Permet de préciser quant il faut réveiller la tâche
-        *  removeTicketGroup | type : trait_onEnter  | description : Fonction qui supprimer le group ticket 
-        *  isSupport | type : gard  | description : Est dans l&#039;équipe support
+        *  isSupport | type : gard
+        *  removeTicketGroup | type : enter
+        *  askSleep | type : prod
 * **En Production** | code : wait_support_to_running
     * Bouton : En cours de production
     * Liste des fonctions 
-        *  isSupport | type : gard  | description : Est dans l&#039;équipe support
+        *  isSupport | type : gard
 * **Répondre à Notilac** | code : wait_managment_to_wait_support
     * Bouton : Répondre à Notilac
     * Liste des fonctions 
-        *  sendNotification | type : prod  |  Arguments : waka.support::new_ticket, support  | description : Envoyer une notification
+        *  sendNotification | type : prod
+            * code : waka.support::new_ticket 
+            * mode : support 
 * **Réveiller C** | code : sleep_to_wait_managment
     * Bouton : Réveiller et transmettre C
     * Liste des fonctions 
-        *  cleanAwake | type : trait_onEnter  | description : Fonction qui enlève le champs awake_at
+        *  cleanAwake | type : enter
 * **Réveiller N** | code : sleep_to_wait_support
     * Bouton : Réveiller et transmettre N
     * Liste des fonctions 
-        *  cleanAwake | type : trait_onEnter  | description : Fonction qui enlève le champs awake_at
+        *  cleanAwake | type : enter
 * **Transmission Client** | code : draft_to_wait_managment
     * Bouton : Transmettre au  client
     * Liste des fonctions 
-        *  sendNotification | type : prod  |  Arguments : waka.support::new_ticket, client  | description : Envoyer une notification
-        *  isSupport | type : gard  | description : Est dans l&#039;équipe support
+        *  isSupport | type : gard
+        *  sendNotification | type : prod
+            * code : waka.support::new_ticket 
+            * mode : client 
 * **Transmission Notilac** | code : draft_to_wait_support
     * Bouton : Transmettre à Notilac
     * Liste des fonctions 
-        *  sendNotification | type : prod  |  Arguments : waka.support::new_ticket, support  | description : Envoyer une notification
+        *  sendNotification | type : prod
+            * code : waka.support::new_ticket 
+            * mode : support 
 * **Validation** | code : wait_managment_to_validated
     * Bouton : Valider le ticket
     * Liste des fonctions 
-        *  sendNotification | type : prod  |  Arguments : waka.support::new_ticket, support  | description : Envoyer une notification
-        *  isClient | type : gard  | description : Est dans l&#039;équipe client
+        *  isClient | type : gard
+        *  sendNotification | type : prod
+            * code : waka.support::new_ticket 
+            * mode : support 
 * **Valider et clôturer** | code : draft_to_validated
     * Bouton : Valider et clôturer le ticket
     * Liste des fonctions 
-        *  isCreatorAsking | type : gard  | description : Est-ce le créateur de la tâche
+        *  isCreatorAsking | type : gard
 
 ## Les jeux de validations des champs
 * **default**: support_client et support_user obligatoire
+
+## Les scopes
+* **running**: Tickets en cours | [draft,wait_support,wait_managment,running]  
+* **closed**: Tickets fermé | [archived,abdn]  

@@ -2,10 +2,8 @@
 
 use Carbon\Carbon;
 use Waka\Utils\Classes\Listeners\WorkflowListener;
-use Waka\Support\Models\Settings;
-use Backend\Models\User;
 
-class WorkflowTicketListener extends WorkflowListener
+class WorkflowTicketWListener extends WorkflowListener
 {
     /**
      * Register the listeners for the subscriber.
@@ -17,12 +15,12 @@ class WorkflowTicketListener extends WorkflowListener
         //Evenement obligatoires
         $event->listen('workflow.ticket_w.guard', [$this, 'onGuard']);
         $event->listen('workflow.ticket_w.entered', [$this, 'onEntered']);
-        $event->listen('workflow.ticket_w.afterModelSaved', [$this, 'onAfterSavedFunction']);
         $event->listen('workflow.ticket_w.enter', [$this, 'onEnter']);
+        $event->listen('workflow.ticket_w.afterModelSaved', [$this, 'onAfterSavedFunction']);
         //Evenement optionels à déclarer ici.
-        //$event->listen('workflow.ticket.leave', [$this, 'onLeave']);
-        //$event->listen('workflow.ticket.transition', [$this, 'onTransition']);
-        
+        //$event->listen('workflow.ticket_w.leave', [$this, 'onLeave']);
+        $event->listen('workflow.ticket_w.transition', [$this, 'recLogs']);
+        //$event->listen('workflow.ticket_w.enter', [$this, 'onEnter']);
     }
 
     /**
@@ -30,15 +28,7 @@ class WorkflowTicketListener extends WorkflowListener
      * Permet de bloquer ou pas une transition d'état
      * doit retourner true or false
      */
-    // public function authorized($event, $args = null)
-    // {
-    //     $blocked = false;
-    //     $model = $event->getSubject();
-    //     $type = $args['name'];
-    //     //A terminer
-    //     return $blocked;
-    // }
-    public function isCreatorAsking($event, $args = null)
+     public function isCreatorAsking($event, $args = null)
     {
         $blocked = false;
         $model = $event->getSubject();
@@ -63,24 +53,24 @@ class WorkflowTicketListener extends WorkflowListener
         return $blocked;
     }
 
-    
-
     /**
      * FONCTIONS DE TRAITEMENT PEUVENT ETRE APPL DANS LES FONCTIONS CLASSIQUES
      */
-    
 
-    // public function cleanData($event, $args = null)
-    // {
-    //     //trace_log('nettoyage des donnes');
-    // }
-    // public function removeValue($event, $args = null)
-    // {
-    //     $blocked = false;
-    //     $model = $event->getSubject();
-    //     $field = $args['field'];
-    //     $model->{$field} = null;
-    // }
+    public function createChildTicket($event, $args = null)
+    {
+        //trace_log('createChildTicket');
+        
+        $model = $event->getSubject();
+        //trace_log($model->name);
+        $model->createChildTicket();
+    }
+
+    public function removeTicketGroup($event, $args = null)
+    {
+        $model = $event->getSubject();
+        $model->ticket_group_id = null;
+    }
 
     /**
      * Fonctions de production de doc, pdf, etc.
@@ -88,6 +78,7 @@ class WorkflowTicketListener extends WorkflowListener
      * 2 arguements $model et $arg
      * Ici les valeurs ne peuvent plus être modifié il faut passer par un traitement
      */
+
     public function askSleep($model) {
         //trace_log('fonction askSleep');
         $model->ticket_group_id = null;
