@@ -114,3 +114,7 @@
 ## Les scopes
 * **running**: Tickets en cours | [draft,wait_support,wait_managment,running]  
 * **closed**: Tickets fermé | [archived,abdn]  
+
+## Les executions automatiques par taches cron auront lieu par défaut à  22h30
+Liste des cron auto 
+* sleep: [sleep_to_wait_support]

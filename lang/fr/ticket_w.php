@@ -49,7 +49,6 @@ return [
         'sleep_to_wait_managment' => 'Réveiller C',
         'sleep_to_wait_support' => 'Réveiller N',
         'to_archived_factu' => 'Archivage facturation',
-        'trans' => null,
         'validated_to_archived' => 'Archivage',
         'wait_managment_to_abdn' => 'Abandonner',
         'wait_managment_to_validated' => 'Validation',

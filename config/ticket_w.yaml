@@ -3,6 +3,7 @@ ticket_w:
     metadata: 
         name: waka.support::ticket_w.name 
         com: waka.support::ticket_w.com 
+        cron_auto_time: 22h30
         rulesSets:
             default:
                 fields:  
