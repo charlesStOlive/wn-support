@@ -11,7 +11,7 @@ scopes:
         label: Etat
         conditions: state in (:filtered)
         modelClass: Waka\Support\Models\Ticket
-        options: listAllWorklowState
+        options: listAllWorkflowState
         nameFrom: name
     user:
         label: waka.support::ticket.user

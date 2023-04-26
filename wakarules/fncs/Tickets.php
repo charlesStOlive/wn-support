@@ -35,7 +35,7 @@ class Tickets extends FncBase implements FncInterface
     public function listTicketState()
     {
         $model = new \Waka\Support\Models\Ticket();
-        return $model->listAllWorklowstate();
+        return $model->listAllWorkflowState();
     }
 
 
