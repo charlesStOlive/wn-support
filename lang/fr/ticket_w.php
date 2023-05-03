@@ -19,7 +19,8 @@ return [
     ],
     'scopes' => [
         'closed' => 'Tickets fermé',
-        'running' => 'Tickets en cours'
+        'running' => 'Tickets en cours',
+        'runningNotSleeping' => null
     ],
     'trans' => [
         'buttons' => [

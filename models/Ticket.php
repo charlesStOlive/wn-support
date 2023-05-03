@@ -249,10 +249,10 @@ class Ticket extends Model
      */
     public function scopeClosed($query)
     {
-        $query->whereIn('state', ['abdn', 'archived']);
+        $query->whereIn('state', $this->getWfScope('closed'));
     }
     public function scopeActive($query) {
-        $query->whereIn('state', ['draft', 'wait_support', 'wait_managment', 'running', 'validated', 'sleep'])
+        $query->whereIn('state', $this->getWfScope('running'))
         ->orWhereNull('state');
 
     }
@@ -267,6 +267,9 @@ class Ticket extends Model
     }
     public function scopeNextUser($query) {
         $query->where('next_id', \BackendAuth::getUser()->id);
+    }
+    public function scopeUserCounter($query) {
+        $query->where('next_id', \BackendAuth::getUser()->id)->active()->isNotSleeping();
     }
 
     

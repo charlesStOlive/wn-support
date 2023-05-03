@@ -66,7 +66,7 @@ class Plugin extends PluginBase
                         'icon' => 'icon-bug',
                         'url' => Backend::url('waka/support/tickets'),
                         'permissions' => ['waka.support.*'],
-                        'counter' => \Waka\Support\Models\Ticket::countScope('nextUser'),
+                        'counter' => \Waka\Support\Models\Ticket::countScope('userCounter'),
                     ],
                     'side-menu-ticketgroups' => [
                         'label' => \Lang::get('waka.support::lang.settings.label_ticket_groupes'),

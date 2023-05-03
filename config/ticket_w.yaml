@@ -14,7 +14,10 @@ ticket_w:
         scopes:
             running:
                 label: waka.support::ticket_w.scopes.running
-                value: [draft,wait_support,wait_managment,running]             
+                value: [draft,wait_support,wait_managment,running, validated,sleep]             
+            runningNotSleeping:
+                label: waka.support::ticket_w.scopes.runningNotSleeping
+                value: [draft,wait_support,wait_managment,running, validated]             
             closed:
                 label: waka.support::ticket_w.scopes.closed
                 value: [archived,abdn]             

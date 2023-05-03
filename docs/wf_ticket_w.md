@@ -112,7 +112,8 @@
 * **default**: support_client et support_user obligatoire
 
 ## Les scopes
-* **running**: Tickets en cours | [draft,wait_support,wait_managment,running]  
+* **running**: Tickets en cours | [draft,wait_support,wait_managment,running, validated,sleep]  
+* **runningNotSleeping**:  | [draft,wait_support,wait_managment,running, validated]  
 * **closed**: Tickets fermé | [archived,abdn]  
 
 ## Les executions automatiques par taches cron auront lieu par défaut à  22h30

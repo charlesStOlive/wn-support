@@ -48,6 +48,6 @@ secondaryTabs:
         infos:
             span: full
             type: modelinfo
-            permissions: [waka.support.admin.*]
+            editPermissions: [nobody]
             tab: waka.support::ticket.tab_infos
             src: waka/support/models/ticket/fields_for_side_bar.yaml
