@@ -37,7 +37,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         \DataSources::registerDataSources(plugins_path().'/waka/support/config/datasources.yaml');
-        Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketListener());
+        Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketWListener);
     }
 
     public function registerWorkflows() {

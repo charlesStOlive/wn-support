@@ -150,6 +150,17 @@ ticket_w:
                         type: prod
             from: wait_support
             to: sleep
+        wait_managment_to_sleep:
+            metadata: 
+                label: waka.support::ticket_w.trans.wait_managment_to_sleep 
+                button: waka.support::ticket_w.trans.buttons.wait_managment_to_sleep 
+                fncs:
+                    removeTicketGroup:
+                        type: enter
+                    askSleep:
+                        type: prod
+            from: wait_managment
+            to: sleep
         wait_support_to_running:
             metadata: 
                 label: waka.support::ticket_w.trans.wait_support_to_running 

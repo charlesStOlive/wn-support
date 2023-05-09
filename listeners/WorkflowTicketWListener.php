@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Waka\Utils\Classes\Listeners\WorkflowListener;
+use Waka\Support\Models\Settings;
 
 class WorkflowTicketWListener extends WorkflowListener
 {

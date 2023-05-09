@@ -65,6 +65,11 @@
         *  isSupport | type : gard
         *  removeTicketGroup | type : enter
         *  askSleep | type : prod
+* **Mise en sommeil ** | code : wait_managment_to_sleep
+    * Bouton : Mise en sommeil du ticket
+    * Liste des fonctions 
+        *  removeTicketGroup | type : enter
+        *  askSleep | type : prod
 * **En Production** | code : wait_support_to_running
     * Bouton : En cours de production
     * Liste des fonctions 
