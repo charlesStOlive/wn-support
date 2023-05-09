@@ -80,13 +80,10 @@
         *  sendNotification | type : prod
             * code : waka.support::new_ticket 
             * mode : support 
-* **Réveiller C** | code : sleep_to_wait_managment
-    * Bouton : Réveiller et transmettre C
-    * Liste des fonctions 
-        *  cleanAwake | type : enter
-* **Réveiller N** | code : sleep_to_wait_support
+* **Réveiller (Notilac)** | code : sleep_to_wait_support
     * Bouton : Réveiller et transmettre N
     * Liste des fonctions 
+        *  isAwakable | type : gard
         *  cleanAwake | type : enter
 * **Transmission Client** | code : draft_to_wait_managment
     * Bouton : Transmettre au  client

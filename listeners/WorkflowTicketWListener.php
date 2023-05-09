@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Waka\Utils\Classes\Listeners\WorkflowListener;
 use Waka\Support\Models\Settings;
+use Backend\Models\User;
 
 class WorkflowTicketWListener extends WorkflowListener
 {
@@ -40,6 +41,20 @@ class WorkflowTicketWListener extends WorkflowListener
         return $blocked;
     }
 
+    public function isAwakable($event, $args = null)
+    {
+        $model = $event->getSubject();
+        $date = Carbon::now();
+        if ($model->awake_at->lte($date)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+
+
     public function isClient($event, $args = null)
     {
         $blocked = false;
@@ -53,6 +68,7 @@ class WorkflowTicketWListener extends WorkflowListener
         $blocked = !Settings::isSupportMember(); //Si pas équipe support
         return $blocked;
     }
+    
 
     /**
      * FONCTIONS DE TRAITEMENT PEUVENT ETRE APPL DANS LES FONCTIONS CLASSIQUES

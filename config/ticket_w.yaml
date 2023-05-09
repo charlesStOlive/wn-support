@@ -184,22 +184,14 @@ ticket_w:
                             mode: support
             from: wait_managment
             to: wait_support
-        sleep_to_wait_managment:
-            metadata: 
-                label: waka.support::ticket_w.trans.sleep_to_wait_managment 
-                button: waka.support::ticket_w.trans.buttons.sleep_to_wait_managment 
-                redirect: "redirect:1"
-                fncs:
-                    cleanAwake:
-                        type: enter
-            from: sleep
-            to: wait_managment
         sleep_to_wait_support:
             metadata: 
                 label: waka.support::ticket_w.trans.sleep_to_wait_support 
                 button: waka.support::ticket_w.trans.buttons.sleep_to_wait_support 
                 redirect: "redirect:1"
                 fncs:
+                    isAwakable:
+                        type: gard
                     cleanAwake:
                         type: enter
             from: sleep

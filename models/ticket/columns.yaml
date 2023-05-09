@@ -44,6 +44,10 @@ columns:
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense
+    awake_at:
+        label: waka.support::ticket.awake_at
+        type: date
+        invisible: true
     sort_order:
         label: waka.utils::lang.global.sort_order
         invisible: true
