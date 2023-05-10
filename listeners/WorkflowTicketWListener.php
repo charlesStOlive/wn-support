@@ -45,6 +45,9 @@ class WorkflowTicketWListener extends WorkflowListener
     {
         $model = $event->getSubject();
         $date = Carbon::now();
+        if(!$model->awake_at) {
+            return false;
+        }
         if ($model->awake_at->lte($date)) {
             return false;
         }

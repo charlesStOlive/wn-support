@@ -187,9 +187,9 @@ class Ticket extends Model
         if(!$this->user) {
             $this->user = \BackendAuth::getUser();
         }
-        if(!$this->awake_at or $this->awake_at < Carbon::now()) {
-            $this->awake_at = $this->baseAwake;
-        }
+        // if(!$this->awake_at or $this->awake_at < Carbon::now()) {
+        //     $this->awake_at = $this->baseAwake;
+        // }
 
     }
 
