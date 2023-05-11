@@ -12,7 +12,7 @@ class Tickets extends Controller
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
         'Waka.Utils.Behaviors.BtnsBehavior',
-        'Waka.Utils.Behaviors.SideBarUpdate',
+        'Backend.Behaviors.RelationController',
         'Waka.ImportExport.Behaviors.ExcelImport',
         'Waka.ImportExport.Behaviors.ExcelExport',
         'Backend.Behaviors.ReorderController',
@@ -22,7 +22,7 @@ class Tickets extends Controller
     public $listConfig = 'config_list.yaml';
     public $btnsConfig = 'config_btns.yaml';
     public $reorderConfig = 'config_reorder.yaml';
-    public $sideBarUpdateConfig = 'config_side_bar_update.yaml';
+    public $relationConfig = 'config_relation.yaml';
     public $workflowConfig = 'config_workflow.yaml'; 
 
     public $requiredPermissions = ['waka.support.*'];
@@ -34,6 +34,7 @@ class Tickets extends Controller
     {
         parent::__construct();
         BackendMenu::setContext('Waka.Support', 'support', 'side-menu-tickets');
+        $this->addCss('/plugins/waka/support/assets/css/messages_list.css');
         $this->wfSleepWidget = $this->createSleepFormWidget();
     }
 

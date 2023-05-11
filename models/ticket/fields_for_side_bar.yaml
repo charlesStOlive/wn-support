@@ -4,55 +4,40 @@
 fields:
     state:
         label: waka.support::ticket.state
-        span: auto
         infoType: workflow
-        noUpdate: true
     code:
         label: waka.support::ticket.code
-        span: auto
         infoType: title
-        noUpdate: true
     sb_section_i:
         label: waka.support::ticket.sb_section_i
-        span: auto
-        infoType: section
-        noUpdate: true
+        infoType: section_group
     name:
         label: waka.support::ticket.name
-        span: full
-        required: true
+        group: sb_section_i
     ticket_type:
         label: waka.support::ticket.ticket_type
-        span: auto
-        type: dropdown
-        placeholder: waka.utils::lang.global.placeholder
-        required: true
-        options: listTicketTypes
         value: ticket_type.name
-        permissions: wcli.ticket.admin.*
+        group: sb_section_i
     next:
         label: waka.support::ticket.next
-        span: auto
         value: next.login
-        noUpdate: true
+        group: sb_section_i
     parent:
         label: waka.support::ticket.parent
-        span: auto
         infoType: link
-        noUpdate: true
         bkRacine: waka/support/tickets/update/
         linkValue: parent.id
         value: parent.name
+        group: sb_section_i
     sb_section_f:
         label: waka.support::ticket.sb_section_f
-        span: auto
-        infoType: section
-        noUpdate: true
+        infoType: section_group
     temps:
         label: waka.support::ticket.temps
         span: left
         default: 0
         permissions: [wcli.ticket.admin.super]
+        group: sb_section_f
     ticket_group:
         label: waka.support::ticket.ticket_group
         span: auto
@@ -61,11 +46,7 @@ fields:
         scope: opened
         permissions: [wcli.ticket.admin.super]
         value: ticket_group.name
-    sb_section_a:
-        label: waka.support::ticket.sb_section_a
-        span: auto
-        infoType: section
-        noUpdate: true
+        group: sb_section_f
     silent_mode:
         label: waka.support::ticket.silent_mode
         span: left
@@ -73,11 +54,13 @@ fields:
         default: true
         comment: waka.support::ticket.silent_mode_com
         infoType: switch
+        group: sb_section_f
     urgent:
         label: waka.support::ticket.urgent
         span: right
         type: checkbox
         infoType: switch
+        group: sb_section_f
     user:
         label: waka.support::ticket.user
         span: auto
@@ -87,14 +70,11 @@ fields:
         required: true
         value: user.login
         noUpdate: true
-    sb_section_w:
-        label: waka.support::ticket.sb_section_w
-        span: auto
-        infoType: section
-        noUpdate: true
+        group: sb_section_f
     sb_section_w_c:
         span: auto
+        label: Historique des états
         infoType: state_logs
         noUpdate: true
-        src_trad: waka.support::ticket_w.trans.
+        src_trad: waka.support
 

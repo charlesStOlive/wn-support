@@ -1,4 +1,6 @@
-<?php namespace Waka\Support\Models;
+<?php
+
+namespace Waka\Support\Models;
 
 use Model;
 use Carbon\Carbon;
@@ -22,14 +24,10 @@ class Ticket extends Model
      * @var string The database table used by the model.
      */
     public $table = 'waka_support_tickets';
-    public $defaultWorkflowName ="ticket_w";
+    public $defaultWorkflowName = "ticket_w";
 
     public $implement = [
         'October.Rain.Database.Behaviors.Purgeable',
-    ];
-    public $purgeable = [
-        'first_message',
-        'next_message',
     ];
 
     /**
@@ -48,11 +46,10 @@ class Ticket extends Model
     public $rules = [
         'name' => 'required',
         'ticket_type' => 'required',
-        'user' => 'required',
+        'ticket_group' => 'required',
     ];
 
-    public $customMessages = [
-    ];
+    public $customMessages = [];
 
     /**
      * @var array attributes send to datasource for creating document
@@ -70,14 +67,12 @@ class Ticket extends Model
     /**
      * @var array Attributes to be cast to JSON
      */
-    protected $jsonable = [
-    ];
+    protected $jsonable = [];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
      */
-    protected $appends = [
-    ];
+    protected $appends = [];
 
     /**
      * @var array Attributes to be removed from the API representation of the model (ex. toArray())
@@ -93,45 +88,36 @@ class Ticket extends Model
         'awake_at',
     ];
 
-/**
-    * @var array Spécifié le type d'export à utiliser pour chaque champs
-    */
-    public $importExportConfig = [
-    ]; 
+    /**
+     * @var array Spécifié le type d'export à utiliser pour chaque champs
+     */
+    public $importExportConfig = [];
 
     /**
      * @var array Relations
      */
-    public $hasOne = [
-    ];
+    public $hasOne = [];
     public $hasMany = [
         'ticket_messages' => [
             'Waka\Support\Models\TicketMessage',
             'delete' => true
         ],
     ];
-    public $hasOneThrough = [
-    ];
-    public $hasManyThrough = [
-    ];
+    public $hasOneThrough = [];
+    public $hasManyThrough = [];
     public $belongsTo = [
-       'ticket_type' => ['Waka\Support\Models\TicketType'],
-       'ticket_group' => ['Waka\Support\Models\TicketGroup'],
-       'user' => ['Backend\Models\User'],
-       'next' => ['Backend\Models\User'],
-       'support_user' => ['Backend\Models\User'],
-       'support_client' => ['Backend\Models\User'],
+        'ticket_type' => ['Waka\Support\Models\TicketType'],
+        'ticket_group' => ['Waka\Support\Models\TicketGroup'],
+        'user' => ['Backend\Models\User'],
+        'next' => ['Backend\Models\User'],
+        'support_user' => ['Backend\Models\User'],
+        'support_client' => ['Backend\Models\User'],
     ];
-    public $belongsToMany = [
-    ];        
-    public $morphTo = [
-    ];
-    public $morphOne = [
-    ];
-    public $morphMany = [
-    ];
-    public $attachOne = [
-    ];
+    public $belongsToMany = [];
+    public $morphTo = [];
+    public $morphOne = [];
+    public $morphMany = [];
+    public $attachOne = [];
     public $attachMany = [
         'attachments' => [
             'System\Models\File',
@@ -145,52 +131,43 @@ class Ticket extends Model
     /**
      *EVENTS
      **/
-    public function beforeCreate() {
-            $id = $this->getNextStringId(5);
-            if(!$this->temps) $this->temps = 0.0;
-            $this->code = 'EM_'.$id;  
+    public function beforeValidate() {
+        //trace_log(post());
+        //trace_log(post('_session_key'));
+        //trace_log($this->ticket_messages()->withDeferred(post('_session_key'))->count());
+        if(!$this->ticket_messages()->withDeferred(post('_session_key'))->count()) {
+            throw new \ValidationException(['ticket_messages' => \Lang::get('waka.support::ticket.e.ticket_messages_missing')]);
+        }
+
     }
-    public function afterCreate() 
+    public function beforeCreate()
     {
-        $content = $this->getOriginalPurgeValue('first_message');
-        $this->ticket_messages()->create([
-            'content' =>$content,
-        ]);
+        $id = $this->getNextStringId(5);
+        if (!$this->temps) $this->temps = 0.0;
+        $this->code = 'EM_' . $id;
+        if (!$this->user) {
+            $this->user = \BackendAuth::getUser();
+        }
     }
 
-    public function beforeSave() 
+    public function beforeSave()
     {
         $this->next_id = $this->getNextUserId();
-        
-        if(!$this->code) {
-            $this->code = 'EM_'.str_pad( $this->id, 5, "0", STR_PAD_LEFT );
+        if (!$this->code) {
+            $this->code = 'EM_' . str_pad($this->id, 5, "0", STR_PAD_LEFT);
         }
-        
-        
-        if($this->id) {
+
+
+        if ($this->id) {
             $content = $this->getOriginalPurgeValue('next_message');
-            if(!$content) {
+            if (!$content) {
                 return;
             }
             TicketMessage::create([
-                'content' =>$content,
+                'content' => $content,
                 'ticket_id' => $this->id,
             ]);
-        } 
-       
-        
-
-    }
-
-    public function beforeValidate() 
-    {
-        if(!$this->user) {
-            $this->user = \BackendAuth::getUser();
         }
-        // if(!$this->awake_at or $this->awake_at < Carbon::now()) {
-        //     $this->awake_at = $this->baseAwake;
-        // }
-
     }
 
 
@@ -199,21 +176,16 @@ class Ticket extends Model
      **/
     public function listTicketTypes()
     {
-        // $user = \BackendAuth::getUser();
-        // if($user->hasAccess('waka.support.admin.super')) {
-        //     return TicketType::lists('name', 'id');
-        // } else {
-        //     return TicketType::where('is_for_super_user', null)->lists('name', 'id');
-        // }
         return TicketType::lists('name', 'id');
-        
     }
-    public function listSupportUser() {
+    public function listSupportUser()
+    {
         $users =  Settings::getSupportUsers();
         $users = User::whereIn('id', $users)->get();
         return $this->collectionConcatId($users);
     }
-    public function ListClientTeam() {
+    public function ListClientTeam()
+    {
         $users =   Settings::getClientManagers();
         $users = User::whereIn('id', $users)->get();
         return $this->collectionConcatId($users);
@@ -223,25 +195,48 @@ class Ticket extends Model
     /**
      * GETTERS
      **/
-    public function getNextUserId() {
-        if($this->state == "draft") {
+    public function getNextUserId()
+    {
+        if ($this->state == "draft") {
             return $this->user_id;
-        }
-        else if(in_array($this->state, ['wait_support', 'running', 'validated', ])) {
+        } else if (in_array($this->state, ['wait_support', 'running', 'validated',])) {
             return $this->support_user_id ? $this->support_user_id : Settings::getSupportUsers()[0] ?? null;
-        }
-        else if(in_array($this->state, ['wait_managment',])) {
-            return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null;   
-        } 
-        else {
+        } else if (in_array($this->state, ['wait_managment',])) {
+            return $this->support_client_id ? $this->support_client_id : Settings::getClientManagers()[0] ?? null;
+        } else {
             return $this->next_id;
         }
-        
     }
 
-    public function getBaseAwakeAttribute() {
-        //trace_log('yo');
+    public function getBaseAwakeAttribute()
+    {
         return Carbon::now()->addWeek();
+    }
+    public function getDefaultSupportNotilacAttribute()
+    {
+        $actualUserId = \BackendAuth::getUser()->id;
+        $supports = Settings::getSupportUsers();
+        if(in_array($actualUserId, $supports)) {
+            return $actualUserId;
+        } else {
+            return $supports[0];
+        }
+    }
+    public function getDefaultSupportClientAttribute()
+    {
+        $actualUserId = \BackendAuth::getUser()->id;
+        $supports = Settings::getClientManagers();
+        //trace_log($actualUserId);
+        //trace_log($supports);
+        if(in_array($actualUserId, $supports)) {
+            return $actualUserId;
+        } else {
+            return null;
+        }
+    }
+    public function getDefaultTicketGroupAttribute()
+    {
+        return \Waka\Support\Models\Settings::get('actual_ticket_group' ,null);
     }
 
     /**
@@ -251,28 +246,33 @@ class Ticket extends Model
     {
         $query->whereIn('state', $this->getWfScope('closed'));
     }
-    public function scopeActive($query) {
+    public function scopeActive($query)
+    {
         $query->whereIn('state', $this->getWfScope('running'))
-        ->orWhereNull('state');
-
+            ->orWhereNull('state');
     }
-    public function scopeIsNotSleeping($query) {
+    public function scopeIsNotSleeping($query)
+    {
         $query->whereNotIn('state', ['sleep']);
     }
-    public function scopeNoGroup($query) {
+    public function scopeNoGroup($query)
+    {
         $query->whereNull('ticket_group_id');
     }
-    public function scopeIsFacturable($query) {
-        $query->where('temps','>', 0);
+    public function scopeIsFacturable($query)
+    {
+        $query->where('temps', '>', 0);
     }
-    public function scopeNextUser($query) {
+    public function scopeNextUser($query)
+    {
         $query->where('next_id', \BackendAuth::getUser()->id);
     }
-    public function scopeUserCounter($query) {
+    public function scopeUserCounter($query)
+    {
         $query->where('next_id', \BackendAuth::getUser()->id)->active()->isNotSleeping();
     }
 
-    
+
 
     /**
      * @param $query
@@ -285,15 +285,17 @@ class Ticket extends Model
     /**
      * SETTERS
      */
- 
+
     /**
      * FILTER FIELDS
      */
     public function filterFields($fields, $context = null)
     {
         //trace_log("filterFields");
-        if (!isset($fields->name)) {
-            return;
+       if(isset($fields->temps)) {
+            if(!\BackendAuth::getUser()->isSuperUser()) {
+                $fields->temps->readOnly = true;
+            }
         }
     }
 
@@ -302,15 +304,16 @@ class Ticket extends Model
      * OTHERS
      */
 
-    public function createChildTicket() {
+    public function createChildTicket()
+    {
         $modelCloned = $this->replicate();
         $modelCloned->created_at = Carbon::now();
         $modelCloned->temps = 0;
-        $modelCloned->name = $this->name.' (reprise)';
+        $modelCloned->name = $this->name . ' (reprise)';
         $modelCloned->parent_id = $this->id;
         $modelCloned->ticket_group = null;
-        $modelCloned->first_message = "Reprise du ticket : ".$this->name;
-        if($this->state == 'archived') {
+        $modelCloned->first_message = "Reprise du ticket : " . $this->name;
+        if ($this->state == 'archived') {
             $modelCloned->state = 'draft';
         }
         //trace_log($modelCloned->toArray());
@@ -326,8 +329,12 @@ class Ticket extends Model
         return $this->opened()->count();
     }
 
-    public function getLastMessageAttribute() {
-        return $this->ticket_messages->last()->content;
+    public function getLastMessageAttribute()
+    {
+        //trace_log('getLastMessageAttribute');
+        //trace_log(post());
+        //trace_log(post('_session_key'));
+        return $this->ticket_messages()->withDeferred(post('_session_key'))->get()->last()->content;
     }
 
     public function getMessagesAsTxt()
@@ -335,10 +342,10 @@ class Ticket extends Model
         $messages = $this->ticket_messages()->get(['content'])->pluck('content');
         $firstTxtMessage = \Soundasleep\Html2Text::convert($messages->first(), ['ignore_errors' => true]);
         $lastTxtMessage = '';
-        if($messages->last()) {
+        if ($messages->last()) {
             $lastTxtMessage = \Soundasleep\Html2Text::convert($messages->last(), ['ignore_errors' => true]);
         }
-        $messagesConcatended = "---PREMIER MESSAGE: \n  ".$firstTxtMessage."\n ---DERNIER MESSAGE: \n  ".$lastTxtMessage;
+        $messagesConcatended = "---PREMIER MESSAGE: \n  " . $firstTxtMessage . "\n ---DERNIER MESSAGE: \n  " . $lastTxtMessage;
         //trace_log($messagesConcatended);
         return $messagesConcatended;
     }
@@ -362,14 +369,7 @@ class Ticket extends Model
     public static function getMenucounter()
     {
         $userId = \BackendAuth::getUser()->id;
-        return Ticket::where('next_id', $userId)->count();
-
-        // if(Settings::isClientManager()) {
-        //     return Ticket::whereIn('state', ['wait_managment', 'wait_response'])->count();
-        // } 
-        //  if(Settings::isSupportMember()) {
-        //     return Ticket::whereIn('state', ['wait_support'])->count();
-        // }     
+        return Ticket::where('next_id', $userId)->count(); 
     }
 
     /**
@@ -382,15 +382,13 @@ class Ticket extends Model
         }
     }
 
-    /**
-     * @return void
-     */
-    public function setDefaults()
-    {
-        $this->user = $this->model->user ?: BackendAuth::getUser()->id;
-    }
+    // /**
+    //  * @return void
+    //  */
+    // public function setDefaults()
+    // {
+    //     $this->user = $this->model->user ?: BackendAuth::getUser()->id;
+    // }
 
-    
-
-//endKeep/
+    //endKeep/
 }

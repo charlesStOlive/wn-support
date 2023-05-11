@@ -3,46 +3,88 @@
 # ===================================
 
 fields:
-    support_user:
-        label: waka.support::ticket.support_user
+    temps:
+        label: waka.support::ticket.temps
         span: left
-        type: dropdown
-        placeholder: waka.utils::lang.global.placeholder
-        options: listSupportUser
-    support_client:
-        label: waka.support::ticket.support_client
-        span: right
-        type: dropdown
-        placeholder: waka.utils::lang.global.placeholder
-        options: ListClientTeam
-    # attachments:
-    #     label: waka.support::ticket.attachments
-    #     span: left
-    #     type: fileupload
-    #     mode: image
-    #     imageHeight: 260
-    #     thumbOptions:
-    #         mode: auto
-    #         quality: 90
-    #         sharpen: 0
-    #         interlace: false
-    #         extension: auto
-    #     useCaption: false
-    ticket_messages:
-        label: waka.support::ticket.ticket_messages
-        span: full
-        type: ticket_messages
-    next_message:
-        label: waka.support::ticket.next_message
-        span: full
-        type: wakaeditor 
-    awake_at:
-        label: waka.support::ticket.awake_at
-        span: auto
-        type: datepicker
-        defaultFrom: baseAwake
-        ignoreTimezone: true
-        mode: date
+        default: 0
+        group: sb_section_f
+tabs:
+    defaultTab:  waka.support::ticket.tab_options
+    icons: 
+        waka.support::ticket.tab_edit: icon-pencil
+        waka.support::ticket.tab_options: icon-cog
+    fields:
+        ticket_messages:
+            label: waka.support::ticket.ticket_messages
+            span: full
+            type: partial
+            path: field_ticket_messages
+            tab: waka.support::ticket.tab_edit
+        silent_mode:
+            label: waka.support::ticket.silent_mode
+            span: left
+            type: checkbox
+            comment: waka.support::ticket.silent_mode_com
+        # urgent:
+        #     label: waka.support::ticket.urgent
+        #     span: right
+        #     type: checkbox
+        name:
+            label: waka.support::ticket.name
+            span: left
+            required: true
+            comment: 'Obligatoire'
+        url:
+            label: waka.support::ticket.url
+            span: right
+            comment: waka.support::ticket.url_com
+        ticket_type:
+            label: waka.support::ticket.ticket_type
+            comment: waka.support::ticket.ticket_type_com
+            span: auto
+            type: dropdown
+            placeholder: waka.utils::lang.global.placeholder
+            required: true
+            options: listTicketTypes
+        ticket_group:
+            label: waka.support::ticket.ticket_group
+            comment: waka.support::ticket.ticket_group_com
+            span: auto
+            type: relation
+            placeholder: waka.utils::lang.global.placeholder
+            defaultFrom: defaultTicketGroup
+            required: true
+            scope: opened
+        support_user:
+            label: waka.support::ticket.support_user
+            span: left
+            type: dropdown
+            placeholder: waka.utils::lang.global.placeholder
+            defaultFrom: defaultSupportNotilac
+            options: listSupportUser
+        support_client:
+            label: waka.support::ticket.support_client
+            span: right
+            type: dropdown
+            defaultFrom: defaultSupportClient
+            placeholder: waka.utils::lang.global.placeholder
+            options: ListClientTeam
+        awake_at:
+            label: waka.support::ticket.awake_at
+            span: auto
+            type: datepicker
+            defaultFrom: baseAwake
+            ignoreTimezone: true
+            mode: date
+    # ticket_messages:
+    #     label: waka.support::ticket.ticket_messages
+    #     span: full
+    #     type: ticket_messages
+    # next_message:
+    #     label: waka.support::ticket.next_message
+    #     span: full
+    #     type: wakaeditor 
+    
 secondaryTabs:
     fields:
         infos:

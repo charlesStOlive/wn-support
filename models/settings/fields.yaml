@@ -13,6 +13,10 @@ fields:
         mode: time
         span: auto
         required: true
+    actual_ticket_group:
+        label: waka.support::lang.settings.actual_ticket_group
+        type: dropdown 
+        options: listOpenTicketGroup
     support_team:
         label: waka.support::lang.settings.support_team
         span: full

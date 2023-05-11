@@ -31,33 +31,3 @@ fields:
         type: dropdown
         placeholder: 'waka.utils::lang.global.placeholder'
         options: ListClientTeam
-    attachments:
-        label: 'waka.support::ticket.attachments'
-        span: left
-        type: fileupload
-        mode: image
-        imageHeight: 260
-        thumbOptions:
-            mode: auto
-            quality: 90
-            sharpen: 0
-            interlace: false
-            extension: auto
-        useCaption: false
-    url:
-        label: 'waka.support::ticket.url'
-        span: right
-        commentAbove: 'waka.support::ticket.url_com'
-    ticket_group:
-        label: 'waka.support::ticket.ticket_group'
-        span: auto
-        type: relation
-        placeholder: 'waka.utils::lang.global.placeholder'
-        scope: opened
-        permissions:
-            - wcli.ticket.admin.super
-    first_message:
-        label: 'waka.support::ticket.first_message'
-        span: full
-        type: richeditor
-        toolbarButtons: 'bold,italic,underline,strikeThrough'

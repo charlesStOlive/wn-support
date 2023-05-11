@@ -29,7 +29,8 @@ return [
         'receive_recap' => 'Reçoit les emails de recap',
         'support_team' => 'Equipe de support',
         'support_user' => 'Utilisateur support',
-        'types_description' => 'Gestion des types de tickets'
+        'types_description' => 'Gestion des types de tickets',
+        'actual_ticket_group' => 'Groupe de ticket par defaut'
     ],
     'ticket' => [
         'delete_confirm' => 'Do you really want to delete this Ticket?',

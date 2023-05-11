@@ -1,0 +1,31 @@
+<?php $readOnly = !$this->config->recordOnClick ?>
+
+
+<div class="message-item <?php if ($record->isOwner()) : ?>owner<?php endif; ?>">
+
+    <div class="hidden-sm hidden-xs col-md-1 <?php if ($record->isOwner()) : ?>pull-right<?php else : ?>pull-left<?php endif; ?>">
+        <img class="<?php if ($record->isOwner()) : ?>pull-left<?php else : ?>pull-right<?php endif; ?> account-avatar" loading="lazy" width="40" height="40" src=" <?= $record?->user?->getAvatarThumb(90, ['mode' => 'crop', 'extension' => 'png']) ?>">
+    </div>
+
+
+    <div class="body col-md-9 <?php if ($record->isOwner()) : ?>pull-right<?php else : ?>pull-left<?php endif; ?>">
+
+        <div class="content">
+            <span class="chat-arrow"></span>
+            <?= $record->content ?>
+            <?php foreach ($record->photos as $photo) : ?>
+                <a href="<?= $photo->getPath() ?>" target="_blank"><img src="<?= $photo->getThumb(150, 150) ?>"></a>
+            <?php endforeach ?>
+
+        </div>
+
+        <span class="from">
+            <?php $url = $this->getRecordUrl($record) ?>
+            <?php echo e($record?->user?->full_name); ?> | <?php echo e($record->created_at); ?> UTC | <?php if ($firstRecord && $record->isOwner()) : ?><a <?= $this->getRecordOnClick($record) ?> href="<?= $url ?>"><i class="icon-pen"></i></a> <?php endif ?>
+        </span>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>

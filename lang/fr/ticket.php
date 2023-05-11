@@ -25,10 +25,10 @@ return [
     'silent_mode' => 'Mode silencieux',
     'silent_mode_com' => 'Les emails de notification ne seront pas envoyés. (utile si notifications actives)',
     'state' => 'Etat',
-    'support_client' => 'Client',
-    'support_user' => 'Support',
+    'support_client' => 'Responsable coté client',
+    'support_user' => 'Responsable coté Notilac',
     'tab_infos' => null,
-    'temps' => 'Temps prévu',
+    'temps' => 'Heures facturables',
     'ticket_group' => 'Lot de tickets',
     'ticket_messages' => 'Messages',
     'ticket_type' => 'Type',
@@ -37,5 +37,12 @@ return [
     'urgent' => 'Urgent',
     'url' => 'Adresse (url) erreur',
     'url_com' => 'Optionnel, adresse de la page nécessitant un support',
-    'user' => 'Créateur'
+    'user' => 'Créateur',
+    'e' => [
+        'ticket_messages_missing' => 'Vous devez écrire un message'
+    ],
+    'ticket_group_com' => 'Veillez à changer de lot de tickets si vous etes en mode projet',
+    'ticket_type_com' => 'Si vous êtes en mode projet veillez à changer le lot de ticket',
+    'tab_edit' => 'Edition',
+    'tab_options' => 'Options'
 ];

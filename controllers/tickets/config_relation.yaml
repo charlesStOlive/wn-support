@@ -1,0 +1,13 @@
+# ===================================
+# Relation Behavior Config
+# ===================================
+
+ticket_messages:
+    label: waka.support::ticket.ticket_messages
+    manage:
+        form: $/waka/support/models/ticketmessage/fields.yaml   
+    view:
+        list: $/waka/support/models/ticketmessage/columns.yaml
+        customViewPath: $/waka/support/controllers/tickets/list
+        toolbarButtons: false
+        showCheckboxes: false

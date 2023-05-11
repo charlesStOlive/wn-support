@@ -75,6 +75,11 @@ class Settings extends Model
         return $backendUser->toArray();
     }
 
+    public function listOpenTicketGroup() {
+        return \Waka\Support\Models\TicketGroup::opened()->pluck('name', 'id');
+
+    }
+
     
 
 }

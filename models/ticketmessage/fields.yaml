@@ -3,3 +3,19 @@
 # ===================================
 
 fields:
+  content:
+    label: waka.support::ticketmessage.content
+    type: wakaeditor
+    size: huge
+  photos:
+      label: waka.support::ticketmessage.photos
+      span: full
+      type: fileupload
+      mode: image
+      imageHeight: 600
+      thumbOptions:
+          mode: auto
+          quality: 90
+          sharpen: 0
+          interlace: false
+          extension: auto

@@ -99,6 +99,7 @@ class TicketMessage extends Model
     public $attachOne = [
     ];
     public $attachMany = [
+        'photos' => ['System\Models\File'],
     ];
 
     //startKeep/
@@ -110,7 +111,8 @@ class TicketMessage extends Model
         $this->user = \BackendAuth::getUser();
     }
     public function afterSave() {
-        $this->ticket->touch();
+        if($this->ticket) $this->ticket->touch();
+        
     }
 
     /**

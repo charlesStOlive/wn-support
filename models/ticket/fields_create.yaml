@@ -8,58 +8,54 @@ fields:
         span: left
         type: checkbox
         comment: waka.support::ticket.silent_mode_com
-    urgent:
-        label: waka.support::ticket.urgent
-        span: right
-        type: checkbox
+    # urgent:
+    #     label: waka.support::ticket.urgent
+    #     span: right
+    #     type: checkbox
     name:
         label: waka.support::ticket.name
-        span: full
+        span: left
         required: true
+        comment: 'Obligatoire'
+    url:
+        label: waka.support::ticket.url
+        span: right
+        comment: waka.support::ticket.url_com
     ticket_type:
         label: waka.support::ticket.ticket_type
+        comment: waka.support::ticket.ticket_type_com
         span: auto
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         required: true
         options: listTicketTypes
+    ticket_group:
+        label: waka.support::ticket.ticket_group
+        comment: waka.support::ticket.ticket_group_com
+        span: auto
+        type: relation
+        placeholder: waka.utils::lang.global.placeholder
+        defaultFrom: defaultTicketGroup
+        required: true
+        scope: opened
     support_user:
         label: waka.support::ticket.support_user
         span: left
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
+        defaultFrom: defaultSupportNotilac
         options: listSupportUser
     support_client:
         label: waka.support::ticket.support_client
         span: right
         type: dropdown
+        defaultFrom: defaultSupportClient
         placeholder: waka.utils::lang.global.placeholder
         options: ListClientTeam
-    # attachments:
-    #     label: waka.support::ticket.attachments
-    #     span: left
-    #     type: fileupload
-    #     mode: image
-    #     imageHeight: 260
-    #     thumbOptions:
-    #         mode: auto
-    #         quality: 90
-    #         sharpen: 0
-    #         interlace: false
-    #         extension: auto
-    #     useCaption: false
-    url:
-        label: waka.support::ticket.url
-        span: right
-        comment: waka.support::ticket.url_com
-    ticket_group:
-        label: waka.support::ticket.ticket_group
-        span: auto
-        type: relation
-        placeholder: waka.utils::lang.global.placeholder
-        scope: opened
-        permissions: [wcli.ticket.admin.super]
-    first_message:
-        label: waka.support::ticket.first_message
+    
+    
+    ticket_messages:
+        label: waka.support::ticket.ticket_messages
         span: full
-        type: wakaeditor
+        type: partial
+        path: field_ticket_messages

@@ -62,7 +62,14 @@ class ReportSupport extends ReportWidgetBase
      */
     public function prepareVars()
     {
-        $lastTicketsGroup = TicketGroup::orderBy('created_at', 'desc')->where('is_factured', false)->first();
+        $lastTicketsGroup = null;
+        $ticketGroupId = \Waka\Support\Models\Settings::get('actual_ticket_group' ,null);
+        if($ticketGroupId) {
+            //trace_log('ok grid');
+            $lastTicketsGroup = TicketGroup::find($ticketGroupId);
+        } else {
+            $lastTicketsGroup = TicketGroup::orderBy('created_at', 'desc')->where('is_factured', false)->first();
+        }
         //trace_log($lastTicketsGroup->toArray());
         $this->vars['ticketsGroup'] = $lastTicketsGroup;
     }
