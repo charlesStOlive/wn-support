@@ -1,4 +1,4 @@
-<div class="control-list list-scrollable" data-control="listwidget">
+<div class="list-scrollable" data-control="listwidget">
     <?php if (count($records)) : ?>
         <?php if ($this->config->recordOnClick && count($records)) : ?>
             <div class="messages_container">
