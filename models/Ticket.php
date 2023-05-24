@@ -46,7 +46,6 @@ class Ticket extends Model
     public $rules = [
         'name' => 'required',
         'ticket_type' => 'required',
-        'ticket_group' => 'required',
     ];
 
     public $customMessages = [];
@@ -132,9 +131,7 @@ class Ticket extends Model
      *EVENTS
      **/
     public function beforeValidate() {
-        //trace_log(post());
-        //trace_log(post('_session_key'));
-        //trace_log($this->ticket_messages()->withDeferred(post('_session_key'))->count());
+        trace_log(post());
         if(!$this->ticket_messages()->withDeferred(post('_session_key'))->count()) {
             throw new \ValidationException(['ticket_messages' => \Lang::get('waka.support::ticket.e.ticket_messages_missing')]);
         }
@@ -152,21 +149,10 @@ class Ticket extends Model
 
     public function beforeSave()
     {
+        trace_log($this->toArray());
         $this->next_id = $this->getNextUserId();
         if (!$this->code) {
             $this->code = 'EM_' . str_pad($this->id, 5, "0", STR_PAD_LEFT);
-        }
-
-
-        if ($this->id) {
-            $content = $this->getOriginalPurgeValue('next_message');
-            if (!$content) {
-                return;
-            }
-            TicketMessage::create([
-                'content' => $content,
-                'ticket_id' => $this->id,
-            ]);
         }
     }
 

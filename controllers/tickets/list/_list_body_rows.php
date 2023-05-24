@@ -1,5 +1,4 @@
 <?php $lastRecord = $records->first(); ?>
-<?php trace_log($lastRecord) ?>
 <?php foreach ($records as $record) : ?>
     <?php if ($record === $lastRecord) : ?>
         <!-- Ici, vous êtes à la dernière itération -->

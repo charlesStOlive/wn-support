@@ -92,6 +92,13 @@ class WorkflowTicketWListener extends WorkflowListener
         $model->ticket_group_id = null;
     }
 
+    public function cleanAwake($event, $args = null) {
+        $model = $event->getSubject();
+        $ticketGroupId = \Waka\Support\Models\Settings::get('actual_ticket_group' ,null);
+        $model->ticket_group_id  = $ticketGroupId;
+        $model->awake_at = null;
+    }
+
     /**
      * Fonctions de production de doc, pdf, etc.
      * passe par l'evenement afterModelSaved
@@ -104,12 +111,6 @@ class WorkflowTicketWListener extends WorkflowListener
         $model->ticket_group_id = null;
         \Event::fire('waka.workflow.popup_afterSave', ['name' => 'sleep']);
     }
-
-    public function cleanAwake($model) {
-        //trace_log('fonction cleanAwake');
-        $model->awake_at = null;
-    }
-
 
     public function sendNotification($model, $args = null)
     {
