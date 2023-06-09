@@ -115,37 +115,13 @@ class WorkflowTicketWListener extends WorkflowListener
     public function sendNotification($model, $args = null)
     {
         if($model->silent_mode) return;
-        //trace_log('sendNotification');
-        //trace_log($args);
-        $subject = $model->name;
-        $modelId = $model->id;
-        //trace_log($model->ticket_messages);
-        $nextUserid = $model->next_id;
-        $userNext = User::find($nextUserid);
-        // trace_log("userEmail");
-        // trace_log("nextUserid ".$nextUserid);
-        // trace_log($userNext->email);
-        //
-
-        $model = $model->toArray();
-        $model = compact('model');
-        $dotedModel = array_dot($model);
-
-
-
-        $code = $args['code'];
-        $mode =  $args['mode'];
-
-        $datasEmail = [
-            'emails' => $userNext->email,
-            'subject' => null,
-        ];
-        // trace_log('envoyer un email -----------------------');
-        // trace_log($dotedModel);
-        // trace_log($code);
-        // trace_log($datasEmail);
-        // trace_log('----------------------Fin email');
-        \Waka\Mailer\Classes\MailCreator::find($code, true)->setModelId($modelId)->renderMail($datasEmail);
+        $user = User::find($model->next_id);
+        $url = \Backend::url('waka/support/tickets/update/'.$model->id);
+        $ticket = $model->toArray();
+        $vars = compact('ticket','user','url');
+        \Mail::queue('waka.support::mail.new_ticket', $vars, function($message) use($user) {
+            $message->to($user->email, 'Notilac: '.$user->login);
+        });
     }
 
 }

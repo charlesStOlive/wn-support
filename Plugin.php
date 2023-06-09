@@ -155,19 +155,7 @@ class Plugin extends PluginBase
         ];
     }
 
-    /**
-     * Register mail templates
-     *
-     * @return array
-     */
-    public function registerMailTemplates()
-    {
-        return [
-            'waka.support::mail.new_ticket'    => 'New ticket mail to support team.',
-            'waka.support::mail.new_reply'     => 'New reply message for ticket.',
-            'waka.support::mail.ticket_closed' => 'Close ticket mail.'
-        ];
-    }
+    
 
     /**
      * Register settings.

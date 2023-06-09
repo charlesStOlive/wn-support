@@ -1,22 +1,12 @@
-subject = "{{ ticket.subject }} (#{{ ticket.id }})"
+subject = Le ticket [{{ ticket.name  }}] a été crée ou mis à jours
 ==
-
-Hello {{ name }},
-
-{{ owner }} created new support ticket #{{ ticket.id }}.
-
-{{ ticket.subject }}
-
-{{ ticket.content|md|striptags }}
-
-==
-
-<p>Hello {{ name }},</p>
-
-<p>{{ owner }} created new support ticket <a href="{{ url }}">#{{ ticket.id }}</a>.</p>
-
-<hr>
-
-<p><strong>{{ ticket.subject }}</strong></p>
-
-<p>{{ ticket.content|md|raw }}</p>
+<p>Bonjour {{ user.first_name }} {{ user.last_name }},</p>
+<p>Un nouveau ticket à été crée ou mis à jours. <br> Pour acceder à ce ticket, cliquez <a href="{{ url }}">ici</a></p>
+<p>Liste des messages :</p>
+{% partial 'panel' body %}
+    {% for message in ticket.ticket_messages|reverse %}
+        <p style="font-size:10px;word-break: normal;"> {{ message.content  | raw | replace({"\n\n": "\n"}) | striptags | nl2br }}</p>
+        <hr/>
+    {% endfor %}
+{% endpartial %}
+                    

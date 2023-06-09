@@ -131,7 +131,7 @@ class Ticket extends Model
      *EVENTS
      **/
     public function beforeValidate() {
-        trace_log(post());
+        //trace_log(post());
         if(!$this->ticket_messages()->withDeferred(post('_session_key'))->count()) {
             throw new \ValidationException(['ticket_messages' => \Lang::get('waka.support::ticket.e.ticket_messages_missing')]);
         }
@@ -149,7 +149,7 @@ class Ticket extends Model
 
     public function beforeSave()
     {
-        trace_log($this->toArray());
+        //trace_log($this->toArray());
         $this->next_id = $this->getNextUserId();
         if (!$this->code) {
             $this->code = 'EM_' . str_pad($this->id, 5, "0", STR_PAD_LEFT);
