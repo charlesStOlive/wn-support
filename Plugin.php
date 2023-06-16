@@ -14,6 +14,12 @@ use Carbon\Carbon;
  */
 class Plugin extends PluginBase
 {
+    /**
+     * @var array Plugin dependencies
+     */
+    public $require = [
+        'Waka.Utils',
+    ];
 
     /**
      * Returns information about this plugin.
@@ -36,11 +42,12 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        \DataSources::registerDataSources(plugins_path().'/waka/support/config/datasources.yaml');
+        \DataSources::registerDataSources(plugins_path() . '/waka/support/config/datasources.yaml');
         Event::subscribe(new \Waka\Support\Listeners\WorkflowTicketWListener);
     }
 
-    public function registerWorkflows() {
+    public function registerWorkflows()
+    {
         return [
             '/waka/support/config/ticket_w.yaml',
         ];
@@ -155,7 +162,7 @@ class Plugin extends PluginBase
         ];
     }
 
-    
+
 
     /**
      * Register settings.
@@ -175,7 +182,7 @@ class Plugin extends PluginBase
                 'keywords'    => 'support help',
                 'permissions' => ['waka.support.access_settings']
             ],
-             'TicketTypes' => [
+            'TicketTypes' => [
                 'label'       => \Lang::get('waka.support::lang.settings.label_ticket_types'),
                 'description' => \Lang::get('waka.support::lang.settings.types_description'),
                 'category'    => \Lang::get('waka.support::lang.settings.category'),
@@ -185,8 +192,7 @@ class Plugin extends PluginBase
                 'keywords'    => 'support help',
                 'permissions' => ['waka.support.admin.super']
             ],
-            
+
         ];
     }
-
 }

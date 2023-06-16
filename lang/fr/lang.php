@@ -10,7 +10,7 @@ return [
     'permissions' => [
         'admin_base' => 'Droit utilisateur Admin (Notilac)',
         'admin_super' => 'Droit utilisateur Admin (Notilac) Avancé',
-        'tab' => 'Autorisation liée au support',
+        'tab' => 'Waka - Support',
         'user' => 'Droit utilisateur client',
         'user_super' => 'Droit utilisateur client avancé'
     ],
