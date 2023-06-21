@@ -53,9 +53,7 @@ class Ticket extends Model
     /**
      * @var array attributes send to datasource for creating document
      */
-    public $attributesToDs = [
-        'lastMessage',
-    ];
+    public $attributesToDs = [];
 
 
     /**
@@ -315,12 +313,9 @@ class Ticket extends Model
         return $this->opened()->count();
     }
 
-    public function getLastMessageAttribute()
+    public function getMessages()
     {
-        //trace_log('getLastMessageAttribute');
-        //trace_log(post());
-        //trace_log(post('_session_key'));
-        return $this->ticket_messages()->withDeferred(post('_session_key'))->get()->last()->content;
+        return  $this->ticket_messages()->withDeferred(post('_session_key'))->get(['content'])->pluck('content')->toArray();
     }
 
     public function getMessagesAsTxt()

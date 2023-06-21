@@ -118,6 +118,10 @@ class WorkflowTicketWListener extends WorkflowListener
         $user = User::find($model->next_id);
         $url = \Backend::url('waka/support/tickets/update/'.$model->id);
         $ticket = $model->toArray();
+        $messages = $model['ticket_messages'] ?? [];
+        if(!count($messages) && post('_session_key')) {
+            $ticket['ticket_messages'] = $model->ticket_messages()->withDeferred(post('_session_key'))->get()->toArray();
+        }
         $vars = compact('ticket','user','url');
         \Mail::queue('waka.support::mail.new_ticket', $vars, function($message) use($user) {
             $message->to($user->email, 'Notilac: '.$user->login);
