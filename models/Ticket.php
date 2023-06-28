@@ -290,18 +290,23 @@ class Ticket extends Model
 
     public function createChildTicket()
     {
+        $sessionKey = post('_session_key');
         $modelCloned = $this->replicate();
+
         $modelCloned->created_at = Carbon::now();
         $modelCloned->temps = 0;
         $modelCloned->name = $this->name . ' (reprise)';
         $modelCloned->parent_id = $this->id;
         $modelCloned->ticket_group = null;
-        $modelCloned->first_message = "Reprise du ticket : " . $this->name;
+        $modelCloned->ticket_messages()->create([
+            'content' => "Reprise du ticket : " . $this->name
+        ], $sessionKey);
         if ($this->state == 'archived') {
             $modelCloned->state = 'draft';
         }
         //trace_log($modelCloned->toArray());
         $modelCloned->save();
+        $modelCloned->commitDeferred($sessionKey);
         return $modelCloned->id;
     }
 
