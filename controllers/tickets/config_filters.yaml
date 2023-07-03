@@ -22,7 +22,7 @@ scopes:
         label: waka.support::ticket.ticket_type
         modelClass: Waka\Support\Models\TicketType
         nameFrom: name
-        conditions: type_id in (:filtered)
+        conditions: ticket_type_id in (:filtered)
     nextuser_me:
         label: waka.support::ticket.nextuser_me
         type: checkbox 
